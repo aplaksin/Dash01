@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!225 &283295574 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 8493594777054932859, guid: d598c1258118a53438d44f4e5b6dbf77, type: 3}
+  m_PrefabInstance: {fileID: 921439018}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &921439018
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -141,7 +146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8493594776518678520, guid: d598c1258118a53438d44f4e5b6dbf77, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8493594776518678520, guid: d598c1258118a53438d44f4e5b6dbf77, type: 3}
       propertyPath: m_AnchorMax.x
@@ -223,6 +228,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8713324141352661597, guid: d598c1258118a53438d44f4e5b6dbf77, type: 3}
+      propertyPath: Curtain
+      value: 
+      objectReference: {fileID: 283295574}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -341,7 +350,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 307731124530788730, guid: 8604303ff88b7c846a4d8276d3b49764, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 307731124530788730, guid: 8604303ff88b7c846a4d8276d3b49764, type: 3}
       propertyPath: m_LocalPosition.x

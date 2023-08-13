@@ -15,9 +15,9 @@ public class StaticDataService : IStaticDataService
 
     public void Load()
     {
-        _monsters = Resources.LoadAll<MonsterStaticData>(MonstersDataPath).ToDictionary(x => x.MonsterTypeId, x => x);
+        //_monsters = Resources.LoadAll<MonsterStaticData>(MonstersDataPath).ToDictionary(x => x.MonsterTypeId, x => x);
         _levelData = Resources.LoadAll<LevelStaticData>(LevelsDataPath).ToDictionary(x => x.LevelKey, x => x);
-        _windowConfigs = Resources.Load<WindowStaticData>(StaticDataWindowPath).Configs.ToDictionary(x => x.WindowId, x => x);
+        //_windowConfigs = Resources.Load<WindowStaticData>(StaticDataWindowPath).Configs.ToDictionary(x => x.WindowId, x => x);
     }
 
     public MonsterStaticData GetMonsterDstaByType(MonsterType typeId)
@@ -25,7 +25,7 @@ public class StaticDataService : IStaticDataService
         return _monsters.TryGetValue(typeId, out MonsterStaticData monsterStaticData) ? monsterStaticData : null;
     }
 
-    public LevelStaticData GetLevlStaticDataByKey(string sceneKey)
+    public LevelStaticData GetLevelStaticDataByKey(string sceneKey)
     {
         return _levelData.TryGetValue(sceneKey, out LevelStaticData levelStaticData) ? levelStaticData : null;
     }

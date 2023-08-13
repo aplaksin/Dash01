@@ -2,6 +2,6 @@
 {
     MonsterStaticData GetMonsterDstaByType(MonsterType typeId);
     void Load();
-    LevelStaticData GetLevlStaticDataByKey(string sceneKey);
+    LevelStaticData GetLevelStaticDataByKey(string sceneKey);
     WindowConfig GetWndowConfigById(WindowId shop);
 }

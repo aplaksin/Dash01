@@ -15,7 +15,7 @@ public class GameStateMachine
         {
             [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
             [typeof(LoadProgressState)] = new LoadProgressState(this, services.Single<IPersistentProgressService>(), services.Single<ISaveLoadService>()),
-            [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, loadingCurtain, services.Single<IGameFactory>(), services.Single<IPersistentProgressService>()),
+            [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, loadingCurtain, services.Single<IGameFactory>(), services.Single<IPersistentProgressService>(), services.Single<IStaticDataService>()),
             [typeof(GameLoopState)] = new GameLoopState(this)
 
 

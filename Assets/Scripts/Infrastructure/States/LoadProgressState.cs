@@ -19,7 +19,8 @@ public class LoadProgressState : IState
     {
         LoadProgressOrInitNew();
 
-        _gameStateMachine.Enter<LoadLevelState, string>(_progressService.PlayerProgress.WorldData.PositionOnLevel.Level);
+        //_gameStateMachine.Enter<LoadLevelState, string>(_progressService.PlayerProgress.WorldData.PositionOnLevel.Level);
+        _gameStateMachine.Enter<LoadLevelState, string>("Level1");
     }
 
     public void Exit()
