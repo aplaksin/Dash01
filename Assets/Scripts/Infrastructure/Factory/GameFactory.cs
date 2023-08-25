@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEditor.Build.Pipeline;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using static Unity.Collections.AllocatorManager;
@@ -13,8 +14,8 @@ public class GameFactory : IGameFactory
     private readonly IStaticDataService _staticDataService;
     private LevelStaticData levelStaticData;
 
-    public Dictionary<Vector2, Vector3> _cellPositionByCoords = new Dictionary<Vector2, Vector3>();
-    public Dictionary<Vector2, GameObject> _blocksByCoords = new Dictionary<Vector2, GameObject>();
+    private Dictionary<Vector2, Vector3> _cellPositionByCoords = new Dictionary<Vector2, Vector3>();
+    private Dictionary<Vector2, GameObject> _blocksByCoords = new Dictionary<Vector2, GameObject>();
 
 
     public GameFactory(IAssetProvider assetProvider, IStaticDataService staticDataService)
@@ -35,6 +36,9 @@ public class GameFactory : IGameFactory
         GameObject player = _assetProvider.Instantiate(AssetPath.PlayerPath);
         player.transform.localScale = scaleVector;
         //player.transform.position = new Vector3(spawnPoint.x + player.transform.localScale.x / 2, spawnPoint.y + player.transform.localScale.y / 2, 0);
+        
+        PlayerMove playerMove = player.transform.GetComponent<PlayerMove>();
+        playerMove.Construct(_cellPositionByCoords, _blocksByCoords, spawnPoint);
         player.transform.position = spawnPoint;
         return player;
     }

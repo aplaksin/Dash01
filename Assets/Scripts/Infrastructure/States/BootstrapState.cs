@@ -34,15 +34,15 @@ public class BootstrapState : IState
     {
 
 
-        //_services.RegisterSingle<IInputService>(Inputservice());
+        _services.RegisterSingle<IInputService>(Inputservice());
         _services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
 
         _services.RegisterSingle<IAssetProvider>(new AssetProvider());
         RegisterStaticDataService();
-        //IAssetProvider asaaa = _services.Single<IAssetProvider>();
+        IAssetProvider asaaa = _services.Single<IAssetProvider>();
         _services.RegisterSingle<IGameFactory>(new GameFactory(_services.Single<IAssetProvider>(), _services.Single<IStaticDataService>()));
 
-        //_services.RegisterSingle<ISaveLoadService>(new SaveLoadService(_services.Single<IPersistentProgressService>(), _services.Single<IGameFactory>()));
+        _services.RegisterSingle<ISaveLoadService>(new SaveLoadService(_services.Single<IPersistentProgressService>(), _services.Single<IGameFactory>()));
 
         
     }
@@ -65,6 +65,8 @@ public class BootstrapState : IState
         else
             return new MobileInputService();*/
 
-        return null;
+        //return new SwipeInputManager();
+        return new KeyboardInputManager();
+        //return null;
     }
 }
