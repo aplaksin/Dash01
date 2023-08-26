@@ -5,24 +5,24 @@ using UnityEngine;
 
 public class StaticDataService : IStaticDataService
 {
-    private const string MonstersDataPath = "StaticData/Monsters";
+    private const string EnemyDataPath = "StaticData/Enemy";
     private const string LevelsDataPath = "StaticData/Levels";
     private const string StaticDataWindowPath = "StaticData/UI/WindowStaticData";
 
-    private Dictionary<MonsterType, MonsterStaticData> _monsters;
+    private Dictionary<EnemyType, EnemyStaticData> _enemies;
     private Dictionary<string, LevelStaticData> _levelData;
     private Dictionary<WindowId, WindowConfig> _windowConfigs;
 
     public void Load()
     {
-        //_monsters = Resources.LoadAll<MonsterStaticData>(MonstersDataPath).ToDictionary(x => x.MonsterTypeId, x => x);
+        _enemies = Resources.LoadAll<EnemyStaticData>(EnemyDataPath).ToDictionary(x => x.Type, x => x);
         _levelData = Resources.LoadAll<LevelStaticData>(LevelsDataPath).ToDictionary(x => x.LevelKey, x => x);
         //_windowConfigs = Resources.Load<WindowStaticData>(StaticDataWindowPath).Configs.ToDictionary(x => x.WindowId, x => x);
     }
 
-    public MonsterStaticData GetMonsterDstaByType(MonsterType typeId)
+    public EnemyStaticData GetEnemyDataByType(EnemyType typeId)
     {
-        return _monsters.TryGetValue(typeId, out MonsterStaticData monsterStaticData) ? monsterStaticData : null;
+        return _enemies.TryGetValue(typeId, out EnemyStaticData enemyStaticData) ? enemyStaticData : null;
     }
 
     public LevelStaticData GetLevelStaticDataByKey(string sceneKey)

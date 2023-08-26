@@ -8,10 +8,10 @@ using UnityEngine.UIElements;
 public class SwipeInputManager : InputService
 {
 
-    public delegate void StartTouch(Vector2 position, float time);
+/*    public delegate void StartTouch(Vector2 position, float time);
     public event StartTouch OnStartTouch;
     public delegate void EndTouch(Vector2 position, float time);
-    public event EndTouch OnEndTouch;
+    public event EndTouch OnEndTouch;*/
 
 
 

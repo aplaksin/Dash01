@@ -12,8 +12,9 @@ public class LoadLevelState : IParameterizedState<string>
     private readonly IPersistentProgressService _progressService;
     private readonly IStaticDataService _staticDataService;
     private LevelStaticData _levelStaticData;
+    private IPoolingService _poolingService;
 
-    public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingCurtain loadingCurtain, IGameFactory gameFactory, IPersistentProgressService progressService, IStaticDataService staticDataService)
+    public LoadLevelState(GameStateMachine gameStateMachine, IPoolingService poolingService, SceneLoader sceneLoader, LoadingCurtain loadingCurtain, IGameFactory gameFactory, IPersistentProgressService progressService, IStaticDataService staticDataService)
     {
         _gameStateMachine = gameStateMachine;
         _sceneLoader = sceneLoader;
@@ -22,6 +23,7 @@ public class LoadLevelState : IParameterizedState<string>
         _progressService = progressService;
         _staticDataService = staticDataService;
         _levelStaticData = _staticDataService.GetLevelStaticDataByKey(LevelDataName);
+        _poolingService = poolingService;
     }
 
     public void Enter(string sceneName)
@@ -39,10 +41,11 @@ public class LoadLevelState : IParameterizedState<string>
         //var initialPoint = GameObject.FindWithTag(InitialPointTag);
         //GameObject hero = _gameFactory.CreateHero(initialPoint);
         //GameObject hud = _gameFactory.CreateHud();
-
+        _poolingService.Construct();
         CorrectCameraPosition();
         Vector3 scaleVector = CalcScaleVector();
-        
+        _gameFactory.Construct(scaleVector);
+        Game.CurrentLevelStaticData = _levelStaticData;
         GameObject player = _gameFactory.CreatePlayer(_levelStaticData.PlayerSpawnCoords, scaleVector);
         _gameFactory.CreateGameGrid(_levelStaticData, scaleVector, player);
         _gameStateMachine.Enter<GameLoopState>();

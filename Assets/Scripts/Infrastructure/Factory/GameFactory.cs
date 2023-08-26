@@ -3,31 +3,57 @@ using UnityEditor.Build.Pipeline;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using static Unity.Collections.AllocatorManager;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class GameFactory : IGameFactory
 {
     public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
     public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
 
+    //public Dictionary<Vector2, Vector3> CellPositionByCoords { get { return _cellPositionByCoords; } }
+
     //private List<Vector2> _blocks = new List<Vector2>();
     private readonly IAssetProvider _assetProvider;
+    private readonly IPoolingService _poolingService;
     private readonly IStaticDataService _staticDataService;
     private LevelStaticData levelStaticData;
 
+    private Vector3 _scaleVector;
     private Dictionary<Vector2, Vector3> _cellPositionByCoords = new Dictionary<Vector2, Vector3>();
     private Dictionary<Vector2, GameObject> _blocksByCoords = new Dictionary<Vector2, GameObject>();
 
 
-    public GameFactory(IAssetProvider assetProvider, IStaticDataService staticDataService)
+    public GameFactory(IAssetProvider assetProvider, IStaticDataService staticDataService, IPoolingService poolingService)
     {
         _assetProvider = assetProvider;
         _staticDataService = staticDataService;
+        _poolingService = poolingService;
+    }
 
+
+
+    public void Construct(Vector3 scaleVector)
+    {
+        AddScaleVector(scaleVector);
+        //TODO переделать прокидывание scaleVector мб перенести CalcScaleVector() из лоад левел сюда
+        // создать метод что-то вроде CreateBaseGameObjects и там создавать грид и плеера
+        // возможно стоит выделить отдельно энеми мувер
+
+    }
+
+    public GameObject CreateEnemy(Vector2 spawnPoint)
+    {
+        GameObject enemy = _poolingService.GetEnemyByType(EnemyType.Base);
+        enemy.transform.localScale = _scaleVector;
+        enemy.transform.position = new Vector3(_cellPositionByCoords[new Vector2(spawnPoint.x, 0)].x, spawnPoint.y, 0);
+        enemy.gameObject.SetActive(true);
+        //точку спавна
+        return enemy;
     }
     
     public void CreateGameGrid(LevelStaticData levelStaticData, Vector3 scaleVector, GameObject player)
     {
-        
+       
         BuildGrid(scaleVector, levelStaticData.GameGridData.GridHeight, levelStaticData.GameGridData.GridWidth, new List<Vector2>(levelStaticData.GameGridData.BlocksCoords), player, levelStaticData.GameGridData.CellSpace);
     }
     
@@ -46,6 +72,19 @@ public class GameFactory : IGameFactory
     public GameObject CreateHud()
     {
         return _assetProvider.Instantiate(AssetPath.HudPath);
+    }
+
+    private void AddScaleVector(Vector3 scaleVector)
+    {
+        if(scaleVector != Vector3.zero)
+        {
+            _scaleVector = scaleVector;
+        }
+        else
+        {
+            Debug.Log("========== scaleVector is zero");
+        }
+        
     }
 
     private void Register(ISavedProgressReader progressReader)
@@ -115,5 +154,7 @@ public class GameFactory : IGameFactory
         }
         player.transform.position = _cellPositionByCoords[player.transform.position];
     }
+
+
 
 }

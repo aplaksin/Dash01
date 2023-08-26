@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88620b8f84b97ad44979f4bd87a62e79, type: 3}
-  m_Name: TestMonster
+  m_Script: {fileID: 11500000, guid: 0ed3fe14558f82a4faf512049642c4a9, type: 3}
+  m_Name: EnemyBase
   m_EditorClassIdentifier: 
-  MonsterTypeId: 0
-  Hp: 100
-  Damage: 15
+  Hp: 10
+  Damage: 0
+  MoveSpeed: 3
+  Type: 0

@@ -1,6 +1,6 @@
 ﻿public interface IStaticDataService : IService
 {
-    MonsterStaticData GetMonsterDstaByType(MonsterType typeId);
+    public EnemyStaticData GetEnemyDataByType(EnemyType typeId);
     void Load();
     LevelStaticData GetLevelStaticDataByKey(string sceneKey);
     WindowConfig GetWndowConfigById(WindowId shop);
