@@ -228,6 +228,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8493594776518678524, guid: d598c1258118a53438d44f4e5b6dbf77, type: 3}
+      propertyPath: m_TagString
+      value: LoadingCurtain
+      objectReference: {fileID: 0}
     - target: {fileID: 8713324141352661597, guid: d598c1258118a53438d44f4e5b6dbf77, type: 3}
       propertyPath: Curtain
       value: 
