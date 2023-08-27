@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EnemyStaticData", menuName = "StaticData/Enemy")]
 public class EnemyStaticData : ScriptableObject
 {
-    [Range(0f, 100f)]
+    [Range(1f, 100f)]
     public float Hp;
 
     [Range(1f, 30f)]

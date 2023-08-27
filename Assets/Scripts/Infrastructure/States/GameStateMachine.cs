@@ -7,7 +7,7 @@ public class GameStateMachine
     private IExitableState _activeState;
     private SceneLoader sceneLoader;
 
-    public GameStateMachine(SceneLoader sceneLoader, LoadingCurtain loadingCurtain, AllServices services)
+    public GameStateMachine(SceneLoader sceneLoader, LoadingCurtain loadingCurtain, AllServices services, ICoroutineRunner coroutineRunner)
     {
 
 
@@ -16,7 +16,7 @@ public class GameStateMachine
             [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
             [typeof(LoadProgressState)] = new LoadProgressState(this, services.Single<IPersistentProgressService>(), services.Single<ISaveLoadService>()),
             [typeof(LoadLevelState)] = new LoadLevelState(this, services.Single<IPoolingService>(), sceneLoader, loadingCurtain, services.Single<IGameFactory>(), services.Single<IPersistentProgressService>(), services.Single<IStaticDataService>()),
-            [typeof(GameLoopState)] = new GameLoopState(this, services.Single<IGameFactory>())
+            [typeof(GameLoopState)] = new GameLoopState(this, services.Single<IGameFactory>(), coroutineRunner)
 
 
         };

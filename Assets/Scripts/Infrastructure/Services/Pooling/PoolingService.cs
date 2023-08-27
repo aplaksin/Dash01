@@ -1,8 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
+
 
 public class PoolingService : IPoolingService
 {
@@ -23,7 +22,7 @@ public class PoolingService : IPoolingService
    public void Construct()
     {
         CreateEnemiesPool();
-        //CreateProjectilesPool();
+        CreateProjectilesPool();
     }
 
 
@@ -51,15 +50,15 @@ public class PoolingService : IPoolingService
 
         if (queue.Count > 0)
         {
-            GameObject enemy = queue.Dequeue();
+            GameObject projectile = queue.Dequeue();
             //enemy.active = true;
-            return enemy;
+            return projectile;
         }
         else
         {
             string path = AssetPath.GetProjectilePathByType(projectileType);
 
-            AddObjectsToQueue(path, ref queue, AddingCapacity);
+            AddProjectilesToQueue(path, ref queue, _staticDataService.GetProjectileDataByType(projectileType), AddingCapacity);
             return queue.Dequeue();
         }
     }
@@ -71,9 +70,11 @@ public class PoolingService : IPoolingService
         _enemiesByType[enemy.Type].Enqueue(enemy.gameObject);
     }
 
-    public void ReturnProjectile(GameObject projectile)
+    public void ReturnProjectile(Projectile projectile)
     {
-        throw new System.NotImplementedException();
+        projectile.gameObject.transform.position = Vector3.zero;
+        projectile.gameObject.SetActive(false);
+        _projectilesByType[projectile.Type].Enqueue(projectile.gameObject);
     }
 
     private void CreateEnemiesPool()
@@ -101,8 +102,8 @@ public class PoolingService : IPoolingService
         {
             Queue<GameObject> projectilesQueue = new Queue<GameObject>(InitialCapacity);
             string path = AssetPath.GetProjectilePathByType(projectileType);
-
-            AddObjectsToQueue(path, ref projectilesQueue, InitialCapacity);
+            ProjectileStaticData projectileStaticData = _staticDataService.GetProjectileDataByType(projectileType);
+            AddProjectilesToQueue(path, ref projectilesQueue, projectileStaticData, InitialCapacity);
 
             _projectilesByType[projectileType] = projectilesQueue;
 
@@ -123,7 +124,20 @@ public class PoolingService : IPoolingService
         }
     }
 
-    private void AddObjectsToQueue(string path, ref Queue<GameObject> queue, int count = 1)
+    private void AddProjectilesToQueue(string path, ref Queue<GameObject> queue, ProjectileStaticData data, int count = 1)
+    {
+
+        for (int i = 0; i < count; i++)
+        {
+            GameObject obj = _assetProvider.Instantiate(path);
+            obj.SetActive(false);
+            Projectile projectile = obj.GetComponent<Projectile>();
+            projectile.Construct(data, this);
+            queue.Enqueue(obj);
+        }
+    }
+
+/*    private void AddObjectsToQueue(string path, ref Queue<GameObject> queue, int count = 1)
     {
         for(int i = 0; i < count; i++)
         {
@@ -131,10 +145,6 @@ public class PoolingService : IPoolingService
             obj.SetActive(false);
             queue.Enqueue(obj);
         }
-    }
+    }*/
     
-
-
-
-
 }

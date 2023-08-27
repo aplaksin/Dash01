@@ -6,6 +6,7 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 public class PlayerMove : MonoBehaviour
 {
     private IInputService _inputService;
+    private IGameFactory _gameFactory;
 
     private Dictionary<Vector2, Vector3> _cellPositionByCoords;
     private Dictionary<Vector2, GameObject> _blocksByCoords;
@@ -20,7 +21,7 @@ public class PlayerMove : MonoBehaviour
     private void Awake()
     {
         _inputService = AllServices.Container.Single<IInputService>();
-        
+        _gameFactory = AllServices.Container.Single<IGameFactory>();
     }
 
     public void Construct(Dictionary<Vector2, Vector3> cellPositionByCoords, Dictionary<Vector2, GameObject> blocksByCoords, Vector2 currentPlayerCoords)
@@ -48,6 +49,8 @@ public class PlayerMove : MonoBehaviour
                 if (_fireBlock != null)
                 {
                     Debug.Log("FIRE!!!!!!!!!!!");
+                    GameObject gameObject1 = _gameFactory.CreateProjectile(_fireBlock.transform.position);
+                    gameObject1.SetActive(true);
                     _fireBlock = null;
                 }
             }

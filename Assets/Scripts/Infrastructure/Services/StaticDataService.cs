@@ -6,23 +6,31 @@ using UnityEngine;
 public class StaticDataService : IStaticDataService
 {
     private const string EnemyDataPath = "StaticData/Enemy";
+    private const string ProjectileDataPath = "StaticData/Projectile";
     private const string LevelsDataPath = "StaticData/Levels";
     private const string StaticDataWindowPath = "StaticData/UI/WindowStaticData";
 
-    private Dictionary<EnemyType, EnemyStaticData> _enemies;
+    private Dictionary<EnemyType, EnemyStaticData> _enemyData;
+    private Dictionary<ProjectileType, ProjectileStaticData> _projctileData;
     private Dictionary<string, LevelStaticData> _levelData;
     private Dictionary<WindowId, WindowConfig> _windowConfigs;
 
     public void Load()
     {
-        _enemies = Resources.LoadAll<EnemyStaticData>(EnemyDataPath).ToDictionary(x => x.Type, x => x);
+        _enemyData = Resources.LoadAll<EnemyStaticData>(EnemyDataPath).ToDictionary(x => x.Type, x => x);
+        _projctileData = Resources.LoadAll<ProjectileStaticData>(ProjectileDataPath).ToDictionary(x => x.Type, x => x);
         _levelData = Resources.LoadAll<LevelStaticData>(LevelsDataPath).ToDictionary(x => x.LevelKey, x => x);
         //_windowConfigs = Resources.Load<WindowStaticData>(StaticDataWindowPath).Configs.ToDictionary(x => x.WindowId, x => x);
     }
 
     public EnemyStaticData GetEnemyDataByType(EnemyType typeId)
     {
-        return _enemies.TryGetValue(typeId, out EnemyStaticData enemyStaticData) ? enemyStaticData : null;
+        return _enemyData.TryGetValue(typeId, out EnemyStaticData enemyStaticData) ? enemyStaticData : null;
+    }
+
+    public ProjectileStaticData GetProjectileDataByType(ProjectileType typeId)
+    {
+        return _projctileData.TryGetValue(typeId, out ProjectileStaticData projctileStaticData) ? projctileStaticData : null;
     }
 
     public LevelStaticData GetLevelStaticDataByKey(string sceneKey)

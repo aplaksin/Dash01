@@ -1,6 +1,7 @@
 ﻿public interface IStaticDataService : IService
 {
-    public EnemyStaticData GetEnemyDataByType(EnemyType typeId);
+    EnemyStaticData GetEnemyDataByType(EnemyType typeId);
+    ProjectileStaticData GetProjectileDataByType(ProjectileType typeId);
     void Load();
     LevelStaticData GetLevelStaticDataByKey(string sceneKey);
     WindowConfig GetWndowConfigById(WindowId shop);

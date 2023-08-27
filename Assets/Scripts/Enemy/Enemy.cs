@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     private float _moveSpeed;
     private float _damage;
     private float _hp;
+    private float _currentHp;
 
     private Vector3 direction = Vector3.down;
     private IPoolingService _poolService;
@@ -27,6 +28,7 @@ public class Enemy : MonoBehaviour
         _moveSpeed = enemyStaticData.MoveSpeed;
         _damage = enemyStaticData.Damage;
         _hp = enemyStaticData.Hp;
+        _currentHp = _hp;
     }
 
     // Start is called before the first frame update
@@ -43,5 +45,25 @@ public class Enemy : MonoBehaviour
         }
         var step = _moveSpeed * Time.deltaTime; // calculate distance to move
         transform.position = Vector3.MoveTowards(transform.position, transform.position+direction, step);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Projectile projectile = collision.GetComponent<Projectile>();
+        if (projectile != null)
+        {
+            TakeDmage(projectile.Damage);
+            projectile.OnDamageEnemy();
+        }
+    }
+
+    private void TakeDmage(float damage)
+    {
+        _currentHp -= damage;
+        if(_currentHp<=0)
+        {
+            _currentHp=_hp;
+            _poolService.ReturnEnemy(this);
+        }
     }
 }

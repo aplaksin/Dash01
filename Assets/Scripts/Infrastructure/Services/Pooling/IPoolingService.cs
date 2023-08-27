@@ -9,5 +9,5 @@ public interface IPoolingService : IService
     void ReturnEnemy(Enemy enemy);
 
     GameObject GetProjectileByType(ProjectileType projectileType);
-    void ReturnProjectile(GameObject projectile);
+    void ReturnProjectile(Projectile projectile);
 }
