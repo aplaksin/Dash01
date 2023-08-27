@@ -13,4 +13,5 @@ public interface IGameFactory : IService
     List<ISavedProgressReader> ProgressReaders { get; }
     List<ISavedProgress> ProgressWriters { get; }
     //Dictionary<Vector2, Vector3> CellPositionByCoords { get ; }
+    Dictionary<Vector2, Vector3> BlocksCoords { get ; }
 }

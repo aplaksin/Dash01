@@ -13,6 +13,7 @@ public class GameLoopState : IState
         _gameStateMashine = gameStateMashine;
         _gameFactory = gameFactory;
         _coroutineRunner = coroutineRunner;
+        
     }
 
     public void Enter()
@@ -25,7 +26,7 @@ public class GameLoopState : IState
         enemy.SetActive(true);
         enemy2.SetActive(true);
         enemy3.SetActive(true);*/
-
+        _enemySpawner = new EnemySpawner(_gameFactory);
         _coroutineRunner.StartCoroutine(SpawnEnemies());
     }
 
@@ -38,7 +39,6 @@ public class GameLoopState : IState
     {
         while (true)
         {
-            _enemySpawner = new EnemySpawner(_gameFactory, Game.CurrentLevelStaticData.GameGridData.GridWidth);
             GameObject enemy = _gameFactory.CreateEnemy(_enemySpawner.GetRandomSpawnPoint());
             enemy.SetActive(true);
             yield return new WaitForSeconds(2f);

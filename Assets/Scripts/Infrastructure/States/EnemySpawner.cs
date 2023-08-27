@@ -1,22 +1,24 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEngine;
 
 public class EnemySpawner
 {
     private List<Vector2> _spawnCoordinaresList = new List<Vector2>();
     private const int ENEMY_Y_SPAWN_POINT = 10;
-    public EnemySpawner(IGameFactory gameFactory, int gridColumnsCount)
+    public EnemySpawner(IGameFactory gameFactory)
     {
-        for(int i = 0; i < gridColumnsCount; i++)
+        
+        foreach (Vector2 key in gameFactory.BlocksCoords.Keys)
         {
-            _spawnCoordinaresList.Add(new Vector2(i, ENEMY_Y_SPAWN_POINT));
+            _spawnCoordinaresList.Add(new Vector2(key.x, ENEMY_Y_SPAWN_POINT));
         }
         
     }
 
     public Vector2 GetRandomSpawnPoint()
     {
-        return _spawnCoordinaresList[Random.Range(0, _spawnCoordinaresList.Count-1)];
+        return _spawnCoordinaresList[Random.Range(0, _spawnCoordinaresList.Count)];
     }
 
 

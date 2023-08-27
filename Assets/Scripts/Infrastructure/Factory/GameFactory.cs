@@ -10,7 +10,7 @@ public class GameFactory : IGameFactory
     public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
     public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
 
-    //public Dictionary<Vector2, Vector3> CellPositionByCoords { get { return _cellPositionByCoords; } }
+    public Dictionary<Vector2, Vector3> BlocksCoords { get { return _blocksCoords; } }
 
     //private List<Vector2> _blocks = new List<Vector2>();
     private readonly IAssetProvider _assetProvider;
@@ -21,7 +21,7 @@ public class GameFactory : IGameFactory
     private Vector3 _scaleVector;
     private Dictionary<Vector2, Vector3> _cellPositionByCoords = new Dictionary<Vector2, Vector3>();
     private Dictionary<Vector2, GameObject> _blocksByCoords = new Dictionary<Vector2, GameObject>();
-
+    private Dictionary<Vector2,Vector3> _blocksCoords = new Dictionary<Vector2, Vector3>();
 
     public GameFactory(IAssetProvider assetProvider, IStaticDataService staticDataService, IPoolingService poolingService)
     {
@@ -150,6 +150,7 @@ public class GameFactory : IGameFactory
                 if (blocksList.Contains(currentCoords))
                 {
                     _blocksByCoords.Add(currentCoords, cell);
+                    _blocksCoords.Add(currentCoords, cell.transform.position);
                 }
 
                 cell.transform.SetParent(grid.transform);
