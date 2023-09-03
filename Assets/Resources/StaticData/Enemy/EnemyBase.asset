@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: EnemyBase
   m_EditorClassIdentifier: 
   Hp: 1
-  Damage: 0
+  Damage: 1
   MoveSpeed: 1.1
   Type: 0

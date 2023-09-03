@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c783d253e9c8934439b85d2255fbffe8, type: 3}
   m_Name: ProjectileBase
   m_EditorClassIdentifier: 
-  Damage: 0
+  Damage: 1
   MoveSpeed: 0.69
   Type: 0

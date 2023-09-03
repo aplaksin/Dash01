@@ -7,8 +7,8 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     public EnemyType _type;
     private float _moveSpeed;
-    private float _damage;
-    private float _hp;
+    private int _damage;
+    private int _hp;
     private float _currentHp;
 
     private Vector3 direction = Vector3.down;
@@ -42,10 +42,20 @@ public class Enemy : MonoBehaviour
     {
         if (transform.position.y < MIN_Y_POSITION) {
             _poolService.ReturnEnemy(this);
+            EventManager.CallOnBaseDamageEvent(_damage);
         }
         var step = _moveSpeed * Time.deltaTime; // calculate distance to move
         transform.position = Vector3.MoveTowards(transform.position, transform.position+direction, step);
     }
+
+/*    private void OnEnable()
+    {
+        EventManager.OnEnemyDeath += EnmemyDeath;
+    }  
+    private void OnDisable()
+    {
+        EventManager.OnEnemyDeath -= EnmemyDeath;
+    }*/
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -54,8 +64,14 @@ public class Enemy : MonoBehaviour
         {
             TakeDmage(projectile.Damage);
             projectile.OnDamageEnemy();
+            EventManager.CallOnOnEnemyDeathEvent();
         }
     }
+
+/*    private void EnmemyDeath()
+    {
+
+    }*/
 
     private void TakeDmage(float damage)
     {

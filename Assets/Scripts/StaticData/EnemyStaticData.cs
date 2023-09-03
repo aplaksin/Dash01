@@ -6,10 +6,10 @@ using UnityEngine;
 public class EnemyStaticData : ScriptableObject
 {
     [Range(1f, 100f)]
-    public float Hp;
+    public int Hp;
 
     [Range(1f, 30f)]
-    public float Damage;
+    public int Damage;
 
     [Range(0.1f, 10f)]
     public float MoveSpeed;

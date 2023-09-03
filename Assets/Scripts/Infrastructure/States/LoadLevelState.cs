@@ -40,14 +40,24 @@ public class LoadLevelState : IParameterizedState<string>
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         //var initialPoint = GameObject.FindWithTag(InitialPointTag);
         //GameObject hero = _gameFactory.CreateHero(initialPoint);
-        //GameObject hud = _gameFactory.CreateHud();
+        //
         _poolingService.Construct();
+
         CorrectCameraPosition();
+
         Vector3 scaleVector = CalcScaleVector();
         _gameFactory.Construct(scaleVector);
+
         Game.CurrentLevelStaticData = _levelStaticData;
+
         GameObject player = _gameFactory.CreatePlayer(_levelStaticData.PlayerSpawnCoords, scaleVector);
+
         _gameFactory.CreateGameGrid(_levelStaticData, scaleVector, player);
+
+        GameObject hud = _gameFactory.CreateHud();
+        hud.GetComponent<PlayerHpUI>().Construct(_levelStaticData.PlayerHP);
+        hud.SetActive(true);
+
         _gameStateMachine.Enter<GameLoopState>();
     }
 
