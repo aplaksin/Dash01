@@ -8,7 +8,7 @@ public class StaticDataService : IStaticDataService
     private const string EnemyDataPath = "StaticData/Enemy";
     private const string ProjectileDataPath = "StaticData/Projectile";
     private const string LevelsDataPath = "StaticData/Levels";
-    private const string StaticDataWindowPath = "StaticData/UI/WindowStaticData";
+    private const string StaticDataWindowPath = "StaticData/WindowStaticData/WindowStaticData";
 
     private Dictionary<EnemyType, EnemyStaticData> _enemyData;
     private Dictionary<ProjectileType, ProjectileStaticData> _projctileData;
@@ -20,7 +20,7 @@ public class StaticDataService : IStaticDataService
         _enemyData = Resources.LoadAll<EnemyStaticData>(EnemyDataPath).ToDictionary(x => x.Type, x => x);
         _projctileData = Resources.LoadAll<ProjectileStaticData>(ProjectileDataPath).ToDictionary(x => x.Type, x => x);
         _levelData = Resources.LoadAll<LevelStaticData>(LevelsDataPath).ToDictionary(x => x.LevelKey, x => x);
-        //_windowConfigs = Resources.Load<WindowStaticData>(StaticDataWindowPath).Configs.ToDictionary(x => x.WindowId, x => x);
+        _windowConfigs = Resources.Load<WindowStaticData>(StaticDataWindowPath).Configs.ToDictionary(x => x.WindowId, x => x);
     }
 
     public EnemyStaticData GetEnemyDataByType(EnemyType typeId)

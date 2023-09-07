@@ -12,6 +12,14 @@ public class PoolingService : IPoolingService
     private const int InitialCapacity = 10;
     private const int AddingCapacity = 3;
 
+    private const string POOL_WRAPPER_NAME = "PoolWrapper";
+    private const string ENEMIES_POOL_WRAPPER_NAME = "EnemiesPool";
+    private const string PROJECTILES_POOL_WRAPPER_NAME = "ProjectilesPool";
+
+    private GameObject _poolWrapper;
+    private GameObject _enemiesPoolWrapper;
+    private GameObject _projectilesPoolWrapper;
+
     public PoolingService(IAssetProvider assetProvider, IStaticDataService staticDataService)
     {
         _assetProvider = assetProvider;
@@ -21,6 +29,7 @@ public class PoolingService : IPoolingService
 
    public void Construct()
     {
+        CreateWrapperObjectsForPools();
         CreateEnemiesPool();
         CreateProjectilesPool();
     }
@@ -94,6 +103,22 @@ public class PoolingService : IPoolingService
         }
         
     }
+
+    private void CreateWrapperObjectsForPools()
+    {
+        _poolWrapper = new GameObject(POOL_WRAPPER_NAME);
+        _poolWrapper.transform.position = Vector3.zero;
+
+        _enemiesPoolWrapper = new GameObject(ENEMIES_POOL_WRAPPER_NAME);
+        _enemiesPoolWrapper.transform.position = Vector3.zero;
+        _enemiesPoolWrapper.transform.SetParent(_poolWrapper.transform);
+
+        _projectilesPoolWrapper = new GameObject(PROJECTILES_POOL_WRAPPER_NAME);
+        _projectilesPoolWrapper.transform.position = Vector3.zero;
+        _projectilesPoolWrapper.transform.SetParent(_poolWrapper.transform);
+
+    }
+
     private void CreateProjectilesPool()
     {
         _projectilesByType = new Dictionary<ProjectileType, Queue<GameObject>>();
@@ -119,6 +144,7 @@ public class PoolingService : IPoolingService
             GameObject obj = _assetProvider.Instantiate(path);
             obj.SetActive(false);
             Enemy enemy = obj.GetComponent<Enemy>();
+            obj.transform.SetParent(_enemiesPoolWrapper.transform);
             enemy.Construct(data, this);
             queue.Enqueue(obj);
         }
@@ -132,6 +158,7 @@ public class PoolingService : IPoolingService
             GameObject obj = _assetProvider.Instantiate(path);
             obj.SetActive(false);
             Projectile projectile = obj.GetComponent<Projectile>();
+            obj.transform.SetParent(_projectilesPoolWrapper.transform);
             projectile.Construct(data, this);
             queue.Enqueue(obj);
         }

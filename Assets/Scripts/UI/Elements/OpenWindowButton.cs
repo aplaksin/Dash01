@@ -9,12 +9,18 @@ public class OpenWindowButton : MonoBehaviour
     public WindowId WindowId;
     private IWindowService _windowService;
 
-    public void Init(IWindowService windowService) =>
-      _windowService = windowService;
+    public void Init(IWindowService windowService) {
+        _windowService = windowService;
+    }
+      
 
-    private void Awake() =>
-      Button.onClick.AddListener(Open);
+    private void Awake() {
+        Button.onClick.AddListener(Open);
+    }
 
-    private void Open() =>
-      _windowService.Open(WindowId);
+    private void Open()
+    {
+        _windowService.Open(WindowId);
+    }
+     
 }

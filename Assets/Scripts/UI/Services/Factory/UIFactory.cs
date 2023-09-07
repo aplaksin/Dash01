@@ -5,11 +5,11 @@ using UnityEngine;
 
   public class UIFactory : IUIFactory
   {
-    private const string UIRootPath = "UIRoot";
+    //private const string UIRootPath = "UIRoot";
     private readonly IAssetProvider _assets;
     private readonly IStaticDataService _staticData;
     
-    private Transform _uiRoot;
+    //private Transform _uiRoot;
 
 
     public UIFactory(IAssetProvider assets, IStaticDataService staticData)
@@ -18,10 +18,10 @@ using UnityEngine;
       _staticData = staticData;
     }
 
-    public void CreateShop()
+    public void CreatePauseMenu()
     {
-      WindowConfig config = _staticData.GetWndowConfigById(WindowId.Shop);
-      TestWindow window = Object.Instantiate(config.Template, _uiRoot) as TestWindow;
+      WindowConfig config = _staticData.GetWndowConfigById(WindowId.Pause);
+      PauseWindow window = Object.Instantiate(config.Template) as PauseWindow;
       window.Construct();
     }
 

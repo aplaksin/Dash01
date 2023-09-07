@@ -15,8 +15,8 @@ public class WindowService : IWindowService
         {
             case WindowId.None:
                 break;
-            case WindowId.Shop:
-                _uiFactory.CreateShop();
+            case WindowId.Pause:
+                _uiFactory.CreatePauseMenu();
                 break;
         }
     }

@@ -2,15 +2,16 @@
 
 public class BootstrapState : IState
 {
-    private readonly GameStateMachine _gameStateMashine;
+    private readonly GameStateMachine _gameStateMachine;
     private readonly SceneLoader _sceneLoader;
     private const string INITIAL_SCENE_NAME = "Initial";
-    private const string LEVEL_SCENE_NAME = "Level1";
+    
+    private const string MAIN_MENU_SCENE_NAME = "MainMenu";
     private readonly AllServices _services;
 
     public BootstrapState(GameStateMachine gameStateMashine, SceneLoader sceneLoader, AllServices services)
     {
-        _gameStateMashine = gameStateMashine;
+        _gameStateMachine = gameStateMashine;
         _sceneLoader = sceneLoader;
         _services = services;
 
@@ -20,7 +21,7 @@ public class BootstrapState : IState
     public void Enter()
     {
 
-        _sceneLoader.LoadScene(INITIAL_SCENE_NAME, EnterLoadLavel);
+        _sceneLoader.LoadScene(INITIAL_SCENE_NAME, EnterMainMenuScene);
     }
 
 
@@ -40,7 +41,9 @@ public class BootstrapState : IState
         _services.RegisterSingle<IAssetProvider>(new AssetProvider());
         
         RegisterStaticDataService();
-
+        _services.RegisterSingle<IUIFactory>(new UIFactory(_services.Single<IAssetProvider>(), _services.Single<IStaticDataService>()));
+        _services.RegisterSingle<IWindowService>(new WindowService(_services.Single<IUIFactory>()));
+        
         _services.RegisterSingle<IPoolingService>(new PoolingService(_services.Single<IAssetProvider>(), _services.Single<IStaticDataService>()));
         _services.RegisterSingle<IGameFactory>(new GameFactory(_services.Single<IAssetProvider>(), _services.Single<IStaticDataService>(), _services.Single<IPoolingService>()));
 
@@ -56,10 +59,15 @@ public class BootstrapState : IState
         _services.RegisterSingle<IStaticDataService>(staticDataService);
     }
 
-    private void EnterLoadLavel()
+    private void EnterMainMenuScene()
+    {
+        _gameStateMachine.Enter<MainMenuState, string>(MAIN_MENU_SCENE_NAME);
+    }
+
+/*    private void EnterLoadLavel()
     {
         _gameStateMashine.Enter<LoadLevelState, string>(LEVEL_SCENE_NAME);
-    }
+    }*/
     private IInputService Inputservice()
     {
         /*        if (Application.isEditor)

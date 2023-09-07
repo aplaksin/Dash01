@@ -4,7 +4,7 @@ public static class EventManager
 {
     public static event Action OnEnemyDeath;
     public static event Action<int> OnBaseDamage;
-    public static void CallOnOnEnemyDeathEvent()
+    public static void CallOnEnemyDeathEvent()
     {
         OnEnemyDeath?.Invoke();
     }

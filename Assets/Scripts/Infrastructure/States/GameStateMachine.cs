@@ -5,22 +5,22 @@ public class GameStateMachine
 {
     private readonly Dictionary<Type, IExitableState> _states;
     private IExitableState _activeState;
-    private SceneLoader sceneLoader;
+    private SceneLoader _sceneLoader;
 
     public GameStateMachine(SceneLoader sceneLoader, LoadingCurtain loadingCurtain, AllServices services, ICoroutineRunner coroutineRunner)
     {
 
-
         _states = new Dictionary<Type, IExitableState>()
         {
             [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
+            [typeof(MainMenuState)] = new MainMenuState(this, sceneLoader),
             [typeof(LoadProgressState)] = new LoadProgressState(this, services.Single<IPersistentProgressService>(), services.Single<ISaveLoadService>()),
-            [typeof(LoadLevelState)] = new LoadLevelState(this, services.Single<IPoolingService>(), sceneLoader, loadingCurtain, services.Single<IGameFactory>(), services.Single<IPersistentProgressService>(), services.Single<IStaticDataService>()),
+            [typeof(LoadLevelState)] = new LoadLevelState(this, services.Single<IPoolingService>(), sceneLoader, loadingCurtain, services.Single<IGameFactory>(), services.Single<IPersistentProgressService>(), services.Single<IStaticDataService>(), services.Single<IUIFactory>(), services.Single<IWindowService>()),
             [typeof(GameLoopState)] = new GameLoopState(this, services.Single<IGameFactory>(), coroutineRunner)
 
-
         };
-        this.sceneLoader = sceneLoader;
+
+        _sceneLoader = sceneLoader;
     }
 
     public void Enter<TState>() where TState : class, IState

@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Globalization;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameBootstrapper : MonoBehaviour, ICoroutineRunner
@@ -9,21 +6,13 @@ public class GameBootstrapper : MonoBehaviour, ICoroutineRunner
     private Game _game;
 
     private void Awake()
-    {
+    {      
+        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(loadingCurtain.gameObject);
         _game = new Game(this, loadingCurtain);
         _game.GameStateMachine.Enter<BootstrapState>();
-        DontDestroyOnLoad(this);
+
+
     }
 
-
-    private void Start()
-    {
-        
-    }
-
-
-    private void Update()
-    {
-        
-    }
 }

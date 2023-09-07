@@ -7,14 +7,15 @@ public class LoadLevelState : IParameterizedState<string>
     private readonly SceneLoader _sceneLoader;
     private LoadingCurtain _loadingCurtain;
     private IGameFactory _gameFactory;
-    private const string InitialPointTag = "InitialPoint";
     private const string LevelDataName = "Level1";
     private readonly IPersistentProgressService _progressService;
     private readonly IStaticDataService _staticDataService;
-    private LevelStaticData _levelStaticData;
-    private IPoolingService _poolingService;
+    private readonly LevelStaticData _levelStaticData;
+    private readonly IPoolingService _poolingService;
+    private readonly IUIFactory _uiFactory;
+    private readonly IWindowService _windowService;
 
-    public LoadLevelState(GameStateMachine gameStateMachine, IPoolingService poolingService, SceneLoader sceneLoader, LoadingCurtain loadingCurtain, IGameFactory gameFactory, IPersistentProgressService progressService, IStaticDataService staticDataService)
+    public LoadLevelState(GameStateMachine gameStateMachine, IPoolingService poolingService, SceneLoader sceneLoader, LoadingCurtain loadingCurtain, IGameFactory gameFactory, IPersistentProgressService progressService, IStaticDataService staticDataService, IUIFactory uIFactory, IWindowService windowService)
     {
         _gameStateMachine = gameStateMachine;
         _sceneLoader = sceneLoader;
@@ -24,6 +25,8 @@ public class LoadLevelState : IParameterizedState<string>
         _staticDataService = staticDataService;
         _levelStaticData = _staticDataService.GetLevelStaticDataByKey(LevelDataName);
         _poolingService = poolingService;
+        _uiFactory = uIFactory;
+        _windowService = windowService;
     }
 
     public void Enter(string sceneName)
@@ -37,10 +40,7 @@ public class LoadLevelState : IParameterizedState<string>
     }
     private void OnLoaded()
     {
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //var initialPoint = GameObject.FindWithTag(InitialPointTag);
-        //GameObject hero = _gameFactory.CreateHero(initialPoint);
-        //
+
         _poolingService.Construct();
 
         CorrectCameraPosition();
@@ -51,12 +51,18 @@ public class LoadLevelState : IParameterizedState<string>
         Game.CurrentLevelStaticData = _levelStaticData;
 
         GameObject player = _gameFactory.CreatePlayer(_levelStaticData.PlayerSpawnCoords, scaleVector);
-
+        
         _gameFactory.CreateGameGrid(_levelStaticData, scaleVector, player);
+        _gameFactory.SetPlayerPositionOnGrid(player);
 
         GameObject hud = _gameFactory.CreateHud();
-        hud.GetComponent<PlayerHpUI>().Construct(_levelStaticData.PlayerHP);
+        hud.GetComponent<UIPlayerHp>().Construct(_levelStaticData.PlayerHP);
         hud.SetActive(true);
+        hud.GetComponentInChildren<OpenWindowButton>().Init(_windowService);
+
+        //GameObject pauseMenu = 
+        //_uiFactory.CreatePauseMenu();
+        //pauseMenu.SetActive(false);
 
         _gameStateMachine.Enter<GameLoopState>();
     }
