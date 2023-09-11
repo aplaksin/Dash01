@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PauseWindow : WindowBase
 {
@@ -20,7 +19,7 @@ public class PauseWindow : WindowBase
 
     public void OnRestartMenuBtnClick()
     {
-        _gameStateMachine.Enter<LoadLevelState, string>(SceneManager.GetActiveScene().name);
+
     }
 
     public void OnPauseBtnClick()

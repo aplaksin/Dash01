@@ -1,26 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PauseWindow : WindowBase
 {
-    private GameStateMachine _gameStateMachine;
 
-    public void Construct(GameStateMachine gameStateMachine)
+
+
+
+    public void Construct()
     {
-        _gameStateMachine = gameStateMachine;
         PauseGame();
-    }
-
-    public void OnExitBtnClick()
-    {
-        Application.Quit();
-    }
-
-    public void OnRestartMenuBtnClick()
-    {
-        _gameStateMachine.Enter<LoadLevelState, string>(SceneManager.GetActiveScene().name);
     }
 
     public void OnPauseBtnClick()

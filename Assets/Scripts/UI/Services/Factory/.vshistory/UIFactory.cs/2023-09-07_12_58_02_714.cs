@@ -18,11 +18,11 @@ using UnityEngine;
       _staticData = staticData;
     }
 
-    public void CreatePauseMenu(GameStateMachine gameStateMachine)
+    public void CreatePauseMenu()
     {
       WindowConfig config = _staticData.GetWndowConfigById(WindowId.Pause);
       PauseWindow window = Object.Instantiate(config.Template) as PauseWindow;
-      window.Construct(gameStateMachine);
+      window.Construct();
     }
 
 /*    public async Task CreateUIRoot()

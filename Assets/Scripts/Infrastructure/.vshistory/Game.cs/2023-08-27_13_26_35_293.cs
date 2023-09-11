@@ -3,7 +3,7 @@ using UnityEngine;
 public class Game
 {
     public GameStateMachine GameStateMachine;
-    //public static LevelStaticData CurrentLevelStaticData;
+    public static LevelStaticData CurrentLevelStaticData;
 
     public Game(ICoroutineRunner coroutineRunner, LoadingCurtain loadingCurtain)
     {

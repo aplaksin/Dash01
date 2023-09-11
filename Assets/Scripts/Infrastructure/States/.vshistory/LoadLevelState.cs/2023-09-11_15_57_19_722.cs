@@ -51,7 +51,7 @@ public class LoadLevelState : IParameterizedState<string>
         Vector3 scaleVector = CalcScaleVector();
         PrepareGameFactory(scaleVector);
 
-        //AddCurrentLevelStaticDataToGame();
+        AddCurrentLevelStaticDataToGame();
         Dictionary<Vector2, Vector3>  cellpositionsByCoords = CreateGameGrid(scaleVector);
         CreatePlayer(scaleVector, cellpositionsByCoords);
 
@@ -87,10 +87,10 @@ public class LoadLevelState : IParameterizedState<string>
         _poolingService.Construct();
     }
 
-/*    private void AddCurrentLevelStaticDataToGame()
+    private void AddCurrentLevelStaticDataToGame()
     {
         Game.CurrentLevelStaticData = _levelStaticData;
-    }*/
+    }
 
     private void CreateHud()
     {
@@ -102,8 +102,8 @@ public class LoadLevelState : IParameterizedState<string>
 
     private Vector3 CalcScaleVector()
     {
-        int resolutionHorizontal = (int) UnityEditor.Handles.GetMainGameViewSize().x;
-        int resolutionVertical = (int) UnityEditor.Handles.GetMainGameViewSize().y;
+        int resolutionHorizontal = (int)UnityEditor.Handles.GetMainGameViewSize().x;
+        int resolutionVertical = (int)UnityEditor.Handles.GetMainGameViewSize().y;
 
         float cameraSize = Camera.main.orthographicSize * 2;
 

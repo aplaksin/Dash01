@@ -12,19 +12,19 @@ public class GameFactory : IGameFactory
     //private List<Vector2> _blocks = new List<Vector2>();
     private readonly IAssetProvider _assetProvider;
     private readonly IPoolingService _poolingService;
-    //private readonly IStaticDataService _staticDataService;
+    private readonly IStaticDataService _staticDataService;
     private readonly IInputService _inputService;
-    //private LevelStaticData levelStaticData;
+    private LevelStaticData levelStaticData;
 
     private Vector3 _scaleVector;
-    private Dictionary<Vector2, Vector3> _cellPositionByCoords;
-    private Dictionary<Vector2, GameObject> _blocksByCoords;
-    private Dictionary<Vector2,Vector3> _blocksCoords;
+    private Dictionary<Vector2, Vector3> _cellPositionByCoords = new Dictionary<Vector2, Vector3>();
+    private Dictionary<Vector2, GameObject> _blocksByCoords = new Dictionary<Vector2, GameObject>();
+    private Dictionary<Vector2,Vector3> _blocksCoords = new Dictionary<Vector2, Vector3>();
 
     public GameFactory(IAssetProvider assetProvider, IStaticDataService staticDataService, IPoolingService poolingService, IInputService inputInputService)
     {
         _assetProvider = assetProvider;
-        //_staticDataService = staticDataService;
+        _staticDataService = staticDataService;
         _poolingService = poolingService;
         _inputService = inputInputService;
     }
@@ -33,9 +33,6 @@ public class GameFactory : IGameFactory
 
     public void Construct(Vector3 scaleVector)
     {
-        _cellPositionByCoords = new Dictionary<Vector2, Vector3>();
-        _blocksByCoords = new Dictionary<Vector2, GameObject>();
-        _blocksCoords = new Dictionary<Vector2, Vector3>();
         AddScaleVector(scaleVector);
         //TODO переделать прокидывание scaleVector мб перенести CalcScaleVector() из лоад левел сюда
         // создать метод что-то вроде CreateBaseGameObjects и там создавать грид и плеера

@@ -12,9 +12,9 @@ public class GameFactory : IGameFactory
     //private List<Vector2> _blocks = new List<Vector2>();
     private readonly IAssetProvider _assetProvider;
     private readonly IPoolingService _poolingService;
-    //private readonly IStaticDataService _staticDataService;
+    private readonly IStaticDataService _staticDataService;
     private readonly IInputService _inputService;
-    //private LevelStaticData levelStaticData;
+    private LevelStaticData levelStaticData;
 
     private Vector3 _scaleVector;
     private Dictionary<Vector2, Vector3> _cellPositionByCoords;
@@ -24,7 +24,7 @@ public class GameFactory : IGameFactory
     public GameFactory(IAssetProvider assetProvider, IStaticDataService staticDataService, IPoolingService poolingService, IInputService inputInputService)
     {
         _assetProvider = assetProvider;
-        //_staticDataService = staticDataService;
+        _staticDataService = staticDataService;
         _poolingService = poolingService;
         _inputService = inputInputService;
     }

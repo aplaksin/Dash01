@@ -18,7 +18,7 @@ public class WindowService : IWindowService
             case WindowId.None:
                 break;
             case WindowId.Pause:
-                _uiFactory.CreatePauseMenu(_gameStateMachine);
+                _uiFactory.CreatePauseMenu();
                 break;
         }
     }

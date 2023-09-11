@@ -11,6 +11,12 @@ public class UiMenu : MonoBehaviour
     private Button _startBtn;
 
     [SerializeField]
+    private Button _restartBtn;
+
+    [SerializeField]
+    private Button _resumeBtn;
+
+    [SerializeField]
     private Button _exitBtn;
 
     public void OnClickStartBtn()
@@ -18,11 +24,17 @@ public class UiMenu : MonoBehaviour
         UIEventManager.CallOnClickStartBtnEvent();
         Debug.Log("OnClickStartBtn");
     }
-
+    public void OnClickRestartBtn()
+    {
+        UIEventManager.CallOnClickRestartBtnEvent();
+    }
+    public void OnClickResumeBtn()
+    {
+        UIEventManager.CallOnClickResumeBtnEvent();
+    }
     public void OnClickExitBtn()
     {
-        //UIEventManager.CallOnClickExitBtnEvent();
-        Application.Quit();
+        UIEventManager.CallOnClickExitBtnEvent();
     }
 
 

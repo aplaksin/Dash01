@@ -19,11 +19,11 @@ public class SceneLoader
 
     public IEnumerator Load(string sceneName, Action onLoadedScene = null)
     {
-/*        if (SceneManager.GetActiveScene().name == sceneName)
+        if (SceneManager.GetActiveScene().name == sceneName)
         {
             onLoadedScene?.Invoke();
             yield break;
-        }*/
+        }
 
 
         AsyncOperation waitNextSceneOperation = SceneManager.LoadSceneAsync(sceneName);

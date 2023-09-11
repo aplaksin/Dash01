@@ -22,8 +22,7 @@ public class BootstrapState : IState
     public void Enter()
     {
 
-        //_sceneLoader.LoadScene(INITIAL_SCENE_NAME, EnterMainMenuScene);
-        EnterMainMenuScene();
+        _sceneLoader.LoadScene(INITIAL_SCENE_NAME, EnterMainMenuScene);
     }
 
 
@@ -44,7 +43,7 @@ public class BootstrapState : IState
         
         RegisterStaticDataService();
         _services.RegisterSingle<IUIFactory>(new UIFactory(_services.Single<IAssetProvider>(), _services.Single<IStaticDataService>()));
-        _services.RegisterSingle<IWindowService>(new WindowService(_services.Single<IUIFactory>(), _gameStateMachine));
+        _services.RegisterSingle<IWindowService>(new WindowService(_services.Single<IUIFactory>()));
         
         _services.RegisterSingle<IPoolingService>(new PoolingService(_services.Single<IAssetProvider>(), _services.Single<IStaticDataService>()));
         _services.RegisterSingle<IGameFactory>(new GameFactory(_services.Single<IAssetProvider>(), _services.Single<IStaticDataService>(), _services.Single<IPoolingService>(), _services.Single<IInputService>()));

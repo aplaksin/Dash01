@@ -24,7 +24,7 @@ public class GameFactory : IGameFactory
     public GameFactory(IAssetProvider assetProvider, IStaticDataService staticDataService, IPoolingService poolingService, IInputService inputInputService)
     {
         _assetProvider = assetProvider;
-        //_staticDataService = staticDataService;
+        _staticDataService = staticDataService;
         _poolingService = poolingService;
         _inputService = inputInputService;
     }

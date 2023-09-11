@@ -22,8 +22,7 @@ public class BootstrapState : IState
     public void Enter()
     {
 
-        //_sceneLoader.LoadScene(INITIAL_SCENE_NAME, EnterMainMenuScene);
-        EnterMainMenuScene();
+        _sceneLoader.LoadScene(INITIAL_SCENE_NAME, EnterMainMenuScene);
     }
 
 

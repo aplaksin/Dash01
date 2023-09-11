@@ -5,7 +5,7 @@ using UnityEngine;
 public class GridGeneratorStandart : IGridGenerator
 {
     private IAssetProvider _assetProvider;
-    //private GameObject _player;
+    private GameObject _player;
     private int _gridHeight;
     private int _gridWidth;
     private Vector3 _scaleVector;
