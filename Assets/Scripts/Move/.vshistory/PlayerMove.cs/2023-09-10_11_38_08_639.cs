@@ -24,8 +24,8 @@ public class PlayerMove : MonoBehaviour
         _blocksByCoords = blocksByCoords;
         _currentPlayerCoords = currentPlayerCoords;
         _inputService = inputService;
-        _inputService.SubscribeOnMoveEvent(Move);
         _gameFactory = gameFactory;
+
     }
 
     private void Update()
@@ -55,7 +55,7 @@ public class PlayerMove : MonoBehaviour
 
     private void OnEnable()
     {
-        _inputService?.SubscribeOnMoveEvent(Move);
+        _inputService.SubscribeOnMoveEvent(Move);
     }
 
     private void OnDisable()
@@ -65,7 +65,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Move(Vector2 direction)
     {
-        
+        Debug.Log(direction);
         if(direction != Vector2.zero)
         {
             CalcMovePlayerPosition(direction);
@@ -94,6 +94,9 @@ public class PlayerMove : MonoBehaviour
             _movePosition = moveTarget;
         }
 
+
+
     }
+
 
 }

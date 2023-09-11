@@ -9,7 +9,7 @@ public class WindowService : IWindowService
         _uiFactory = uiFactory;
     }
 
-    public void OpenWindowById(WindowId windowId)
+    public void Open(WindowId windowId)
     {
         switch (windowId)
         {

@@ -65,7 +65,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Move(Vector2 direction)
     {
-        
+        Debug.Log(direction);
         if(direction != Vector2.zero)
         {
             CalcMovePlayerPosition(direction);

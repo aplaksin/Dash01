@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class GameFactory : IGameFactory
 {
@@ -13,7 +13,6 @@ public class GameFactory : IGameFactory
     private readonly IAssetProvider _assetProvider;
     private readonly IPoolingService _poolingService;
     private readonly IStaticDataService _staticDataService;
-    private readonly IInputService _inputService;
     private LevelStaticData levelStaticData;
 
     private Vector3 _scaleVector;
@@ -21,12 +20,11 @@ public class GameFactory : IGameFactory
     private Dictionary<Vector2, GameObject> _blocksByCoords = new Dictionary<Vector2, GameObject>();
     private Dictionary<Vector2,Vector3> _blocksCoords = new Dictionary<Vector2, Vector3>();
 
-    public GameFactory(IAssetProvider assetProvider, IStaticDataService staticDataService, IPoolingService poolingService, IInputService inputInputService)
+    public GameFactory(IAssetProvider assetProvider, IStaticDataService staticDataService, IPoolingService poolingService)
     {
         _assetProvider = assetProvider;
         _staticDataService = staticDataService;
         _poolingService = poolingService;
-        _inputService = inputInputService;
     }
 
 
@@ -57,30 +55,26 @@ public class GameFactory : IGameFactory
         return enemy;
     }
     
-    public Dictionary<Vector2, Vector3> CreateGameGrid(LevelStaticData levelStaticData, Vector3 scaleVector)
+    public void CreateGameGrid(LevelStaticData levelStaticData, Vector3 scaleVector, GameObject player)
     {
-        IGridGenerator gridGenerator = new GridGeneratorStandart(_assetProvider, levelStaticData.GameGridData.GridHeight, levelStaticData.GameGridData.GridWidth, scaleVector);
+        IGridGenerator gridGenerator = new GridGeneratorStandart(_assetProvider, player, levelStaticData.GameGridData.GridHeight, levelStaticData.GameGridData.GridWidth, scaleVector);
 
         gridGenerator.BuildGrid(new List<Vector2>(levelStaticData.GameGridData.BlocksCoords), _cellPositionByCoords, _blocksByCoords, _blocksCoords, levelStaticData.GameGridData.CellSpace);
-
-        return _cellPositionByCoords;
     }
-    public void SetPlayerPositionOnGrid(GameObject player, Vector3 spawnPoint, Dictionary<Vector2, Vector3> cellpositionsByCoords)
+    public void SetPlayerPositionOnGrid(GameObject player)
     {
-        player.transform.position = cellpositionsByCoords[spawnPoint];
+        player.transform.position = _cellPositionByCoords[player.transform.position];
     }
     
-    public GameObject CreatePlayer(Vector2 spawnPoint, Vector3 scaleVector, Dictionary<Vector2, Vector3> cellpositionsByCoords)
+    public GameObject CreatePlayer(Vector2 spawnPoint, Vector3 scaleVector)
     {
         GameObject player = _assetProvider.Instantiate(AssetPath.PlayerPath);
         player.transform.localScale = scaleVector;
-        SetPlayerPositionOnGrid(player, spawnPoint, cellpositionsByCoords);
         //player.transform.position = new Vector3(spawnPoint.x + player.transform.localScale.x / 2, spawnPoint.y + player.transform.localScale.y / 2, 0);
         
         PlayerMove playerMove = player.transform.GetComponent<PlayerMove>();
-
-        playerMove.Init(cellpositionsByCoords, _blocksByCoords, spawnPoint, _inputService, this);
-        
+        playerMove.Construct(_cellPositionByCoords, _blocksByCoords, spawnPoint);
+        player.transform.position = spawnPoint;
         return player;
     }
 

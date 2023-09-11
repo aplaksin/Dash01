@@ -20,7 +20,7 @@ public class OpenWindowButton : MonoBehaviour
 
     private void Open()
     {
-        _windowService.OpenWindowById(WindowId);
+        _windowService.Open(WindowId);
     }
      
 }

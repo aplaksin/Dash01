@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LoadLevelState : IParameterizedState<string>
@@ -10,11 +9,11 @@ public class LoadLevelState : IParameterizedState<string>
     private IGameFactory _gameFactory;
     //private const string LevelDataName = "Level1";
     private string _levelDataName;
-    //private readonly IPersistentProgressService _progressService;
+    private readonly IPersistentProgressService _progressService;
     private readonly IStaticDataService _staticDataService;
     private LevelStaticData _levelStaticData;
     private readonly IPoolingService _poolingService;
-    //private readonly IUIFactory _uiFactory;
+    private readonly IUIFactory _uiFactory;
     private readonly IWindowService _windowService;
 
     public LoadLevelState(GameStateMachine gameStateMachine, IPoolingService poolingService, SceneLoader sceneLoader, LoadingCurtain loadingCurtain, IGameFactory gameFactory, IPersistentProgressService progressService, IStaticDataService staticDataService, IUIFactory uIFactory, IWindowService windowService)
@@ -23,11 +22,11 @@ public class LoadLevelState : IParameterizedState<string>
         _sceneLoader = sceneLoader;
         _loadingCurtain = loadingCurtain;
         _gameFactory = gameFactory;
-        //_progressService = progressService;
+        _progressService = progressService;
         _staticDataService = staticDataService;
         //_levelStaticData = _staticDataService.GetLevelStaticDataByKey(LevelDataName);
         _poolingService = poolingService;
-        //_uiFactory = uIFactory;
+        _uiFactory = uIFactory;
         _windowService = windowService;
     }
 
@@ -52,8 +51,10 @@ public class LoadLevelState : IParameterizedState<string>
         PrepareGameFactory(scaleVector);
 
         AddCurrentLevelStaticDataToGame();
-        Dictionary<Vector2, Vector3>  cellpositionsByCoords = CreateGameGrid(scaleVector);
-        CreatePlayer(scaleVector, cellpositionsByCoords);
+
+        CreatePlayer(scaleVector);
+
+        CreateGameGrid(scaleVector);
 
         CreateHud();
 
@@ -62,19 +63,17 @@ public class LoadLevelState : IParameterizedState<string>
         //_uiFactory.CreatePauseMenu();
         //pauseMenu.SetActive(false);
 
-        _gameStateMachine.Enter<GameLoopState, LevelStaticData>(_levelStaticData);
+        _gameStateMachine.Enter<GameLoopState>();
     }
 
-
-
-    private Dictionary<Vector2, Vector3> CreateGameGrid(Vector3 scaleVector)
+    private void CreateGameGrid(Vector3 scaleVector)
     {
-        return _gameFactory.CreateGameGrid(_levelStaticData, scaleVector);
+        _gameFactory.CreateGameGrid(_levelStaticData, scaleVector);
     }
 
-    private GameObject CreatePlayer(Vector3 scaleVector, Dictionary<Vector2, Vector3> cellpositionsByCoords)
+    private GameObject CreatePlayer(Vector3 scaleVector)
     {
-        return _gameFactory.CreatePlayer(_levelStaticData.PlayerSpawnCoords, scaleVector, cellpositionsByCoords);
+        return _gameFactory.CreatePlayer(_levelStaticData.PlayerSpawnCoords, scaleVector);
     }
 
     private void PrepareGameFactory(Vector3 scaleVector)
@@ -136,11 +135,11 @@ public class LoadLevelState : IParameterizedState<string>
         Camera.main.transform.position = new Vector3(correctPositionX, camSize, -10);
     }
 
-/*    private void InformProgressReaders()
+    private void InformProgressReaders()
     {
         foreach (ISavedProgressReader progressReader in _gameFactory.ProgressReaders)
             progressReader.LoadProgress(_progressService.PlayerProgress);
-    }*/
+    }
 
 
 }

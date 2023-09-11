@@ -18,22 +18,26 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private float _moveSpeed = 1f;
 
-    public void Init(Dictionary<Vector2, Vector3> cellPositionByCoords, Dictionary<Vector2, GameObject> blocksByCoords, Vector2 currentPlayerCoords, IInputService inputService, IGameFactory gameFactory)
+    private void Awake()
+    {
+        _inputService = AllServices.Container.Single<IInputService>();
+        _gameFactory = AllServices.Container.Single<IGameFactory>();
+    }
+
+    public void Construct(Dictionary<Vector2, Vector3> cellPositionByCoords, Dictionary<Vector2, GameObject> blocksByCoords, Vector2 currentPlayerCoords)
     {
         _cellPositionByCoords = cellPositionByCoords;
         _blocksByCoords = blocksByCoords;
         _currentPlayerCoords = currentPlayerCoords;
-        _inputService = inputService;
-        _inputService.SubscribeOnMoveEvent(Move);
-        _gameFactory = gameFactory;
     }
 
-    private void Update()
+
+    void Update()
     {
         if (_movePosition != Vector3.zero)
         {
             _isMoving = true;
-            var step = _moveSpeed * Time.deltaTime; 
+            var step = _moveSpeed * Time.deltaTime; // calculate distance to move
             transform.position = Vector3.MoveTowards(transform.position, _movePosition, step);
 
             if (Vector3.Distance(transform.position, _movePosition) < 0.001f)
@@ -44,7 +48,7 @@ public class PlayerMove : MonoBehaviour
                 _isMoving = false;
                 if (_fireBlock != null)
                 {
-                    
+                    Debug.Log("FIRE!!!!!!!!!!!");
                     GameObject gameObject1 = _gameFactory.CreateProjectile(_fireBlock.transform.position);
                     gameObject1.SetActive(true);
                     _fireBlock = null;
@@ -55,7 +59,7 @@ public class PlayerMove : MonoBehaviour
 
     private void OnEnable()
     {
-        _inputService?.SubscribeOnMoveEvent(Move);
+        _inputService.SubscribeOnMoveEvent(Move);
     }
 
     private void OnDisable()
@@ -65,7 +69,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Move(Vector2 direction)
     {
-        
+        Debug.Log(direction);
         if(direction != Vector2.zero)
         {
             CalcMovePlayerPosition(direction);
@@ -84,7 +88,7 @@ public class PlayerMove : MonoBehaviour
                 currentDirection = _currentPlayerCoords + direction;
                 _currentPlayerCoords = currentDirection;
                 moveTarget = _cellPositionByCoords[currentDirection];
-                
+                //Debug.Log(moveTarget);
                 if (_blocksByCoords.ContainsKey(_currentPlayerCoords + direction))
                 {
                     _fireBlock = _blocksByCoords[currentDirection + direction];
@@ -94,6 +98,9 @@ public class PlayerMove : MonoBehaviour
             _movePosition = moveTarget;
         }
 
+
+
     }
+
 
 }

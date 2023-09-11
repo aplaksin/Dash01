@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class GameFactory : IGameFactory
 {
@@ -13,7 +13,7 @@ public class GameFactory : IGameFactory
     private readonly IAssetProvider _assetProvider;
     private readonly IPoolingService _poolingService;
     private readonly IStaticDataService _staticDataService;
-    private readonly IInputService _inputService;
+    private readonly IInputService _inputInputService;
     private LevelStaticData levelStaticData;
 
     private Vector3 _scaleVector;
@@ -26,7 +26,7 @@ public class GameFactory : IGameFactory
         _assetProvider = assetProvider;
         _staticDataService = staticDataService;
         _poolingService = poolingService;
-        _inputService = inputInputService;
+        _inputInputService = inputInputService;
     }
 
 
@@ -79,7 +79,7 @@ public class GameFactory : IGameFactory
         
         PlayerMove playerMove = player.transform.GetComponent<PlayerMove>();
 
-        playerMove.Init(cellpositionsByCoords, _blocksByCoords, spawnPoint, _inputService, this);
+        playerMove.Init(cellpositionsByCoords, _blocksByCoords, spawnPoint, _inputInputService, this);
         
         return player;
     }

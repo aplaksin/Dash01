@@ -10,11 +10,11 @@ public class LoadLevelState : IParameterizedState<string>
     private IGameFactory _gameFactory;
     //private const string LevelDataName = "Level1";
     private string _levelDataName;
-    //private readonly IPersistentProgressService _progressService;
+    private readonly IPersistentProgressService _progressService;
     private readonly IStaticDataService _staticDataService;
     private LevelStaticData _levelStaticData;
     private readonly IPoolingService _poolingService;
-    //private readonly IUIFactory _uiFactory;
+    private readonly IUIFactory _uiFactory;
     private readonly IWindowService _windowService;
 
     public LoadLevelState(GameStateMachine gameStateMachine, IPoolingService poolingService, SceneLoader sceneLoader, LoadingCurtain loadingCurtain, IGameFactory gameFactory, IPersistentProgressService progressService, IStaticDataService staticDataService, IUIFactory uIFactory, IWindowService windowService)
@@ -23,11 +23,11 @@ public class LoadLevelState : IParameterizedState<string>
         _sceneLoader = sceneLoader;
         _loadingCurtain = loadingCurtain;
         _gameFactory = gameFactory;
-        //_progressService = progressService;
+        _progressService = progressService;
         _staticDataService = staticDataService;
         //_levelStaticData = _staticDataService.GetLevelStaticDataByKey(LevelDataName);
         _poolingService = poolingService;
-        //_uiFactory = uIFactory;
+        _uiFactory = uIFactory;
         _windowService = windowService;
     }
 
@@ -55,6 +55,8 @@ public class LoadLevelState : IParameterizedState<string>
         Dictionary<Vector2, Vector3>  cellpositionsByCoords = CreateGameGrid(scaleVector);
         CreatePlayer(scaleVector, cellpositionsByCoords);
 
+        
+
         CreateHud();
 
 
@@ -62,7 +64,7 @@ public class LoadLevelState : IParameterizedState<string>
         //_uiFactory.CreatePauseMenu();
         //pauseMenu.SetActive(false);
 
-        _gameStateMachine.Enter<GameLoopState, LevelStaticData>(_levelStaticData);
+        _gameStateMachine.Enter<GameLoopState>();
     }
 
 
@@ -136,11 +138,11 @@ public class LoadLevelState : IParameterizedState<string>
         Camera.main.transform.position = new Vector3(correctPositionX, camSize, -10);
     }
 
-/*    private void InformProgressReaders()
+    private void InformProgressReaders()
     {
         foreach (ISavedProgressReader progressReader in _gameFactory.ProgressReaders)
             progressReader.LoadProgress(_progressService.PlayerProgress);
-    }*/
+    }
 
 
 }

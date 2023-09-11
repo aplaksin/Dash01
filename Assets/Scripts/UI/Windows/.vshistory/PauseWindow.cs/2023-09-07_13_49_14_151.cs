@@ -10,7 +10,8 @@ public class PauseWindow : WindowBase
 
     public void Construct()
     {
-        PauseGame();
+        //gameObject.SetActive(false);
+        Time.timeScale = 0f;
     }
 
     public void OnPauseBtnClick()
@@ -21,18 +22,7 @@ public class PauseWindow : WindowBase
 
     protected override void Cleanup()
     {
-        ContinueGame();
+        Time.timeScale = 1.0f;
     }
-
-    private void PauseGame()
-    {
-        Time.timeScale = 0f;
-    } 
-    private void ContinueGame()
-    {
-        Time.timeScale = 1f;
-    }
-
-
 
 }

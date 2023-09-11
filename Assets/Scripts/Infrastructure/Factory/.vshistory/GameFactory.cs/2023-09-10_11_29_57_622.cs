@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class GameFactory : IGameFactory
 {
@@ -13,7 +13,6 @@ public class GameFactory : IGameFactory
     private readonly IAssetProvider _assetProvider;
     private readonly IPoolingService _poolingService;
     private readonly IStaticDataService _staticDataService;
-    private readonly IInputService _inputService;
     private LevelStaticData levelStaticData;
 
     private Vector3 _scaleVector;
@@ -21,12 +20,11 @@ public class GameFactory : IGameFactory
     private Dictionary<Vector2, GameObject> _blocksByCoords = new Dictionary<Vector2, GameObject>();
     private Dictionary<Vector2,Vector3> _blocksCoords = new Dictionary<Vector2, Vector3>();
 
-    public GameFactory(IAssetProvider assetProvider, IStaticDataService staticDataService, IPoolingService poolingService, IInputService inputInputService)
+    public GameFactory(IAssetProvider assetProvider, IStaticDataService staticDataService, IPoolingService poolingService)
     {
         _assetProvider = assetProvider;
         _staticDataService = staticDataService;
         _poolingService = poolingService;
-        _inputService = inputInputService;
     }
 
 
@@ -79,7 +77,7 @@ public class GameFactory : IGameFactory
         
         PlayerMove playerMove = player.transform.GetComponent<PlayerMove>();
 
-        playerMove.Init(cellpositionsByCoords, _blocksByCoords, spawnPoint, _inputService, this);
+        playerMove.Construct(cellpositionsByCoords, _blocksByCoords, spawnPoint);
         
         return player;
     }

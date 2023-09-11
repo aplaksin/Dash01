@@ -22,7 +22,7 @@ public class BootstrapState : IState
     public void Enter()
     {
 
-        _sceneLoader.LoadScene(INITIAL_SCENE_NAME, EnterMainMenuScene);
+        //_sceneLoader.LoadScene(INITIAL_SCENE_NAME, EnterMainMenuScene);
     }
 
 
@@ -65,10 +65,10 @@ public class BootstrapState : IState
         _gameStateMachine.Enter<MainMenuState, string>(MAIN_MENU_SCENE_NAME);
     }
 
-    /*    private void EnterLoadLavel()
-        {
-            _gameStateMashine.Enter<LoadLevelState, string>(LEVEL_SCENE_NAME);
-        }*/
+/*    private void EnterLoadLavel()
+    {
+        _gameStateMashine.Enter<LoadLevelState, string>(LEVEL_SCENE_NAME);
+    }*/
     private IInputService Inputservice()
     {
         if (Application.isEditor)

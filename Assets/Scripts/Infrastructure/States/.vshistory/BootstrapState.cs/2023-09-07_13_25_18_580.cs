@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEngine;
 
 public class BootstrapState : IState
 {
@@ -46,7 +45,7 @@ public class BootstrapState : IState
         _services.RegisterSingle<IWindowService>(new WindowService(_services.Single<IUIFactory>()));
         
         _services.RegisterSingle<IPoolingService>(new PoolingService(_services.Single<IAssetProvider>(), _services.Single<IStaticDataService>()));
-        _services.RegisterSingle<IGameFactory>(new GameFactory(_services.Single<IAssetProvider>(), _services.Single<IStaticDataService>(), _services.Single<IPoolingService>(), _services.Single<IInputService>()));
+        _services.RegisterSingle<IGameFactory>(new GameFactory(_services.Single<IAssetProvider>(), _services.Single<IStaticDataService>(), _services.Single<IPoolingService>()));
 
         _services.RegisterSingle<ISaveLoadService>(new SaveLoadService(_services.Single<IPersistentProgressService>(), _services.Single<IGameFactory>()));
 
@@ -65,19 +64,19 @@ public class BootstrapState : IState
         _gameStateMachine.Enter<MainMenuState, string>(MAIN_MENU_SCENE_NAME);
     }
 
-    /*    private void EnterLoadLavel()
-        {
-            _gameStateMashine.Enter<LoadLevelState, string>(LEVEL_SCENE_NAME);
-        }*/
+/*    private void EnterLoadLavel()
+    {
+        _gameStateMashine.Enter<LoadLevelState, string>(LEVEL_SCENE_NAME);
+    }*/
     private IInputService Inputservice()
     {
-        if (Application.isEditor)
-            return new KeyboardInputManager();
+        /*        if (Application.isEditor)
+            return new StandaloneInputService();
         else
-            return new SwipeInputManager();
+            return new MobileInputService();*/
 
         //return new SwipeInputManager();
-        //return new KeyboardInputManager();
+        return new KeyboardInputManager();
         //return null;
     }
 }

@@ -10,9 +10,10 @@ public class GridGeneratorStandart : IGridGenerator
     private int _gridWidth;
     private Vector3 _scaleVector;
 
-    public GridGeneratorStandart(IAssetProvider assetProvider, int gridHeight, int gridWidht, Vector3 scaleVector)
+    public GridGeneratorStandart(IAssetProvider assetProvider, GameObject player, int gridHeight, int gridWidht, Vector3 scaleVector)
     {
         _assetProvider = assetProvider;
+        _player = player;
         _gridHeight = gridHeight;
         _gridWidth = gridWidht;
         _scaleVector = scaleVector;
