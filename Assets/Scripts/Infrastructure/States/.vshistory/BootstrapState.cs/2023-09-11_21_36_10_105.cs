@@ -5,7 +5,7 @@ public class BootstrapState : IState
 {
     private readonly GameStateMachine _gameStateMachine;
     private readonly SceneLoader _sceneLoader;
-    //private const string INITIAL_SCENE_NAME = "Initial";
+    private const string INITIAL_SCENE_NAME = "Initial";
     
     private const string MAIN_MENU_SCENE_NAME = "MainMenu";
     private readonly AllServices _services;
@@ -13,7 +13,7 @@ public class BootstrapState : IState
     public BootstrapState(GameStateMachine gameStateMashine, SceneLoader sceneLoader, AllServices services)
     {
         _gameStateMachine = gameStateMashine;
-        //_sceneLoader = sceneLoader;
+        _sceneLoader = sceneLoader;
         _services = services;
 
         RegisterServices();
@@ -76,5 +76,9 @@ public class BootstrapState : IState
             return new KeyboardInputManager();
         else
             return new SwipeInputManager();
+
+        //return new SwipeInputManager();
+        //return new KeyboardInputManager();
+        //return null;
     }
 }

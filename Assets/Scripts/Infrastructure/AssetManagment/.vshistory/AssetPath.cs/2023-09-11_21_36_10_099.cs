@@ -12,8 +12,7 @@ public static class AssetPath
     public const string GridPath = "Grid/Grid";
 
     private static Dictionary<EnemyType, string> _enemyPathByType = new Dictionary<EnemyType, string>() {
-        [EnemyType.Base] = "Enemies/baseEnemy",
-        [EnemyType.Tank] = "Enemies/tankEnemy",
+        [EnemyType.Base] = "Enemies/base",
     };
 
     private static Dictionary<ProjectileType, string> _projectilePathByType = new Dictionary<ProjectileType, string>()

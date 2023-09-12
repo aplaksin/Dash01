@@ -50,9 +50,9 @@ public class GameFactory : IGameFactory
         return projectile;
     }
 
-    public GameObject CreateEnemy(Vector2 spawnPoint, EnemyType enemyType)
+    public GameObject CreateEnemy(Vector2 spawnPoint)
     {
-        GameObject enemy = _poolingService.GetEnemyByType(enemyType);
+        GameObject enemy = _poolingService.GetEnemyByType(EnemyType.Base);
         enemy.transform.localScale = _scaleVector;
         enemy.transform.position = new Vector3(_cellPositionByCoords[new Vector2(spawnPoint.x, 0)].x, spawnPoint.y, 0);
         //enemy.gameObject.SetActive(true);

@@ -1,6 +1,5 @@
 ﻿public enum EnemyType
 {
-    Base,
-    Tank
+    Base
 
 }

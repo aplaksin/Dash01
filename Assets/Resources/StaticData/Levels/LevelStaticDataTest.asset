@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c4eb9060b8a6f494484f660cfddcd8c1, type: 3}
-  m_Name: LevelStaticData
+  m_Name: LevelStaticDataTest
   m_EditorClassIdentifier: 
-  LevelKey: Level1
+  LevelKey: test
   PlayerSpawnCoords: {x: 3, y: 1}
   GameGridData: {fileID: 11400000, guid: 790bd9c393168b84696157d963eabe34, type: 2}
   PlayerHP: 40
-  SpawnEnemyDelay: 2
+  SpawnEnemyDelay: 1
   EnemyTypes: 0000000001000000

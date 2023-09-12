@@ -30,7 +30,7 @@ public class GameLoopState : IParameterizedState<LevelStaticData>
         enemy3.SetActive(true);*/
         _levelStaticData = levelStaticData;
         _enemySpawner = new EnemySpawner(_gameFactory);
-        _enemySpawnCoroutine = _coroutineRunner.StartCoroutine(SpawnEnemies(_levelStaticData.SpawnEnemyDelay, _levelStaticData.EnemyTypes));
+        _enemySpawnCoroutine = _coroutineRunner.StartCoroutine(SpawnEnemies(_levelStaticData.SpawnEnemyDelay));
     }
 
     public void Exit()
@@ -38,12 +38,11 @@ public class GameLoopState : IParameterizedState<LevelStaticData>
         _coroutineRunner.StopCoroutine(_enemySpawnCoroutine);
     }
 
-    private  IEnumerator SpawnEnemies(float spawnDelay, EnemyType[] enemyTypes)
+    private  IEnumerator SpawnEnemies(float spawnDelay)
     {
         while (true)
         {
-            int randomIndex = UnityEngine.Random.Range(0, enemyTypes.Length);
-            GameObject enemy = _gameFactory.CreateEnemy(_enemySpawner.GetRandomSpawnPoint(), enemyTypes[randomIndex]);
+            GameObject enemy = _gameFactory.CreateEnemy(_enemySpawner.GetRandomSpawnPoint());
             enemy.SetActive(true);
             yield return new WaitForSeconds(spawnDelay);
         }
