@@ -11,7 +11,6 @@ public class PauseWindow : WindowBase
     {
         _gameStateMachine = gameStateMachine;
         PauseGame();
-        Debug.Log("qqqq");
     }
 
     public void OnExitBtnClick()
