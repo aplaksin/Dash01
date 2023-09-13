@@ -21,12 +21,6 @@ public class EnemySpawner
         _enemyTypes = new EnemyType[spawnProbabilityByTypes.Length];
         _probabilities = new float[spawnProbabilityByTypes.Length];
 
-        for(int i = 0; i < spawnProbabilityByTypes.Length; i++)
-        {
-            _enemyTypes[i] = spawnProbabilityByTypes[i].EnemyType;
-            _probabilities[i] = spawnProbabilityByTypes[i].Probability;
-        }
-
     }
 
     public GameObject SpawnEnemy()

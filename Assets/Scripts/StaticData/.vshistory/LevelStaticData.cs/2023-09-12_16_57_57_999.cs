@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName ="LevelStaticData", menuName ="StaticData/Level")]
 public class LevelStaticData : ScriptableObject
@@ -9,6 +8,5 @@ public class LevelStaticData : ScriptableObject
     public GameGridStaticData GameGridData;
     public int PlayerHP;
     public float SpawnEnemyDelay;
-    public SpawnProbabilityByType[] EnemyTypes;
-    //public EnemyTypeSpawnProbabilityDictionary EnemyTypeSpawnProbabilityDictionary;
+    public EnemyType[] EnemyTypes;
  }

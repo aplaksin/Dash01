@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class GameFactory : IGameFactory
 {
-
+    public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
+    public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
 
     public Dictionary<Vector2, Vector3> BlocksCoords { get { return _blocksCoords; } }
 
@@ -110,9 +111,24 @@ public class GameFactory : IGameFactory
         
     }
 
+    private void Register(ISavedProgressReader progressReader)
+    {
+        if (progressReader is ISavedProgress progressWriter)
+            ProgressWriters.Add(progressWriter);
+
+        ProgressReaders.Add(progressReader);
+    }
+
+    private void RegisterProgressWatchers(GameObject gameObject)
+    {
+        foreach (ISavedProgressReader progressReader in gameObject.GetComponentsInChildren<ISavedProgressReader>())
+            Register(progressReader);
+    }
+
     public void Cleanup()
     {
-
+        ProgressReaders.Clear();
+        ProgressWriters.Clear();
     }
 
     

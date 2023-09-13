@@ -8,6 +8,12 @@ public interface IGameFactory : IService
     GameObject CreateEnemy(Vector2 spawnPoint, EnemyType enemyType);
     GameObject CreateProjectile(Vector2 spawnPoint);
     GameObject CreateHud();
+
+    //GameObject CreatePauseMenu();
     Dictionary<Vector2, Vector3> CreateGameGrid(LevelStaticData levelStaticData, Vector3 scaleVector);
+
+    List<ISavedProgressReader> ProgressReaders { get; }
+    List<ISavedProgress> ProgressWriters { get; }
+    //Dictionary<Vector2, Vector3> CellPositionByCoords { get ; }
     Dictionary<Vector2, Vector3> BlocksCoords { get ; }
 }

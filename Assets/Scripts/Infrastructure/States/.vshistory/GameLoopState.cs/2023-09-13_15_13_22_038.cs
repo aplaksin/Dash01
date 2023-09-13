@@ -30,7 +30,7 @@ public class GameLoopState : IParameterizedState<LevelStaticData>
         enemy3.SetActive(true);*/
         _levelStaticData = levelStaticData;
         _enemySpawner = new EnemySpawner(_gameFactory, levelStaticData.EnemyTypes);
-        _enemySpawnCoroutine = _coroutineRunner.StartCoroutine(SpawnEnemies(_levelStaticData.SpawnEnemyDelay, _levelStaticData.EnemyTypes));
+        //_enemySpawnCoroutine = _coroutineRunner.StartCoroutine(SpawnEnemies(_levelStaticData.SpawnEnemyDelay, _levelStaticData.EnemyTypes));
     }
 
     public void Exit()

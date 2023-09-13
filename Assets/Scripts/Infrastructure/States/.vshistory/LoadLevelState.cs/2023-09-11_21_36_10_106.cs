@@ -17,12 +17,13 @@ public class LoadLevelState : IParameterizedState<string>
     //private readonly IUIFactory _uiFactory;
     private readonly IWindowService _windowService;
 
-    public LoadLevelState(GameStateMachine gameStateMachine, IPoolingService poolingService, SceneLoader sceneLoader, LoadingCurtain loadingCurtain, IGameFactory gameFactory, IStaticDataService staticDataService, IUIFactory uIFactory, IWindowService windowService)
+    public LoadLevelState(GameStateMachine gameStateMachine, IPoolingService poolingService, SceneLoader sceneLoader, LoadingCurtain loadingCurtain, IGameFactory gameFactory, IPersistentProgressService progressService, IStaticDataService staticDataService, IUIFactory uIFactory, IWindowService windowService)
     {
         _gameStateMachine = gameStateMachine;
         _sceneLoader = sceneLoader;
         _loadingCurtain = loadingCurtain;
         _gameFactory = gameFactory;
+        //_progressService = progressService;
         _staticDataService = staticDataService;
         //_levelStaticData = _staticDataService.GetLevelStaticDataByKey(LevelDataName);
         _poolingService = poolingService;
