@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LoadLevelState : IParameterizedState<string>
@@ -103,6 +103,7 @@ public class LoadLevelState : IParameterizedState<string>
     {
         //int resolutionHorizontal = (int) UnityEditor.Handles.GetMainGameViewSize().x;
         //int resolutionVertical = (int) UnityEditor.Handles.GetMainGameViewSize().y;
+
         int resolutionHorizontal = Screen.width;
         int resolutionVertical = Screen.height;
 
