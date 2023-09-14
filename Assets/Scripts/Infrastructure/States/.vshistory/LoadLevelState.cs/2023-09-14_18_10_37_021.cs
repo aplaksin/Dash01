@@ -101,8 +101,11 @@ public class LoadLevelState : IParameterizedState<string>
 
     private Vector3 CalcScaleVector()
     {
-        int resolutionHorizontal = (int) UnityEditor.Handles.GetMainGameViewSize().x;
-        int resolutionVertical = (int) UnityEditor.Handles.GetMainGameViewSize().y;
+        //int resolutionHorizontal = (int) UnityEditor.Handles.GetMainGameViewSize().x;
+        //int resolutionVertical = (int) UnityEditor.Handles.GetMainGameViewSize().y;
+
+        int resolutionHorizontal = Screen.width;
+        int resolutionVertical = Screen.height;
 
         float cameraSize = Camera.main.orthographicSize * 2;
 
