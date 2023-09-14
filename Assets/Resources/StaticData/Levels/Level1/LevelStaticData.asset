@@ -17,4 +17,6 @@ MonoBehaviour:
   GameGridData: {fileID: 11400000, guid: 790bd9c393168b84696157d963eabe34, type: 2}
   PlayerHP: 40
   SpawnEnemyDelay: 2
-  EnemyTypes: 0000000001000000
+  EnemyTypes:
+  - {fileID: 11400000, guid: 2479fb98fc70cdd49a9b18ea9d844b63, type: 2}
+  - {fileID: 11400000, guid: 5b1b31b61d3a96f428912c6c96d4596c, type: 2}

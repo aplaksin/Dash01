@@ -17,6 +17,7 @@ public class EnemySpawner
 
         }
 
+
         _enemyTypes = new EnemyType[spawnProbabilityByTypes.Length];
         _probabilities = new float[spawnProbabilityByTypes.Length];
 
