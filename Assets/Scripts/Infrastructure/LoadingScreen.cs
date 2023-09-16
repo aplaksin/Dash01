@@ -2,20 +2,14 @@ using System.Collections;
 using UnityEngine;
 
 
-public class LoadingCurtain : MonoBehaviour
+public class LoadingScreen : MonoBehaviour
 {
-    public CanvasGroup Curtain;
-
-/*    private void Awake()
-    {
-        DontDestroyOnLoad(this.gameObject);
-        
-    }*/
+    public CanvasGroup LoadingScreenCanvasGroup;
 
     public void Show()
     {
         gameObject.SetActive(true);
-        Curtain.alpha = 1;
+        LoadingScreenCanvasGroup.alpha = 1;
     }
 
     public void Hide()
@@ -26,9 +20,9 @@ public class LoadingCurtain : MonoBehaviour
 
     private IEnumerator DoFadeIn()
     {
-        while (Curtain.alpha > 0)
+        while (LoadingScreenCanvasGroup.alpha > 0)
         {
-            Curtain.alpha -= 0.03f;
+            LoadingScreenCanvasGroup.alpha -= 0.03f;
             yield return new WaitForSeconds(0.03f);
         }
 

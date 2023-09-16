@@ -6,7 +6,7 @@ public class Game
     //public static LevelStaticData CurrentLevelStaticData;
     public static GameContext GameContext;
 
-    public Game(ICoroutineRunner coroutineRunner, LoadingScreen loadingCurtain)
+    public Game(ICoroutineRunner coroutineRunner, LoadingCurtain loadingCurtain)
     {
         GameStateMachine = new GameStateMachine(new SceneLoader(coroutineRunner), loadingCurtain, AllServices.Container, coroutineRunner);
 

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GameBootstrapper : MonoBehaviour, ICoroutineRunner
 {
-    public LoadingScreen loadingCurtain;
+    public LoadingCurtain loadingCurtain;
     private Game _game;
 
     private void Awake()

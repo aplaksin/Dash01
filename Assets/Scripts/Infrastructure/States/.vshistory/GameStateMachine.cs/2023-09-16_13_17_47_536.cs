@@ -7,7 +7,7 @@ public class GameStateMachine
     private IExitableState _activeState;
     private SceneLoader _sceneLoader;
 
-    public GameStateMachine(SceneLoader sceneLoader, LoadingScreen loadingCurtain, AllServices services, ICoroutineRunner coroutineRunner)
+    public GameStateMachine(SceneLoader sceneLoader, LoadingCurtain loadingCurtain, AllServices services, ICoroutineRunner coroutineRunner)
     {
 
         _states = new Dictionary<Type, IExitableState>()

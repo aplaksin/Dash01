@@ -6,7 +6,7 @@ public class LoadLevelState : IParameterizedState<string>
 {
     private readonly GameStateMachine _gameStateMachine;
     private readonly SceneLoader _sceneLoader;
-    private LoadingScreen _loadingCurtain;
+    private LoadingCurtain _loadingCurtain;
     private IGameFactory _gameFactory;
     //private const string LevelDataName = "Level1";
     private string _levelDataName;
@@ -18,7 +18,7 @@ public class LoadLevelState : IParameterizedState<string>
     private readonly IWindowService _windowService;
     private GameContext _gameContext;
 
-    public LoadLevelState(GameStateMachine gameStateMachine, IPoolingService poolingService, SceneLoader sceneLoader, LoadingScreen loadingCurtain, IGameFactory gameFactory, IStaticDataService staticDataService, IUIFactory uIFactory, IWindowService windowService)
+    public LoadLevelState(GameStateMachine gameStateMachine, IPoolingService poolingService, SceneLoader sceneLoader, LoadingCurtain loadingCurtain, IGameFactory gameFactory, IStaticDataService staticDataService, IUIFactory uIFactory, IWindowService windowService)
     {
         _gameStateMachine = gameStateMachine;
         _sceneLoader = sceneLoader;
