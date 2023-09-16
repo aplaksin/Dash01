@@ -5,13 +5,18 @@ using UnityEngine;
 
   public class UIFactory : IUIFactory
   {
-
+    //private const string UIRootPath = "UIRoot";
+    private readonly IAssetProvider _assets;
     private readonly IStaticDataService _staticData;
+    private GameContext _gameContext;
+    //private Transform _uiRoot;
 
-    public UIFactory(IStaticDataService staticData)
+
+    public UIFactory(IAssetProvider assets, IStaticDataService staticData, GameContext gameContext)
     {
+        _assets = assets;
         _staticData = staticData;
-        
+        _gameContext = gameContext;
     }
 
     public void CreatePauseMenu(GameStateMachine gameStateMachine)
@@ -21,11 +26,11 @@ using UnityEngine;
         window.Construct(gameStateMachine);
     }
 
-    public void CreateGameOverMenu(GameStateMachine gameStateMachine, int score)
+    public void CreateGameOverMenu(GameStateMachine gameStateMachine)
     {
         WindowConfig config = _staticData.GetWndowConfigById(WindowId.GameOver);
         GameOverMenu window = Object.Instantiate(config.Template) as GameOverMenu;
-        window.Construct(gameStateMachine, score);
+        window.Construct(gameStateMachine, _gameContext.Score);
     }
 
     /*    public async Task CreateUIRoot()

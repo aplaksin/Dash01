@@ -43,7 +43,7 @@ public class BootstrapState : IState
         _services.RegisterSingle<IAssetProvider>(new AssetProvider());
         
         RegisterStaticDataService();
-        _services.RegisterSingle<IUIFactory>(new UIFactory(_services.Single<IStaticDataService>()));
+        _services.RegisterSingle<IUIFactory>(new UIFactory(_services.Single<IAssetProvider>(), _services.Single<IStaticDataService>(), Game.GameContext));
         _services.RegisterSingle<IWindowService>(new WindowService(_services.Single<IUIFactory>(), _gameStateMachine));
         
         _services.RegisterSingle<IPoolingService>(new PoolingService(_services.Single<IAssetProvider>(), _services.Single<IStaticDataService>()));

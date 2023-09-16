@@ -11,7 +11,7 @@ public class PauseWindow : WindowBase
     {
         _gameStateMachine = gameStateMachine;
         PauseGame();
-        //EventManager.OnGameOver += OnGameOver;
+        EventManager.OnGameOver += OnGameOver;
     }
 
     public void OnExitBtnClick()
@@ -44,11 +44,10 @@ public class PauseWindow : WindowBase
         Time.timeScale = 1f;
     }
 
-/*    private void OnGameOver()
+    private void OnGameOver()
     {
-        PauseGame();
         _closeButton.transform.gameObject.SetActive(false);
-    }*/
+    }
 
 
 }

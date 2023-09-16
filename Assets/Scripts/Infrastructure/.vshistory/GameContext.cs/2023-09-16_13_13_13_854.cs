@@ -25,15 +25,15 @@ public class GameContext
     private void OnHpChanged(int hp)
     {
         _playerHP -= hp;
-
-        EventManager.CallOnHpChanged(_playerHP);
-
         if(_playerHP <= 0)
         {
             Clear();
             EventManager.CallOnGameOver();
         }
-        
+        else
+        {
+            EventManager.CallOnHpChanged(_playerHP);
+        }
     }
 
     public void Clear()

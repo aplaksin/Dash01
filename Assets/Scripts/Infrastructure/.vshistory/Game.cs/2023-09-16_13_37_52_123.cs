@@ -4,7 +4,7 @@ public class Game
 {
     public GameStateMachine GameStateMachine;
     //public static LevelStaticData CurrentLevelStaticData;
-    public static GameContext GameContext;
+    public GameContext GameContext;
 
     public Game(ICoroutineRunner coroutineRunner, LoadingCurtain loadingCurtain)
     {

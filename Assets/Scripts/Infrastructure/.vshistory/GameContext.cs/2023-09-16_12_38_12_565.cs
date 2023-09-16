@@ -2,11 +2,10 @@
 
 public class GameContext
 {
-    private int _playerHP;
-    private int _score = 0;
-    private LevelStaticData _levelStaticData;
+    public int _playerHP;
+    public int _score = 0;
+    public LevelStaticData _levelStaticData;
 
-    public int Score { get { return _score; } }
 
     public GameContext(LevelStaticData levelStaticData)
     {
@@ -25,15 +24,15 @@ public class GameContext
     private void OnHpChanged(int hp)
     {
         _playerHP -= hp;
-
-        EventManager.CallOnHpChanged(_playerHP);
-
         if(_playerHP <= 0)
         {
             Clear();
             EventManager.CallOnGameOver();
         }
-        
+        else
+        {
+            EventManager.CallOnHpChanged(_playerHP);
+        }
     }
 
     public void Clear()

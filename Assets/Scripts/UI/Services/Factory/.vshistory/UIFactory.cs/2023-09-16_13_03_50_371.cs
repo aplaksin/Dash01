@@ -5,20 +5,24 @@ using UnityEngine;
 
   public class UIFactory : IUIFactory
   {
-
+    //private const string UIRootPath = "UIRoot";
+    private readonly IAssetProvider _assets;
     private readonly IStaticDataService _staticData;
+    
+    //private Transform _uiRoot;
 
-    public UIFactory(IStaticDataService staticData)
+
+    public UIFactory(IAssetProvider assets, IStaticDataService staticData)
     {
-        _staticData = staticData;
-        
+      _assets = assets;
+      _staticData = staticData;
     }
 
     public void CreatePauseMenu(GameStateMachine gameStateMachine)
     {
-        WindowConfig config = _staticData.GetWndowConfigById(WindowId.Pause);
-        PauseWindow window = Object.Instantiate(config.Template) as PauseWindow;
-        window.Construct(gameStateMachine);
+      WindowConfig config = _staticData.GetWndowConfigById(WindowId.Pause);
+      PauseWindow window = Object.Instantiate(config.Template) as PauseWindow;
+      window.Construct(gameStateMachine);
     }
 
     public void CreateGameOverMenu(GameStateMachine gameStateMachine, int score)

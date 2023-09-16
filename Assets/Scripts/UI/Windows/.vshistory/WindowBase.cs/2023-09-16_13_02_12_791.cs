@@ -31,7 +31,7 @@ public abstract class WindowBase : MonoBehaviour
 
     protected virtual void OnAwake()
     {
-        if (_closeButton != null)
+        if(_closeButton != null)
         {
             _closeButton.onClick.AddListener(() => Destroy(gameObject));
         }

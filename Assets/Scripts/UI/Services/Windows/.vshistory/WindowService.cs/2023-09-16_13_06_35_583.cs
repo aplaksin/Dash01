@@ -4,7 +4,6 @@ public class WindowService : IWindowService
 {
     private readonly IUIFactory _uiFactory;
     private readonly GameStateMachine _gameStateMachine;
-    private GameContext _gameContext;
 
     public WindowService(IUIFactory uiFactory, GameStateMachine gameStateMachine)
     {
@@ -12,7 +11,7 @@ public class WindowService : IWindowService
         _gameStateMachine = gameStateMachine;
     }
 
-    public void OpenWindowById(WindowId windowId)
+    public void OpenWindowById(WindowId windowId, int score = -1)
     {
         switch (windowId)
         {
@@ -22,9 +21,8 @@ public class WindowService : IWindowService
                 _uiFactory.CreatePauseMenu(_gameStateMachine);
                 break;
             case WindowId.GameOver:
-                _uiFactory.CreateGameOverMenu(_gameStateMachine, Game.GameContext.Score);
+                _uiFactory.CreateGameOverMenu(_gameStateMachine, score);
                 break;
         }
     }
-
 }

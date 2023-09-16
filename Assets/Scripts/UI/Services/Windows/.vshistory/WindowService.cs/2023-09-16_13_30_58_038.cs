@@ -22,9 +22,8 @@ public class WindowService : IWindowService
                 _uiFactory.CreatePauseMenu(_gameStateMachine);
                 break;
             case WindowId.GameOver:
-                _uiFactory.CreateGameOverMenu(_gameStateMachine, Game.GameContext.Score);
+                _uiFactory.CreateGameOverMenu(_gameStateMachine);
                 break;
         }
     }
-
 }

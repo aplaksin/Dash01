@@ -5,13 +5,18 @@ using UnityEngine;
 
   public class UIFactory : IUIFactory
   {
-
+    //private const string UIRootPath = "UIRoot";
+    private readonly IAssetProvider _assets;
     private readonly IStaticDataService _staticData;
+    private Game _game;
+    //private Transform _uiRoot;
 
-    public UIFactory(IStaticDataService staticData)
+
+    public UIFactory(IAssetProvider assets, IStaticDataService staticData, Game game)
     {
+        _assets = assets;
         _staticData = staticData;
-        
+        _game = game;
     }
 
     public void CreatePauseMenu(GameStateMachine gameStateMachine)

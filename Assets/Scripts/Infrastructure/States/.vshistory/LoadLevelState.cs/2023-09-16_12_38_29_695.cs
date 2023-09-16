@@ -45,7 +45,6 @@ public class LoadLevelState : IParameterizedState<string>
     private void OnLoaded()
     {
         _gameContext = new GameContext(_levelStaticData);
-        Game.GameContext = _gameContext;
         PreparePoolingService();
         CorrectCameraPosition();
 

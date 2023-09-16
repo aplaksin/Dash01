@@ -7,11 +7,14 @@ using UnityEngine;
   {
 
     private readonly IStaticDataService _staticData;
+    private Game _game;
 
-    public UIFactory(IStaticDataService staticData)
+
+
+    public UIFactory(IStaticDataService staticData, Game game)
     {
         _staticData = staticData;
-        
+        _game = game;
     }
 
     public void CreatePauseMenu(GameStateMachine gameStateMachine)

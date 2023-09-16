@@ -8,8 +8,10 @@ public class GameLoopState : IParameterizedState<LevelStaticData>
     private EnemySpawner _enemySpawner;
     private ICoroutineRunner _coroutineRunner;
     private IWindowService _windowService;
+    private float _spawnDelay;
     private LevelStaticData _levelStaticData;
     private Coroutine _enemySpawnCoroutine;
+    private GameContext _gameContext;
 
     public GameLoopState(GameStateMachine gameStateMashine, IGameFactory gameFactory, ICoroutineRunner coroutineRunner, IWindowService windowService)
     {
