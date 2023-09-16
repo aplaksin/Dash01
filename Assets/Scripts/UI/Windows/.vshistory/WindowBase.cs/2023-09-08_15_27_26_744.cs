@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public abstract class WindowBase : MonoBehaviour
 {
-    [SerializeField] protected Button _closeButton;
+    [SerializeField] private Button CloseButton;
 
 
     public void Construct()
@@ -31,7 +31,7 @@ public abstract class WindowBase : MonoBehaviour
 
     protected virtual void OnAwake()
     {
-        _closeButton.onClick.AddListener(() => Destroy(gameObject));
+        CloseButton.onClick.AddListener(() => Destroy(gameObject));
     }
 
     protected virtual void Initialize() { }

@@ -16,3 +16,4 @@ MonoBehaviour:
   Damage: 1
   MoveSpeed: 1.1
   Type: 0
+  Score: 1

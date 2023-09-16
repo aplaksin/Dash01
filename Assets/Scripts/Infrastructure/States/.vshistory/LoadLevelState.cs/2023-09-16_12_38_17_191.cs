@@ -44,7 +44,7 @@ public class LoadLevelState : IParameterizedState<string>
     }
     private void OnLoaded()
     {
-        _gameContext = new GameContext(_levelStaticData);
+
         PreparePoolingService();
         CorrectCameraPosition();
 
@@ -53,8 +53,8 @@ public class LoadLevelState : IParameterizedState<string>
 
         //AddCurrentLevelStaticDataToGame();
         Dictionary<Vector2, Vector3>  cellpositionsByCoords = CreateGameGrid(scaleVector);
-        CreatePlayer(scaleVector, cellpositionsByCoords);
-        
+        GameObject player = CreatePlayer(scaleVector, cellpositionsByCoords);
+        _gameContext = new GameContext(_levelStaticData);
         CreateHud();
 
 

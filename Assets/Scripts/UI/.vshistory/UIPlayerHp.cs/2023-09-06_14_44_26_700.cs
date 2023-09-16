@@ -15,19 +15,25 @@ public class UIPlayerHp : MonoBehaviour
         UpdatText();
     }
 
+    private void Start()
+    {
+
+    }
+
+
     private void OnEnable()
     {
-        EventManager.OnHpChanged += ChangeHpText;
+        EventManager.OnBaseDamage += ChangeHpText;
     }
     private void OnDisable()
     {
-        EventManager.OnHpChanged -= ChangeHpText;
+        EventManager.OnBaseDamage -= ChangeHpText;
     }
 
 
     private void ChangeHpText(int hp)
     {
-        _currentHp = hp;
+        _currentHp -= hp;
         UpdatText();
     }
 

@@ -31,7 +31,13 @@ public class Enemy : MonoBehaviour
         _score = enemyStaticData.Score;
     }
 
+    // Start is called before the first frame update
+    private void Start()
+    {
+        
+    }
 
+    // Update is called once per frame
     private void Update()
     {
         if (transform.position.y < MIN_Y_POSITION) {

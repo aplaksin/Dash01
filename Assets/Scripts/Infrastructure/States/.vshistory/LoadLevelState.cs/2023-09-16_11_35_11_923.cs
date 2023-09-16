@@ -16,7 +16,6 @@ public class LoadLevelState : IParameterizedState<string>
     private readonly IPoolingService _poolingService;
     //private readonly IUIFactory _uiFactory;
     private readonly IWindowService _windowService;
-    private GameContext _gameContext;
 
     public LoadLevelState(GameStateMachine gameStateMachine, IPoolingService poolingService, SceneLoader sceneLoader, LoadingCurtain loadingCurtain, IGameFactory gameFactory, IStaticDataService staticDataService, IUIFactory uIFactory, IWindowService windowService)
     {
@@ -44,7 +43,7 @@ public class LoadLevelState : IParameterizedState<string>
     }
     private void OnLoaded()
     {
-        _gameContext = new GameContext(_levelStaticData);
+
         PreparePoolingService();
         CorrectCameraPosition();
 
@@ -54,7 +53,7 @@ public class LoadLevelState : IParameterizedState<string>
         //AddCurrentLevelStaticDataToGame();
         Dictionary<Vector2, Vector3>  cellpositionsByCoords = CreateGameGrid(scaleVector);
         CreatePlayer(scaleVector, cellpositionsByCoords);
-        
+
         CreateHud();
 
 
@@ -121,10 +120,10 @@ public class LoadLevelState : IParameterizedState<string>
         return resolutionVertical / cameraSize;
     }
 
-/*    private float CalcScaleCoefficient(int resolutionHorisontal, int gridWidth, float pixelsPerUnit)
+    private float CalcScaleCoefficient(int resolutionHorisontal, int gridWidth, float pixelsPerUnit)
     {
         return (resolutionHorisontal / gridWidth) / pixelsPerUnit;
-    }*/
+    }
     private float CalcScaleCoefficient(int resolutionHorisontal, int gridWidth, float pixelsPerUnit, float cellSpace)
     {
         return ((resolutionHorisontal - ((gridWidth - 1) * cellSpace * pixelsPerUnit)) / gridWidth) / pixelsPerUnit;

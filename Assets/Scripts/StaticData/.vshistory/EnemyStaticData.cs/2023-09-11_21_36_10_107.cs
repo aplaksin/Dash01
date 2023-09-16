@@ -16,6 +16,4 @@ public class EnemyStaticData : ScriptableObject
 
     public EnemyType Type;
 
-    public int Score;
-
 }

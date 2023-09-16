@@ -25,11 +25,11 @@ public class UIScore : MonoBehaviour
     private void OnEnable()
     {
 
-        EventManager.OnScoreChanged += AddScore;
+        EventManager.OnHpChanged += AddScore;
     }
     private void OnDisable()
     {
-        EventManager.OnScoreChanged -= AddScore;
+        EventManager.OnEnemyDeath -= AddScore;
     }
 
     private void AddScore(int score)
