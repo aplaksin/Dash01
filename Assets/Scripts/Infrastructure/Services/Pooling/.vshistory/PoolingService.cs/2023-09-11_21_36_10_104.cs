@@ -7,7 +7,7 @@ public class PoolingService : IPoolingService
 {
     private IAssetProvider _assetProvider;
     private IStaticDataService _staticDataService;
-    private Dictionary<EnemyType, Queue<Enemy>> _enemiesByType;
+    private Dictionary<EnemyType, Queue<GameObject>> _enemiesByType;
     private Dictionary<ProjectileType, Queue<GameObject>> _projectilesByType;
     private const int InitialCapacity = 10;
     private const int AddingCapacity = 3;
@@ -35,9 +35,9 @@ public class PoolingService : IPoolingService
     }
 
 
-    public Enemy GetEnemyByType(EnemyType enemyType)
+    public GameObject GetEnemyByType(EnemyType enemyType)
     {
-        Queue<Enemy> queue = _enemiesByType[enemyType];
+        Queue<GameObject> queue = _enemiesByType[enemyType];
 
         if(queue.Count > 0)
         {
@@ -76,7 +76,7 @@ public class PoolingService : IPoolingService
     {
         enemy.gameObject.transform.position = Vector3.zero;
         enemy.gameObject.SetActive(false);
-        _enemiesByType[enemy.Type].Enqueue(enemy);
+        _enemiesByType[enemy.Type].Enqueue(enemy.gameObject);
     }
 
     public void ReturnProjectile(Projectile projectile)
@@ -88,11 +88,11 @@ public class PoolingService : IPoolingService
 
     private void CreateEnemiesPool()
     {
-        _enemiesByType = new Dictionary<EnemyType, Queue<Enemy>>();
+        _enemiesByType = new Dictionary<EnemyType, Queue<GameObject>>();
 
         foreach (EnemyType enemyType in Enum.GetValues(typeof(EnemyType)))
         {
-            Queue<Enemy> enemiesQueue = new Queue<Enemy>();
+            Queue<GameObject> enemiesQueue = new Queue<GameObject>();
             string path = AssetPath.GetEnemyPathByType(enemyType);
             EnemyStaticData enemyStaticData = _staticDataService.GetEnemyDataByType(enemyType);
             AddEnemiesToQueue(path, ref enemiesQueue, enemyStaticData, InitialCapacity);
@@ -136,7 +136,7 @@ public class PoolingService : IPoolingService
 
     }
 
-    private void AddEnemiesToQueue(string path, ref Queue<Enemy> queue, EnemyStaticData data, int count = 1)
+    private void AddEnemiesToQueue(string path, ref Queue<GameObject> queue, EnemyStaticData data, int count = 1)
     {
 
         for (int i = 0; i < count; i++)
@@ -146,7 +146,7 @@ public class PoolingService : IPoolingService
             Enemy enemy = obj.GetComponent<Enemy>();
             obj.transform.SetParent(_enemiesPoolWrapper.transform);
             enemy.Construct(data, this);
-            queue.Enqueue(enemy);
+            queue.Enqueue(obj);
         }
     }
 

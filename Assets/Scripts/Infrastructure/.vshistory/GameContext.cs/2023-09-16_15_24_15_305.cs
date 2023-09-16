@@ -8,15 +8,11 @@ public class GameContext
     private Dictionary<int, GameProgressionStaticData> _gameProgressionByScore = new Dictionary<int, GameProgressionStaticData>();
 
     public int Score { get { return _score; } }
-    public GameProgressionStaticData CurrentStage { get { return _currentStage; } }
 
     public GameContext(LevelStaticData levelStaticData)
     {
         _playerHP = levelStaticData.PlayerHP;
         ConstructGameProgressionStages(levelStaticData.GameProgressionStaticDatas);
-        GameProgressionStaticData stage;
-        _gameProgressionByScore.TryGetValue(_score, out stage);
-        SetActiveStage(stage);
         SubscribeOnEvents();
     }
 
@@ -30,11 +26,6 @@ public class GameContext
                 Debug.LogError($"cant add GameProgressionStaticData, scoreStage already exist - {data.ScoreStage}");
             }
         }
-    }
-
-    private void SetActiveStage(GameProgressionStaticData stage)
-    {
-        _currentStage = stage;
     }
 
     private void SubscribeOnEvents()
@@ -56,7 +47,6 @@ public class GameContext
         if (stage != null)
         {
             EventManager.CallOnChangeGameStage(stage);
-            _currentStage = stage;
         }
 
         EventManager.CallOnScoreChanged(_score);

@@ -12,37 +12,25 @@ public class Enemy : MonoBehaviour
 
     private Vector3 direction = Vector3.down;
     private IPoolingService _poolService;
-    private const float  MIN_Y_POSITION = -1f;
-    private EnemyStaticData _enemyStaticData;
+    private const float  MIN_Y_POSITION = -5f;
     public EnemyType Type { get { return _type; } }
 
     public void Construct(EnemyStaticData enemyStaticData, IPoolingService poolingService)
     {
         _poolService = poolingService;
-        _enemyStaticData = enemyStaticData;
 
         if(_type != enemyStaticData.Type)
         {
             Debug.Log($"========== Wrong EnemyStaticData for this {_type} - {enemyStaticData.Type}");
         }
-
-        InitBaseParams();
-
-        //SubscribeOnEvents();
-    }
-
-    public void InitProperties(GameProgressionStaticData stage)
-    {
-        ChangePropertiesByStage(stage);
-    }
-    public void InitBaseParams()
-    {
-        _moveSpeed = _enemyStaticData.MoveSpeed;
-        _damage = _enemyStaticData.Damage;
-        _hp = _enemyStaticData.Hp;
+        
+        _moveSpeed = enemyStaticData.MoveSpeed;
+        _damage = enemyStaticData.Damage;
+        _hp = enemyStaticData.Hp;
         _currentHp = _hp;
-        _score =_enemyStaticData.Score;
+        _score = enemyStaticData.Score;
     }
+
 
     private void Update()
     {
@@ -54,16 +42,14 @@ public class Enemy : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, transform.position+direction, step);
     }
 
-    /*    private void OnEnable()
-        {
-            EventManager.OnEnemyDeath += EnmemyDeath;
-        }  
-        private void OnDisable()
-        {
-            EventManager.OnEnemyDeath -= EnmemyDeath;
-        }*/
-
-
+/*    private void OnEnable()
+    {
+        EventManager.OnEnemyDeath += EnmemyDeath;
+    }  
+    private void OnDisable()
+    {
+        EventManager.OnEnemyDeath -= EnmemyDeath;
+    }*/
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -87,27 +73,8 @@ public class Enemy : MonoBehaviour
         if(_currentHp<=0)
         {
             _currentHp=_hp;
-            UnsubscribeOnEvents();
-            InitBaseParams();
             _poolService.ReturnEnemy(this);
             EventManager.CallOnEnemyDeathEvent(_score);
         }
     }
-
-    private void ChangePropertiesByStage(GameProgressionStaticData stage)
-    {
-        _moveSpeed *= stage.EnemySpeedScale !=0 ? stage.EnemySpeedScale : 1;
-        _damage += stage.AdditionalDamage;
-    }
-
-    private void SubscribeOnEvents()
-    {
-        EventManager.OnChangeGameStage += ChangePropertiesByStage;
-    }
-
-    private void UnsubscribeOnEvents()
-    {
-        EventManager.OnChangeGameStage -= ChangePropertiesByStage;
-    }
-
 }

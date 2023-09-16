@@ -28,10 +28,10 @@ public class EnemySpawner
 
     }
 
-    public Enemy SpawnEnemy(GameProgressionStaticData stage)
+    public GameObject SpawnEnemy()
     {
         EnemyType enemyType = RandomWithRobabilitySelector.GetRandom<EnemyType>(_enemyTypes, _probabilities);
-        Enemy enemy = _gameFactory.CreateEnemy(GetRandomSpawnPoint(), enemyType, stage);
+        GameObject enemy = _gameFactory.CreateEnemy(GetRandomSpawnPoint(), enemyType);
         return enemy;
     }
 

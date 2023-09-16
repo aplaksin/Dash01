@@ -56,7 +56,6 @@ public class GameContext
         if (stage != null)
         {
             EventManager.CallOnChangeGameStage(stage);
-            _currentStage = stage;
         }
 
         EventManager.CallOnScoreChanged(_score);

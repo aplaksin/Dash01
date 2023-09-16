@@ -52,8 +52,8 @@ public class GameLoopState : IParameterizedState<LevelStaticData>
         while (true)
         {
 
-            Enemy enemy = _enemySpawner.SpawnEnemy(Game.GameContext.CurrentStage);
-            enemy.gameObject.SetActive(true);
+            GameObject enemy = _enemySpawner.SpawnEnemy();
+            enemy.SetActive(true);
             yield return new WaitForSeconds(spawnDelay);
         }
     }

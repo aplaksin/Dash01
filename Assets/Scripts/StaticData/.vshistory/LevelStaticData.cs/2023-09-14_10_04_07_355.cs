@@ -10,6 +10,5 @@ public class LevelStaticData : ScriptableObject
     public int PlayerHP;
     public float SpawnEnemyDelay;
     public SpawnProbabilityByType[] EnemyTypes;
-    public GameProgressionStaticData[] GameProgressionStaticDatas;
     //public EnemyTypeSpawnProbabilityDictionary EnemyTypeSpawnProbabilityDictionary;
  }

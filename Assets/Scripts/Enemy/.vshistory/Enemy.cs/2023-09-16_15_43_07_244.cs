@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour
 
         InitBaseParams();
 
-        //SubscribeOnEvents();
+        SubscribeOnEvents();
     }
 
     public void InitProperties(GameProgressionStaticData stage)

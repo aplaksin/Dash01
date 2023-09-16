@@ -55,7 +55,8 @@ public class GameFactory : IGameFactory
         enemy.InitProperties(stage);
         enemy.transform.localScale = _scaleVector;
         enemy.transform.position = new Vector3(_cellPositionByCoords[new Vector2(spawnPoint.x, 0)].x, spawnPoint.y, 0);
-
+        //enemy.gameObject.SetActive(true);
+        //точку спавна
         return enemy;
     }
     

@@ -1,6 +1,5 @@
 using System;
-using System.Diagnostics;
-using UnityEngine;
+
 public static class EventManager
 {
     public static event Action <int>OnEnemyDeath;
@@ -8,13 +7,6 @@ public static class EventManager
     public static event Action <int>OnHpChanged;
     public static event Action<int> OnDamage;
     public static event Action OnGameOver;
-    public static event Action<GameProgressionStaticData> OnChangeGameStage;
-
-    public static void CallOnChangeGameStage(GameProgressionStaticData stage)
-    {
-        UnityEngine.Debug.Log(stage);
-        OnChangeGameStage?.Invoke(stage);
-    }
 
     public static void CallOnEnemyDeathEvent(int score)
     {
