@@ -8,7 +8,8 @@ public class LevelStaticData : ScriptableObject
     public Vector2 PlayerSpawnCoords;
     public GameGridStaticData GameGridData;
     public int PlayerHP;
+    public float SpawnEnemyDelay;
     public SpawnProbabilityByType[] EnemyTypes;
-    public GameStageStaticData[] GameStageStaticDatas;
+    public GameStageStaticData[] GameProgressionStaticDatas;
     //public EnemyTypeSpawnProbabilityDictionary EnemyTypeSpawnProbabilityDictionary;
  }

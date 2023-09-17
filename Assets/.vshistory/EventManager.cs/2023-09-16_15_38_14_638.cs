@@ -8,9 +8,9 @@ public static class EventManager
     public static event Action <int>OnHpChanged;
     public static event Action<int> OnDamage;
     public static event Action OnGameOver;
-    public static event Action<GameStageStaticData> OnChangeGameStage;
+    public static event Action<GameProgressionStaticData> OnChangeGameStage;
 
-    public static void CallOnChangeGameStage(GameStageStaticData stage)
+    public static void CallOnChangeGameStage(GameProgressionStaticData stage)
     {
         UnityEngine.Debug.Log(stage);
         OnChangeGameStage?.Invoke(stage);

@@ -49,7 +49,7 @@ public class GameFactory : IGameFactory
         return projectile;
     }
 
-    public Enemy CreateEnemy(Vector2 spawnPoint, EnemyType enemyType, GameStageStaticData stage)
+    public Enemy CreateEnemy(Vector2 spawnPoint, EnemyType enemyType, GameProgressionStaticData stage)
     {
         Enemy enemy = _poolingService.GetEnemyByType(enemyType);
         enemy.InitProperties(stage);
@@ -61,7 +61,7 @@ public class GameFactory : IGameFactory
     
     public Dictionary<Vector2, Vector3> CreateGameGrid(LevelStaticData levelStaticData, Vector3 scaleVector)
     {
-        IGridGenerator gridGenerator = new GridGeneratorStandart(_assetProvider, levelStaticData.GameGridData.GridHeight, levelStaticData.GameGridData.GridWidth, levelStaticData.GameGridData.GridPadding, scaleVector);
+        IGridGenerator gridGenerator = new GridGeneratorStandart(_assetProvider, levelStaticData.GameGridData.GridHeight, levelStaticData.GameGridData.GridWidth, scaleVector);
 
         gridGenerator.BuildGrid(new List<Vector2>(levelStaticData.GameGridData.BlocksCoords), _cellPositionByCoords, _blocksByCoords, _blocksCoords, levelStaticData.GameGridData.CellSpace);
 

@@ -20,6 +20,7 @@ MonoBehaviour:
   EnemyTypes:
   - {fileID: 11400000, guid: 2479fb98fc70cdd49a9b18ea9d844b63, type: 2}
   - {fileID: 11400000, guid: 5b1b31b61d3a96f428912c6c96d4596c, type: 2}
-  GameProgressionStaticDatas:
+  GameStageStaticDatas:
   - {fileID: 11400000, guid: 0d8cb8964a5b2184d8cb562b05762a25, type: 2}
-  - {fileID: 11400000, guid: 02bb3421adabc5f4cbf1a44179104e80, type: 2}
+  - {fileID: 11400000, guid: f66f184c3985f884b9fdeda14cede72b, type: 2}
+  - {fileID: 11400000, guid: 33f5f7ed964f03b4cba542c211eb7e6a, type: 2}

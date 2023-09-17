@@ -4,39 +4,35 @@ public class GameContext
 {
     private int _playerHP;
     private int _score = 0;
-    private float _spawnEnemyDelay = 2f;
-    private GameStageStaticData _currentStage;
-    private Dictionary<int, GameStageStaticData> _gameStageByScore = new Dictionary<int, GameStageStaticData>();
-
+    private GameProgressionStaticData _currentStage;
+    private Dictionary<int, GameProgressionStaticData> _gameProgressionByScore = new Dictionary<int, GameProgressionStaticData>();
 
     public int Score { get { return _score; } }
-    public float SpawnEnemyDelay { get { return _spawnEnemyDelay; } }
-    public GameStageStaticData CurrentStage { get { return _currentStage; } }
+    public GameProgressionStaticData CurrentStage { get { return _currentStage; } }
 
     public GameContext(LevelStaticData levelStaticData)
     {
         _playerHP = levelStaticData.PlayerHP;
-        ConstructGameProgressionStages(levelStaticData.GameStageStaticDatas);
-        GameStageStaticData stage;
-        _gameStageByScore.TryGetValue(_score, out stage);
+        ConstructGameProgressionStages(levelStaticData.GameProgressionStaticDatas);
+        GameProgressionStaticData stage;
+        _gameProgressionByScore.TryGetValue(_score, out stage);
         SetActiveStage(stage);
-        _spawnEnemyDelay = stage.SpawnDelay;
         SubscribeOnEvents();
     }
 
-    private void ConstructGameProgressionStages(GameStageStaticData[] gameStagesArr )
+    private void ConstructGameProgressionStages(GameProgressionStaticData[] gameProgressionsArr )
     {
-        foreach(GameStageStaticData data in gameStagesArr)
+        foreach(GameProgressionStaticData data in gameProgressionsArr)
         {
-            bool isAdded = _gameStageByScore.TryAdd(data.ScoreStage, data);
+            bool isAdded = _gameProgressionByScore.TryAdd(data.ScoreStage, data);
             if(!isAdded)
             {
-                Debug.LogError($"cant add GameStageStaticData, scoreStage already exist - {data.ScoreStage}");
+                Debug.LogError($"cant add GameProgressionStaticData, scoreStage already exist - {data.ScoreStage}");
             }
         }
     }
 
-    private void SetActiveStage(GameStageStaticData stage)
+    private void SetActiveStage(GameProgressionStaticData stage)
     {
         _currentStage = stage;
     }
@@ -55,14 +51,12 @@ public class GameContext
     private void OnScoreChanged(int score)
     {
         _score += score;
-        GameStageStaticData stage;
-         _gameStageByScore.TryGetValue(_score, out stage);
-
+        GameProgressionStaticData stage;
+         _gameProgressionByScore.TryGetValue(_score, out stage);
         if (stage != null)
         {
             EventManager.CallOnChangeGameStage(stage);
             _currentStage = stage;
-            _spawnEnemyDelay = stage.SpawnDelay;
         }
 
         EventManager.CallOnScoreChanged(_score);

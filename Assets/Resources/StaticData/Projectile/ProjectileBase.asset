@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: ProjectileBase
   m_EditorClassIdentifier: 
   Damage: 1
-  MoveSpeed: 0.69
+  MoveSpeed: 2
   Type: 0

@@ -20,7 +20,6 @@ public class GameContext
         GameStageStaticData stage;
         _gameStageByScore.TryGetValue(_score, out stage);
         SetActiveStage(stage);
-        _spawnEnemyDelay = stage.SpawnDelay;
         SubscribeOnEvents();
     }
 
@@ -62,7 +61,6 @@ public class GameContext
         {
             EventManager.CallOnChangeGameStage(stage);
             _currentStage = stage;
-            _spawnEnemyDelay = stage.SpawnDelay;
         }
 
         EventManager.CallOnScoreChanged(_score);

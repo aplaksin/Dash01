@@ -43,7 +43,7 @@ public class GridGeneratorStandart : IGridGenerator
 
                 if (blocksList.Contains(currentCoords))
                 {
-                    //prefab = _blockPrefab; 0.6318452
+                    //prefab = _blockPrefab;
                     prefab = _assetProvider.Instantiate(AssetPath.BlockPath);
                 }
                 else

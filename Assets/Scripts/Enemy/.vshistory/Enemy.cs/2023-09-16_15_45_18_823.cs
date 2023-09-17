@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour
         //SubscribeOnEvents();
     }
 
-    public void InitProperties(GameStageStaticData stage)
+    public void InitProperties(GameProgressionStaticData stage)
     {
         ChangePropertiesByStage(stage);
     }
@@ -94,7 +94,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void ChangePropertiesByStage(GameStageStaticData stage)
+    private void ChangePropertiesByStage(GameProgressionStaticData stage)
     {
         _moveSpeed *= stage.EnemySpeedScale !=0 ? stage.EnemySpeedScale : 1;
         _damage += stage.AdditionalDamage;

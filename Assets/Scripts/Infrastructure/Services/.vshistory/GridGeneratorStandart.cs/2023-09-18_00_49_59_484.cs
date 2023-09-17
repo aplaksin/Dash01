@@ -28,12 +28,10 @@ public class GridGeneratorStandart : IGridGenerator
     {
 
         GameObject grid = _assetProvider.Instantiate(AssetPath.GridPath);
-        //float positionByScalePointerVertical = _padding.y;
         float positionByScalePointerVertical = _padding.y;
         for (int i = 0; i < _gridHeight; i++)
         {
             float positionByScalePointerHorizontal = _padding.x;
-            //float positionByScalePointerHorizontal = 0;
 
             for (int j = 0; j < _gridWidth; j++)
             {
@@ -43,7 +41,7 @@ public class GridGeneratorStandart : IGridGenerator
 
                 if (blocksList.Contains(currentCoords))
                 {
-                    //prefab = _blockPrefab; 0.6318452
+                    //prefab = _blockPrefab;
                     prefab = _assetProvider.Instantiate(AssetPath.BlockPath);
                 }
                 else

@@ -112,7 +112,7 @@ public class LoadLevelState : IParameterizedState<string>
 
         float pixelsPerUnit = CalcPixelsPerUnit(resolutionVertical, cameraSize);
 
-        float scaleCoeff = CalcScaleCoefficient(resolutionHorizontal, _levelStaticData.GameGridData.GridWidth, pixelsPerUnit, _levelStaticData.GameGridData.CellSpace, _levelStaticData.GameGridData.GridPadding);
+        float scaleCoeff = CalcScaleCoefficient(resolutionHorizontal, _levelStaticData.GameGridData.GridWidth, pixelsPerUnit, _levelStaticData.GameGridData.CellSpace);
 
         return new Vector3(scaleCoeff, scaleCoeff, scaleCoeff);
     }
@@ -126,9 +126,9 @@ public class LoadLevelState : IParameterizedState<string>
     {
         return (resolutionHorisontal / gridWidth) / pixelsPerUnit;
     }*/
-    private float CalcScaleCoefficient(int resolutionHorisontal, int gridWidth, float pixelsPerUnit, float cellSpace, Vector2 padding)
+    private float CalcScaleCoefficient(int resolutionHorisontal, int gridWidth, float pixelsPerUnit, float cellSpace)
     {
-        return ((resolutionHorisontal - (2 * padding.x * pixelsPerUnit + (gridWidth - 1) * cellSpace * pixelsPerUnit)) / gridWidth) / pixelsPerUnit;
+        return ((resolutionHorisontal - ((gridWidth - 1) * cellSpace * pixelsPerUnit)) / gridWidth) / pixelsPerUnit;
     }
 
     private void CorrectCameraPosition()

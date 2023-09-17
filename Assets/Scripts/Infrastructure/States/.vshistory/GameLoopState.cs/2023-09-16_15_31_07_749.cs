@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class GameLoopState : IParameterizedState<LevelStaticData>
 {
+    private GameStateMachine _gameStateMashine;
     private IGameFactory _gameFactory;
     private EnemySpawner _enemySpawner;
     private ICoroutineRunner _coroutineRunner;
@@ -10,8 +11,9 @@ public class GameLoopState : IParameterizedState<LevelStaticData>
     private LevelStaticData _levelStaticData;
     private Coroutine _enemySpawnCoroutine;
 
-    public GameLoopState(IGameFactory gameFactory, ICoroutineRunner coroutineRunner, IWindowService windowService)
+    public GameLoopState(GameStateMachine gameStateMashine, IGameFactory gameFactory, ICoroutineRunner coroutineRunner, IWindowService windowService)
     {
+        _gameStateMashine = gameStateMashine;
         _gameFactory = gameFactory;
         _coroutineRunner = coroutineRunner;
         _windowService = windowService;
@@ -30,7 +32,7 @@ public class GameLoopState : IParameterizedState<LevelStaticData>
         //_gameContext;
         _levelStaticData = levelStaticData;
         _enemySpawner = new EnemySpawner(_gameFactory, levelStaticData.EnemyTypes);
-        _enemySpawnCoroutine = _coroutineRunner.StartCoroutine(SpawnEnemies(Game.GameContext.SpawnEnemyDelay, _levelStaticData.EnemyTypes));
+        _enemySpawnCoroutine = _coroutineRunner.StartCoroutine(SpawnEnemies(_levelStaticData.SpawnEnemyDelay, _levelStaticData.EnemyTypes));
         EventManager.OnGameOver += OnGameOver;
     }
 

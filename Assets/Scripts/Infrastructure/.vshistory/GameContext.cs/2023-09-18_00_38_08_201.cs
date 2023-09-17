@@ -4,13 +4,10 @@ public class GameContext
 {
     private int _playerHP;
     private int _score = 0;
-    private float _spawnEnemyDelay = 2f;
     private GameStageStaticData _currentStage;
-    private Dictionary<int, GameStageStaticData> _gameStageByScore = new Dictionary<int, GameStageStaticData>();
-
+    private Dictionary<int, GameStageStaticData> _gameProgressionByScore = new Dictionary<int, GameStageStaticData>();
 
     public int Score { get { return _score; } }
-    public float SpawnEnemyDelay { get { return _spawnEnemyDelay; } }
     public GameStageStaticData CurrentStage { get { return _currentStage; } }
 
     public GameContext(LevelStaticData levelStaticData)
@@ -18,9 +15,8 @@ public class GameContext
         _playerHP = levelStaticData.PlayerHP;
         ConstructGameProgressionStages(levelStaticData.GameStageStaticDatas);
         GameStageStaticData stage;
-        _gameStageByScore.TryGetValue(_score, out stage);
+        _gameProgressionByScore.TryGetValue(_score, out stage);
         SetActiveStage(stage);
-        _spawnEnemyDelay = stage.SpawnDelay;
         SubscribeOnEvents();
     }
 
@@ -28,7 +24,7 @@ public class GameContext
     {
         foreach(GameStageStaticData data in gameStagesArr)
         {
-            bool isAdded = _gameStageByScore.TryAdd(data.ScoreStage, data);
+            bool isAdded = _gameProgressionByScore.TryAdd(data.ScoreStage, data);
             if(!isAdded)
             {
                 Debug.LogError($"cant add GameStageStaticData, scoreStage already exist - {data.ScoreStage}");
@@ -56,13 +52,12 @@ public class GameContext
     {
         _score += score;
         GameStageStaticData stage;
-         _gameStageByScore.TryGetValue(_score, out stage);
+         _gameProgressionByScore.TryGetValue(_score, out stage);
 
         if (stage != null)
         {
             EventManager.CallOnChangeGameStage(stage);
             _currentStage = stage;
-            _spawnEnemyDelay = stage.SpawnDelay;
         }
 
         EventManager.CallOnScoreChanged(_score);

@@ -9,15 +9,13 @@ public class GridGeneratorStandart : IGridGenerator
     private int _gridHeight;
     private int _gridWidth;
     private Vector3 _scaleVector;
-    private Vector2 _padding;
 
-    public GridGeneratorStandart(IAssetProvider assetProvider, int gridHeight, int gridWidht, Vector2 padding, Vector3 scaleVector)
+    public GridGeneratorStandart(IAssetProvider assetProvider, int gridHeight, int gridWidht, Vector3 scaleVector)
     {
         _assetProvider = assetProvider;
         _gridHeight = gridHeight;
         _gridWidth = gridWidht;
         _scaleVector = scaleVector;
-        _padding = padding;
     }
 
     public void BuildGrid(List<Vector2> blocksList, 
@@ -28,12 +26,10 @@ public class GridGeneratorStandart : IGridGenerator
     {
 
         GameObject grid = _assetProvider.Instantiate(AssetPath.GridPath);
-        //float positionByScalePointerVertical = _padding.y;
-        float positionByScalePointerVertical = _padding.y;
+        float positionByScalePointerVertical = 0.0f;
         for (int i = 0; i < _gridHeight; i++)
         {
-            float positionByScalePointerHorizontal = _padding.x;
-            //float positionByScalePointerHorizontal = 0;
+            float positionByScalePointerHorizontal = 0.0f;
 
             for (int j = 0; j < _gridWidth; j++)
             {
@@ -43,7 +39,7 @@ public class GridGeneratorStandart : IGridGenerator
 
                 if (blocksList.Contains(currentCoords))
                 {
-                    //prefab = _blockPrefab; 0.6318452
+                    //prefab = _blockPrefab;
                     prefab = _assetProvider.Instantiate(AssetPath.BlockPath);
                 }
                 else
@@ -56,10 +52,7 @@ public class GridGeneratorStandart : IGridGenerator
                 cell.name = $"{cell.name}-{j}-{i}";
                 //cell.transform.localScale = new Vector3(cell.transform.localScale.x * scaleVector.x, cell.transform.localScale.y * scaleVector.y, cell.transform.localScale.z * scaleVector.z);
                 cell.transform.localScale = _scaleVector;
-                cell.transform.position = new Vector3(
-                    positionByScalePointerHorizontal + cell.transform.localScale.x / 2 ,
-                    positionByScalePointerVertical + cell.transform.localScale.y / 2,
-                    0);
+                cell.transform.position = new Vector3(positionByScalePointerHorizontal + cell.transform.localScale.x / 2, positionByScalePointerVertical + cell.transform.localScale.y / 2, 0);
                 cellPositionByCoords.Add(currentCoords, cell.transform.position);
 
                 if (blocksList.Contains(currentCoords))

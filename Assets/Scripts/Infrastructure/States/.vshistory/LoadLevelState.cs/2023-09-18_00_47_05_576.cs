@@ -128,7 +128,7 @@ public class LoadLevelState : IParameterizedState<string>
     }*/
     private float CalcScaleCoefficient(int resolutionHorisontal, int gridWidth, float pixelsPerUnit, float cellSpace, Vector2 padding)
     {
-        return ((resolutionHorisontal - (2 * padding.x * pixelsPerUnit + (gridWidth - 1) * cellSpace * pixelsPerUnit)) / gridWidth) / pixelsPerUnit;
+        return ((resolutionHorisontal - ((gridWidth - 1) * cellSpace * pixelsPerUnit) + 2*padding.x) / gridWidth) / pixelsPerUnit;
     }
 
     private void CorrectCameraPosition()

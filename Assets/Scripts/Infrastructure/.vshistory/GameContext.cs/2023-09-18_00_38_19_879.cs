@@ -4,13 +4,10 @@ public class GameContext
 {
     private int _playerHP;
     private int _score = 0;
-    private float _spawnEnemyDelay = 2f;
     private GameStageStaticData _currentStage;
     private Dictionary<int, GameStageStaticData> _gameStageByScore = new Dictionary<int, GameStageStaticData>();
 
-
     public int Score { get { return _score; } }
-    public float SpawnEnemyDelay { get { return _spawnEnemyDelay; } }
     public GameStageStaticData CurrentStage { get { return _currentStage; } }
 
     public GameContext(LevelStaticData levelStaticData)
@@ -20,7 +17,6 @@ public class GameContext
         GameStageStaticData stage;
         _gameStageByScore.TryGetValue(_score, out stage);
         SetActiveStage(stage);
-        _spawnEnemyDelay = stage.SpawnDelay;
         SubscribeOnEvents();
     }
 
@@ -62,7 +58,6 @@ public class GameContext
         {
             EventManager.CallOnChangeGameStage(stage);
             _currentStage = stage;
-            _spawnEnemyDelay = stage.SpawnDelay;
         }
 
         EventManager.CallOnScoreChanged(_score);
