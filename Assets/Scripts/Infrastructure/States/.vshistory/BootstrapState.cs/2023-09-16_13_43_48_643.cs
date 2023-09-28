@@ -72,7 +72,7 @@ public class BootstrapState : IState
         }*/
     private IInputService Inputservice()
     {
-        if (Application.isEditor || SystemInfo.deviceType == DeviceType.Desktop)
+        if (Application.isEditor)
             return new KeyboardInputManager();
         else
             return new SwipeInputManager();
