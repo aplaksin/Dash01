@@ -9,16 +9,21 @@ public class Projectile : MonoBehaviour
 
     private float _moveSpeed;
     private float _damage;
+    private AudioClip _shootSound;
+
+    private IAudioService _audioService;
 
     private Vector3 direction = Vector3.up;
     private IPoolingService _poolService;
     private const float MAX_Y_POSITION = 15f;
     public ProjectileType Type { get { return _type; } }
 
-    public void Construct(ProjectileStaticData projectileStaticData, IPoolingService poolingService)
+    public void Construct(ProjectileStaticData projectileStaticData, IPoolingService poolingService, IAudioService audioService)
     {
+        
         _poolService = poolingService;
-
+        _audioService = audioService;
+        
         if (_type != projectileStaticData.Type)
         {
             Debug.Log($"========== Wrong ProjectileStaticData for this {_type} - {projectileStaticData.Type}");
@@ -26,7 +31,16 @@ public class Projectile : MonoBehaviour
 
         _moveSpeed = projectileStaticData.MoveSpeed;
         _damage = projectileStaticData.Damage;
-        
+        _shootSound = projectileStaticData.ShootSound;
+    }
+    public void OnDamageEnemy()
+    {
+        _poolService.ReturnProjectile(this);
+    }
+
+    public void PlayShootSFX()
+    {
+        _audioService.PlaySFX(_shootSound);
     }
 
     private void Update()
@@ -40,10 +54,7 @@ public class Projectile : MonoBehaviour
         
     }
 
-    public void OnDamageEnemy()
-    {
-        _poolService.ReturnProjectile(this);
-    }
+
 
     
 }

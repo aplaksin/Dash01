@@ -19,7 +19,7 @@ public class GameFactory : IGameFactory
     private Dictionary<Vector2, Vector3> _cellPositionByCoords;
     private Dictionary<Vector2, GameObject> _blocksByCoords;
     private Dictionary<Vector2,Vector3> _blocksCoords;
-
+    private IAudioService _audioService;
     public GameFactory(IAssetProvider assetProvider, IStaticDataService staticDataService, IPoolingService poolingService, IInputService inputInputService)
     {
         _assetProvider = assetProvider;
@@ -32,6 +32,7 @@ public class GameFactory : IGameFactory
 
     public void Construct(Vector3 scaleVector)
     {
+        _audioService = AllServices.Container.Single<IAudioService>();
         _cellPositionByCoords = new Dictionary<Vector2, Vector3>();
         _blocksByCoords = new Dictionary<Vector2, GameObject>();
         _blocksCoords = new Dictionary<Vector2, Vector3>();
@@ -42,10 +43,11 @@ public class GameFactory : IGameFactory
 
     }
 
-    public GameObject CreateProjectile(Vector2 spawnPoint)
+    public Projectile CreateProjectile(Vector2 spawnPoint)
     {
-        GameObject projectile = _poolingService.GetProjectileByType(ProjectileType.Base);
+        Projectile projectile = _poolingService.GetProjectileByType(ProjectileType.Base);
         projectile.transform.position = spawnPoint;
+        //_audioService.PlaySFX(SoundType.PlayerShoot);
         return projectile;
     }
 

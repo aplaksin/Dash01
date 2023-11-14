@@ -10,6 +10,9 @@ public static class AssetPath
     public const string CellPath = "Grid/cell";
     public const string BlockPath = "Grid/block";
     public const string GridPath = "Grid/Grid";
+    public const string MainMenuMusicPath = "Audio/Music/MainMenuMusic";
+    public const string GameOverMusicPath = "Audio/Music/GameOverMusic";
+    public const string PlayerDamageSFXPath = "Audio/SFX/PlayerDamage";
 
     private static Dictionary<EnemyType, string> _enemyPathByType = new Dictionary<EnemyType, string>() {
         [EnemyType.Base] = "Enemies/baseEnemy",

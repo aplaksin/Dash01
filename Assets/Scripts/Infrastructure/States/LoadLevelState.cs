@@ -16,9 +16,11 @@ public class LoadLevelState : IParameterizedState<string>
     private readonly IPoolingService _poolingService;
     //private readonly IUIFactory _uiFactory;
     private readonly IWindowService _windowService;
+    private readonly IAudioService _audioService;
+    private readonly IAssetProvider _assetProvider;
     private GameContext _gameContext;
 
-    public LoadLevelState(GameStateMachine gameStateMachine, IPoolingService poolingService, SceneLoader sceneLoader, LoadingScreen loadingCurtain, IGameFactory gameFactory, IStaticDataService staticDataService, IUIFactory uIFactory, IWindowService windowService)
+    public LoadLevelState(GameStateMachine gameStateMachine, IPoolingService poolingService, SceneLoader sceneLoader, LoadingScreen loadingCurtain, IGameFactory gameFactory, IStaticDataService staticDataService, IUIFactory uIFactory, IWindowService windowService, IAudioService audioService, IAssetProvider assetProvider)
     {
         _gameStateMachine = gameStateMachine;
         _sceneLoader = sceneLoader;
@@ -29,6 +31,8 @@ public class LoadLevelState : IParameterizedState<string>
         _poolingService = poolingService;
         //_uiFactory = uIFactory;
         _windowService = windowService;
+        _audioService = audioService;
+        _assetProvider = assetProvider;
     }
 
     public void Enter(string sceneName)
@@ -44,9 +48,10 @@ public class LoadLevelState : IParameterizedState<string>
     }
     private void OnLoaded()
     {
-        _gameContext = new GameContext(_levelStaticData);
+        _gameContext = new GameContext(_levelStaticData, _audioService, _assetProvider);
         Game.GameContext = _gameContext;
         PreparePoolingService();
+        PrepareAudioService();
         CorrectCameraPosition();
 
         Vector3 scaleVector = CalcScaleVector();
@@ -86,6 +91,11 @@ public class LoadLevelState : IParameterizedState<string>
     private void PreparePoolingService()
     {
         _poolingService.Construct();
+    }
+
+    private void PrepareAudioService()
+    {
+        _audioService.Construct(_levelStaticData.LevelMusic);
     }
 
 /*    private void AddCurrentLevelStaticDataToGame()

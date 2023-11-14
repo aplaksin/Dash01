@@ -7,8 +7,9 @@ public class PoolingService : IPoolingService
 {
     private IAssetProvider _assetProvider;
     private IStaticDataService _staticDataService;
+    private IAudioService _audioService;
     private Dictionary<EnemyType, Queue<Enemy>> _enemiesByType;
-    private Dictionary<ProjectileType, Queue<GameObject>> _projectilesByType;
+    private Dictionary<ProjectileType, Queue<Projectile>> _projectilesByType;
     private const int InitialCapacity = 10;
     private const int AddingCapacity = 3;
 
@@ -20,10 +21,11 @@ public class PoolingService : IPoolingService
     private GameObject _enemiesPoolWrapper;
     private GameObject _projectilesPoolWrapper;
 
-    public PoolingService(IAssetProvider assetProvider, IStaticDataService staticDataService)
+    public PoolingService(IAssetProvider assetProvider, IStaticDataService staticDataService, IAudioService audioService)
     {
         _assetProvider = assetProvider;
         _staticDataService = staticDataService;
+        _audioService = audioService;
         
     }
 
@@ -53,14 +55,13 @@ public class PoolingService : IPoolingService
         
     }
 
-    public GameObject GetProjectileByType(ProjectileType projectileType)
+    public Projectile GetProjectileByType(ProjectileType projectileType)
     {
-        Queue<GameObject> queue = _projectilesByType[projectileType];
+        Queue<Projectile> queue = _projectilesByType[projectileType];
 
         if (queue.Count > 0)
         {
-            GameObject projectile = queue.Dequeue();
-            //enemy.active = true;
+            Projectile projectile = queue.Dequeue();
             return projectile;
         }
         else
@@ -83,7 +84,7 @@ public class PoolingService : IPoolingService
     {
         projectile.gameObject.transform.position = Vector3.zero;
         projectile.gameObject.SetActive(false);
-        _projectilesByType[projectile.Type].Enqueue(projectile.gameObject);
+        _projectilesByType[projectile.Type].Enqueue(projectile);
     }
 
     private void CreateEnemiesPool()
@@ -121,11 +122,11 @@ public class PoolingService : IPoolingService
 
     private void CreateProjectilesPool()
     {
-        _projectilesByType = new Dictionary<ProjectileType, Queue<GameObject>>();
+        _projectilesByType = new Dictionary<ProjectileType, Queue<Projectile>>();
 
         foreach (ProjectileType projectileType in Enum.GetValues(typeof(ProjectileType)))
         {
-            Queue<GameObject> projectilesQueue = new Queue<GameObject>(InitialCapacity);
+            Queue<Projectile> projectilesQueue = new Queue<Projectile>(InitialCapacity);
             string path = AssetPath.GetProjectilePathByType(projectileType);
             ProjectileStaticData projectileStaticData = _staticDataService.GetProjectileDataByType(projectileType);
             AddProjectilesToQueue(path, ref projectilesQueue, projectileStaticData, InitialCapacity);
@@ -145,12 +146,12 @@ public class PoolingService : IPoolingService
             obj.SetActive(false);
             Enemy enemy = obj.GetComponent<Enemy>();
             obj.transform.SetParent(_enemiesPoolWrapper.transform);
-            enemy.Construct(data, this);
+            enemy.Construct(data, this, _audioService);
             queue.Enqueue(enemy);
         }
     }
 
-    private void AddProjectilesToQueue(string path, ref Queue<GameObject> queue, ProjectileStaticData data, int count = 1)
+    private void AddProjectilesToQueue(string path, ref Queue<Projectile> queue, ProjectileStaticData data, int count = 1)
     {
 
         for (int i = 0; i < count; i++)
@@ -159,8 +160,8 @@ public class PoolingService : IPoolingService
             obj.SetActive(false);
             Projectile projectile = obj.GetComponent<Projectile>();
             obj.transform.SetParent(_projectilesPoolWrapper.transform);
-            projectile.Construct(data, this);
-            queue.Enqueue(obj);
+            projectile.Construct(data, this, _audioService);
+            queue.Enqueue(projectile);
         }
     }
 

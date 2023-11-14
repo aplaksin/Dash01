@@ -16,4 +16,7 @@ public class EnemyStaticData : ScriptableObject
 
     public int Score;
 
+    public AudioClip DeathClip;
+    public AudioClip TakeDamageClip;
+
 }

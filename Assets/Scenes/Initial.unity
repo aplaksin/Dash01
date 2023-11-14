@@ -146,7 +146,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &340605886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -540,7 +540,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1769710086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -643,10 +643,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1283162284786365806, guid: 8604303ff88b7c846a4d8276d3b49764, type: 3}
+      propertyPath: m_Volume
+      value: 0.571
+      objectReference: {fileID: 0}
+    - target: {fileID: 3719632280420080877, guid: 8604303ff88b7c846a4d8276d3b49764, type: 3}
+      propertyPath: _fxSource
+      value: 
+      objectReference: {fileID: 8143606927211668924}
+    - target: {fileID: 3719632280420080877, guid: 8604303ff88b7c846a4d8276d3b49764, type: 3}
+      propertyPath: _musicSource
+      value: 
+      objectReference: {fileID: 8143606927211668925}
     - target: {fileID: 3719632280420080877, guid: 8604303ff88b7c846a4d8276d3b49764, type: 3}
       propertyPath: loadingCurtain
       value: 
       objectReference: {fileID: 921439019}
+    - target: {fileID: 4158809372336060745, guid: 8604303ff88b7c846a4d8276d3b49764, type: 3}
+      propertyPath: m_Volume
+      value: 0.239
+      objectReference: {fileID: 0}
     - target: {fileID: 8722742988643689062, guid: 8604303ff88b7c846a4d8276d3b49764, type: 3}
       propertyPath: m_Name
       value: GameBootstrapper
@@ -656,3 +672,13 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8604303ff88b7c846a4d8276d3b49764, type: 3}
+--- !u!82 &8143606927211668924 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4158809372336060745, guid: 8604303ff88b7c846a4d8276d3b49764, type: 3}
+  m_PrefabInstance: {fileID: 8143606927211668923}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &8143606927211668925 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1283162284786365806, guid: 8604303ff88b7c846a4d8276d3b49764, type: 3}
+  m_PrefabInstance: {fileID: 8143606927211668923}
+  m_PrefabAsset: {fileID: 0}

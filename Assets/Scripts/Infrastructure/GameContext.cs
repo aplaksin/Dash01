@@ -7,13 +7,13 @@ public class GameContext
     private float _spawnEnemyDelay = 2f;
     private GameStageStaticData _currentStage;
     private Dictionary<int, GameStageStaticData> _gameStageByScore = new Dictionary<int, GameStageStaticData>();
-
-
+    private IAudioService _audioService;
+    private IAssetProvider _assetProvider;
     public int Score { get { return _score; } }
     public float SpawnEnemyDelay { get { return _spawnEnemyDelay; } }
     public GameStageStaticData CurrentStage { get { return _currentStage; } }
 
-    public GameContext(LevelStaticData levelStaticData)
+    public GameContext(LevelStaticData levelStaticData, IAudioService audioService, IAssetProvider assetProvider)
     {
         _playerHP = levelStaticData.PlayerHP;
         ConstructGameProgressionStages(levelStaticData.GameStageStaticDatas);
@@ -21,7 +21,9 @@ public class GameContext
         _gameStageByScore.TryGetValue(_score, out stage);
         SetActiveStage(stage);
         _spawnEnemyDelay = stage.SpawnDelay;
+        _audioService = audioService;
         SubscribeOnEvents();
+        _assetProvider = assetProvider;
     }
 
     private void ConstructGameProgressionStages(GameStageStaticData[] gameStagesArr )
@@ -78,6 +80,11 @@ public class GameContext
         {
             Clear();
             EventManager.CallOnGameOver();
+            _audioService.PlayGameOverMusic();
+        }
+        else
+        {
+            _audioService.PlaySFX(_assetProvider.GetAudioClip(AssetPath.PlayerDamageSFXPath));
         }
         
     }

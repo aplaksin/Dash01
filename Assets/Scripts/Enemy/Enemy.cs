@@ -14,14 +14,16 @@ public class Enemy : MonoBehaviour
     private IPoolingService _poolService;
     private const float  MIN_Y_POSITION = -1f;
     private EnemyStaticData _enemyStaticData;
+    private IAudioService _audioService;
     public EnemyType Type { get { return _type; } }
 
-    public void Construct(EnemyStaticData enemyStaticData, IPoolingService poolingService)
+    public void Construct(EnemyStaticData enemyStaticData, IPoolingService poolingService, IAudioService audioService)
     {
         _poolService = poolingService;
         _enemyStaticData = enemyStaticData;
-
-        if(_type != enemyStaticData.Type)
+        _audioService = audioService;
+        
+        if (_type != enemyStaticData.Type)
         {
             Debug.Log($"========== Wrong EnemyStaticData for this {_type} - {enemyStaticData.Type}");
         }
@@ -91,6 +93,11 @@ public class Enemy : MonoBehaviour
             InitBaseParams();
             _poolService.ReturnEnemy(this);
             EventManager.CallOnEnemyDeathEvent(_score);
+            _audioService.PlaySFX(_enemyStaticData.DeathClip);
+        }
+        else
+        {
+            _audioService.PlaySFX(_enemyStaticData.TakeDamageClip);
         }
     }
 

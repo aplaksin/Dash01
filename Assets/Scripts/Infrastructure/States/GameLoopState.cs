@@ -7,14 +7,16 @@ public class GameLoopState : IParameterizedState<LevelStaticData>
     private EnemySpawner _enemySpawner;
     private ICoroutineRunner _coroutineRunner;
     private IWindowService _windowService;
+    private IAudioService _audioService;
     private LevelStaticData _levelStaticData;
     private Coroutine _enemySpawnCoroutine;
 
-    public GameLoopState(IGameFactory gameFactory, ICoroutineRunner coroutineRunner, IWindowService windowService)
+    public GameLoopState(IGameFactory gameFactory, ICoroutineRunner coroutineRunner, IWindowService windowService, IAudioService audioService)
     {
         _gameFactory = gameFactory;
         _coroutineRunner = coroutineRunner;
         _windowService = windowService;
+        _audioService = audioService;
     }
 
     public void Enter(LevelStaticData levelStaticData)
@@ -32,10 +34,13 @@ public class GameLoopState : IParameterizedState<LevelStaticData>
         _enemySpawner = new EnemySpawner(_gameFactory, levelStaticData.EnemyTypes);
         _enemySpawnCoroutine = _coroutineRunner.StartCoroutine(SpawnEnemies(Game.GameContext.SpawnEnemyDelay, _levelStaticData.EnemyTypes));
         EventManager.OnGameOver += OnGameOver;
+        IAudioService audioService = AllServices.Container.Single<IAudioService>();
+        audioService.PlayLevelMusic();
     }
 
     private void OnGameOver()
     {
+        _coroutineRunner.StopCoroutine(_enemySpawnCoroutine);
         _windowService.OpenWindowById(WindowId.GameOver);
     }
 

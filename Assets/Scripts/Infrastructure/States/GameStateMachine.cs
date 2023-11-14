@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class GameStateMachine
 {
@@ -7,16 +8,16 @@ public class GameStateMachine
     private IExitableState _activeState;
     private SceneLoader _sceneLoader;
 
-    public GameStateMachine(SceneLoader sceneLoader, LoadingScreen loadingCurtain, AllServices services, ICoroutineRunner coroutineRunner)
+    public GameStateMachine(SceneLoader sceneLoader, LoadingScreen loadingCurtain, AllServices services, ICoroutineRunner coroutineRunner, AudioSource musicSource, AudioSource fxSource)
     {
 
         _states = new Dictionary<Type, IExitableState>()
         {
-            [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
-            [typeof(MainMenuState)] = new MainMenuState(this, sceneLoader),
+            [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services, musicSource, fxSource),
+            [typeof(MainMenuState)] = new MainMenuState(this, sceneLoader, services.Single<IAudioService>()),
             //[typeof(LoadProgressState)] = new LoadProgressState(this, services.Single<IPersistentProgressService>(), services.Single<ISaveLoadService>()),
-            [typeof(LoadLevelState)] = new LoadLevelState(this, services.Single<IPoolingService>(), sceneLoader, loadingCurtain, services.Single<IGameFactory>(), services.Single<IStaticDataService>(), services.Single<IUIFactory>(), services.Single<IWindowService>()),
-            [typeof(GameLoopState)] = new GameLoopState(services.Single<IGameFactory>(), coroutineRunner, services.Single<IWindowService>())
+            [typeof(LoadLevelState)] = new LoadLevelState(this, services.Single<IPoolingService>(), sceneLoader, loadingCurtain, services.Single<IGameFactory>(), services.Single<IStaticDataService>(), services.Single<IUIFactory>(), services.Single<IWindowService>(), services.Single<IAudioService>(), services.Single<IAssetProvider>()),
+            [typeof(GameLoopState)] = new GameLoopState(services.Single<IGameFactory>(), coroutineRunner, services.Single<IWindowService>(), services.Single<IAudioService>())
 
         };
 

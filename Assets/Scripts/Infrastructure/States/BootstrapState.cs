@@ -9,14 +9,18 @@ public class BootstrapState : IState
     
     private const string MAIN_MENU_SCENE_NAME = "MainMenu";
     private readonly AllServices _services;
+    private AudioSource _musicSource;
+    private AudioSource _fxSource;
 
-    public BootstrapState(GameStateMachine gameStateMashine, SceneLoader sceneLoader, AllServices services)
+    public BootstrapState(GameStateMachine gameStateMashine, SceneLoader sceneLoader, AllServices services, AudioSource musicSource, AudioSource fxSource)
     {
         _gameStateMachine = gameStateMashine;
         //_sceneLoader = sceneLoader;
         _services = services;
-
+        _musicSource = musicSource;
+        _fxSource = fxSource;
         RegisterServices();
+
     }
 
     public void Enter()
@@ -45,10 +49,11 @@ public class BootstrapState : IState
         RegisterStaticDataService();
         _services.RegisterSingle<IUIFactory>(new UIFactory(_services.Single<IStaticDataService>()));
         _services.RegisterSingle<IWindowService>(new WindowService(_services.Single<IUIFactory>(), _gameStateMachine));
-        
-        _services.RegisterSingle<IPoolingService>(new PoolingService(_services.Single<IAssetProvider>(), _services.Single<IStaticDataService>()));
+        _services.RegisterSingle<IAudioService>(new AudioService(_musicSource, _fxSource, _services.Single<IAssetProvider>()));
+        _services.RegisterSingle<IPoolingService>(new PoolingService(_services.Single<IAssetProvider>(), _services.Single<IStaticDataService>(), _services.Single<IAudioService>()));
         _services.RegisterSingle<IGameFactory>(new GameFactory(_services.Single<IAssetProvider>(), _services.Single<IStaticDataService>(), _services.Single<IPoolingService>(), _services.Single<IInputService>()));
-
+        
+        
         //_services.RegisterSingle<ISaveLoadService>(new SaveLoadService(_services.Single<IPersistentProgressService>(), _services.Single<IGameFactory>()));
 
         

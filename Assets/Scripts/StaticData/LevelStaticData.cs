@@ -10,5 +10,5 @@ public class LevelStaticData : ScriptableObject
     public int PlayerHP;
     public SpawnProbabilityByType[] EnemyTypes;
     public GameStageStaticData[] GameStageStaticDatas;
-    //public EnemyTypeSpawnProbabilityDictionary EnemyTypeSpawnProbabilityDictionary;
+    public AudioClip LevelMusic;
  }

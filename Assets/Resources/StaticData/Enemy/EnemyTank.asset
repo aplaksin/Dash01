@@ -17,3 +17,5 @@ MonoBehaviour:
   MoveSpeed: 0.5
   Type: 1
   Score: 2
+  DeathClip: {fileID: 8300000, guid: abc35f626f798384cbea941315e8f803, type: 3}
+  TakeDamageClip: {fileID: 8300000, guid: 0da5dea3ca1a17d4790e2a1fd9faf78e, type: 3}

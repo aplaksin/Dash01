@@ -1,7 +1,5 @@
-
 using System.Collections.Generic;
 using UnityEngine;
-
 
 public class PlayerMove : MonoBehaviour
 {
@@ -45,8 +43,9 @@ public class PlayerMove : MonoBehaviour
                 if (_fireBlock != null)
                 {
                     
-                    GameObject gameObject1 = _gameFactory.CreateProjectile(_fireBlock.transform.position);
-                    gameObject1.SetActive(true);
+                    Projectile projectile = _gameFactory.CreateProjectile(_fireBlock.transform.position);
+                    projectile.gameObject.SetActive(true);
+                    projectile.PlayShootSFX();
                     _fireBlock = null;
                 }
             }
