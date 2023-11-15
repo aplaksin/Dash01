@@ -15,3 +15,4 @@ MonoBehaviour:
   Damage: 1
   MoveSpeed: 2
   Type: 0
+  ShootSound: {fileID: 8300000, guid: 633a9465fd488d148b8e83fcc5e4d190, type: 3}
