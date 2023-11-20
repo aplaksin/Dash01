@@ -645,7 +645,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1283162284786365806, guid: 8604303ff88b7c846a4d8276d3b49764, type: 3}
       propertyPath: m_Volume
-      value: 0.571
+      value: 0.134
       objectReference: {fileID: 0}
     - target: {fileID: 3719632280420080877, guid: 8604303ff88b7c846a4d8276d3b49764, type: 3}
       propertyPath: _fxSource
@@ -661,7 +661,7 @@ PrefabInstance:
       objectReference: {fileID: 921439019}
     - target: {fileID: 4158809372336060745, guid: 8604303ff88b7c846a4d8276d3b49764, type: 3}
       propertyPath: m_Volume
-      value: 0.239
+      value: 0.138
       objectReference: {fileID: 0}
     - target: {fileID: 8722742988643689062, guid: 8604303ff88b7c846a4d8276d3b49764, type: 3}
       propertyPath: m_Name
