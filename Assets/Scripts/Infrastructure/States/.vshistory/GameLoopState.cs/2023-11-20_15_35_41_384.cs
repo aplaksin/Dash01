@@ -21,16 +21,26 @@ public class GameLoopState : IParameterizedState<LevelStaticData>
 
     public void Enter(LevelStaticData levelStaticData)
     {
+        /*        _enemySpawner = new EnemySpawner(_gameFactory, Game.CurrentLevelStaticData.GameGridData.GridWidth);
+                GameObject enemy = _gameFactory.CreateEnemy(_enemySpawner.GetRandomSpawnPoint());
+                GameObject enemy2 = _gameFactory.CreateEnemy(_enemySpawner.GetRandomSpawnPoint());
+                GameObject enemy3 = _gameFactory.CreateEnemy(_enemySpawner.GetRandomSpawnPoint());
+
+                enemy.SetActive(true);
+                enemy2.SetActive(true);
+                enemy3.SetActive(true);*/
+        //_gameContext;
         _levelStaticData = levelStaticData;
         _enemySpawner = new EnemySpawner(_gameFactory, levelStaticData.EnemyTypes);
         _enemySpawnCoroutine = _coroutineRunner.StartCoroutine(SpawnEnemies(Game.GameContext.SpawnEnemyDelay, _levelStaticData.EnemyTypes));
         EventManager.OnGameOver += OnGameOver;
-        
-        _audioService.PlayLevelMusic();
+        IAudioService audioService = AllServices.Container.Single<IAudioService>();
+        audioService.PlayLevelMusic();
     }
 
     private void OnGameOver()
     {
+        _coroutineRunner.StopCoroutine(_enemySpawnCoroutine);
         _windowService.OpenWindowById(WindowId.GameOver);
     }
 

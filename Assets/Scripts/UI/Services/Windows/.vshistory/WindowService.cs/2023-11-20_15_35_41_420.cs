@@ -5,13 +5,11 @@ public class WindowService : IWindowService
     private readonly IUIFactory _uiFactory;
     private readonly GameStateMachine _gameStateMachine;
     private GameContext _gameContext;
-    private IAudioService _audioService;
 
-    public WindowService(IUIFactory uiFactory, GameStateMachine gameStateMachine, IAudioService audioService)
+    public WindowService(IUIFactory uiFactory, GameStateMachine gameStateMachine)
     {
         _uiFactory = uiFactory;
         _gameStateMachine = gameStateMachine;
-        _audioService = audioService;
     }
 
     public void OpenWindowById(WindowId windowId)
@@ -21,7 +19,7 @@ public class WindowService : IWindowService
             case WindowId.None:
                 break;
             case WindowId.Pause:
-                _uiFactory.CreatePauseMenu(_gameStateMachine, _audioService);
+                _uiFactory.CreatePauseMenu(_gameStateMachine);
                 break;
             case WindowId.GameOver:
                 _uiFactory.CreateGameOverMenu(_gameStateMachine, Game.GameContext.Score);

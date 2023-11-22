@@ -6,12 +6,10 @@ using UnityEngine.SceneManagement;
 public class PauseWindow : WindowBase
 {
     private GameStateMachine _gameStateMachine;
-    private IAudioService _audioService;
 
-    public void Construct(GameStateMachine gameStateMachine, IAudioService audioService)
+    public void Construct(GameStateMachine gameStateMachine)
     {
         _gameStateMachine = gameStateMachine;
-        _audioService = audioService;
         PauseGame();
         //EventManager.OnGameOver += OnGameOver;
     }
@@ -30,12 +28,6 @@ public class PauseWindow : WindowBase
     {
         //Debug.Log("OnPauseBtnClick");
         //UIEventManager.CallOnClickPauseBtnEvent();
-    }
-
-    public void OnSoundTurn()
-    {
-        _audioService.MuteMusic();
-        _audioService.MuteSFX();
     }
 
     protected override void Cleanup()

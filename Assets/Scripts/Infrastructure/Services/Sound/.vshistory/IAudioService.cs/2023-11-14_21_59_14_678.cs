@@ -9,11 +9,11 @@ public interface IAudioService : IService
     void PlayMusic(AudioClip musicClip);
     void StopMusic();
 
-    void MuteMusic();
+    void MuteMusic(bool shouldMute);
     void PlayLevelMusic();
     void PlayMainMenuMusic();
     void PlayGameOverMusic();
-    void MuteSFX();
+    void MuteSFX(bool shouldMute);
 
     void ChangeMusicVolume(float value);
     void ChangeSFXVolume(float value);

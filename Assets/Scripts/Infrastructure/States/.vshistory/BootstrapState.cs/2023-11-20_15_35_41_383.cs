@@ -48,9 +48,8 @@ public class BootstrapState : IState
         
         RegisterStaticDataService();
         _services.RegisterSingle<IUIFactory>(new UIFactory(_services.Single<IStaticDataService>()));
+        _services.RegisterSingle<IWindowService>(new WindowService(_services.Single<IUIFactory>(), _gameStateMachine));
         _services.RegisterSingle<IAudioService>(new AudioService(_musicSource, _fxSource, _services.Single<IAssetProvider>()));
-        _services.RegisterSingle<IWindowService>(new WindowService(_services.Single<IUIFactory>(), _gameStateMachine, _services.Single<IAudioService>()));
-        
         _services.RegisterSingle<IPoolingService>(new PoolingService(_services.Single<IAssetProvider>(), _services.Single<IStaticDataService>(), _services.Single<IAudioService>()));
         _services.RegisterSingle<IGameFactory>(new GameFactory(_services.Single<IAssetProvider>(), _services.Single<IStaticDataService>(), _services.Single<IPoolingService>(), _services.Single<IInputService>()));
         

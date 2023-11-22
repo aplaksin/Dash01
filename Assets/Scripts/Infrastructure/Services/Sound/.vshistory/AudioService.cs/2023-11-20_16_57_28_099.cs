@@ -60,9 +60,9 @@ public class AudioService : IAudioService
         _musicSource.mute = !_musicSource.mute;
     }
 
-    public void MuteSFX()
+    public void MuteSFX(bool shouldMute)
     {
-        _fxSource.mute = !_fxSource.mute;
+        _fxSource.mute = shouldMute;
     }
 
     public void ChangeMusicVolume(float value)

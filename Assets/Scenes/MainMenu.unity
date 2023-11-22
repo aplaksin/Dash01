@@ -213,14 +213,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: menu
       objectReference: {fileID: 0}
-    - target: {fileID: 2180767802088075752, guid: 846e150c797cb244688e4c3dde777917, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3475046262074045469, guid: 846e150c797cb244688e4c3dde777917, type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 4691383386132644879, guid: 846e150c797cb244688e4c3dde777917, type: 3}
       propertyPath: m_Pivot.x
       value: 0

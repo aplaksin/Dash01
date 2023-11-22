@@ -55,14 +55,14 @@ public class AudioService : IAudioService
         _musicSource.Pause();
     }
 
-    public void MuteMusic()
+    public void MuteMusic(bool shouldMute)
     {
-        _musicSource.mute = !_musicSource.mute;
+        _musicSource.mute = shouldMute;
     }
 
-    public void MuteSFX()
+    public void MuteSFX(bool shouldMute)
     {
-        _fxSource.mute = !_fxSource.mute;
+        _fxSource.mute = shouldMute;
     }
 
     public void ChangeMusicVolume(float value)

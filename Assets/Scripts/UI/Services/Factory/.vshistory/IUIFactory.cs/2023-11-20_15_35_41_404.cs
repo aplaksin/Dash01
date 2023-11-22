@@ -1,7 +1,7 @@
 ﻿
 public interface IUIFactory : IService
 {
-    void CreatePauseMenu(GameStateMachine gameStateMachine, IAudioService audioService);
+    void CreatePauseMenu(GameStateMachine gameStateMachine);
     void CreateGameOverMenu(GameStateMachine gameStateMachine, int score);
     /*Task CreateUIRoot();*/
 }

@@ -35,7 +35,6 @@ public class PauseWindow : WindowBase
     public void OnSoundTurn()
     {
         _audioService.MuteMusic();
-        _audioService.MuteSFX();
     }
 
     protected override void Cleanup()

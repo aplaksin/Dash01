@@ -31,6 +31,7 @@ public class GameLoopState : IParameterizedState<LevelStaticData>
 
     private void OnGameOver()
     {
+        _coroutineRunner.StopCoroutine(_enemySpawnCoroutine);
         _windowService.OpenWindowById(WindowId.GameOver);
     }
 

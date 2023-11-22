@@ -14,11 +14,11 @@ using UnityEngine;
         
     }
 
-    public void CreatePauseMenu(GameStateMachine gameStateMachine, IAudioService audioService)
+    public void CreatePauseMenu(GameStateMachine gameStateMachine)
     {
         WindowConfig config = _staticData.GetWndowConfigById(WindowId.Pause);
         PauseWindow window = Object.Instantiate(config.Template) as PauseWindow;
-        window.Construct(gameStateMachine, audioService);
+        window.Construct(gameStateMachine);
     }
 
     public void CreateGameOverMenu(GameStateMachine gameStateMachine, int score)
