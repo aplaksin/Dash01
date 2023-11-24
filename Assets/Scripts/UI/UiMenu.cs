@@ -6,17 +6,24 @@ using UnityEngine.UI;
 
 public class UiMenu : MonoBehaviour
 {
-
+    //TODO dele this buttons
     [SerializeField]
     private Button _startBtn;
 
     [SerializeField]
     private Button _exitBtn;
 
+    [SerializeField]
+    private Button _toggleSoundBtn;
+
     public void OnClickStartBtn()
     {
         UIEventManager.CallOnClickStartBtnEvent();
-        Debug.Log("OnClickStartBtn");
+    }
+
+    public void OnClickToggleSoundBtn()
+    {
+        UIEventManager.CallOnClickToggleSoundBtnEvent();
     }
 
     public void OnClickExitBtn()

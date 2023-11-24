@@ -16,3 +16,10 @@ MonoBehaviour:
   EnemySpeedScale: 1.2
   AdditionalDamage: 0
   SpawnDelay: 1.8
+  enemySpawnProbabilities:
+  - enemyType: 0
+    probability: 70
+  - enemyType: 1
+    probability: 30
+  - enemyType: 2
+    probability: 70

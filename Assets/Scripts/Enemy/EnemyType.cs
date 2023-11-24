@@ -1,6 +1,7 @@
 ﻿public enum EnemyType
 {
     Base,
-    Tank
+    Tank,
+    ZigZag,
 
 }

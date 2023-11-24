@@ -17,7 +17,6 @@ public class LoadingScreen : MonoBehaviour
         StartCoroutine(DoFadeIn());
     }
 
-
     private IEnumerator DoFadeIn()
     {
         while (LoadingScreenCanvasGroup.alpha > 0)

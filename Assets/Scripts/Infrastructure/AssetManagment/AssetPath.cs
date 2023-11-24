@@ -5,6 +5,7 @@ public static class AssetPath
 {
     public const string PlayerPath = "Player/player";
     public const string HudPath = "Hud/hud";
+    public const string DamageBorderPath = "Hud/damageBorder";
     public static string MenuPath = "UI/menu";
     public static string PauseMenuPath = "UI/PauseMenu";
     public const string CellPath = "Grid/cell";
@@ -17,6 +18,7 @@ public static class AssetPath
     private static Dictionary<EnemyType, string> _enemyPathByType = new Dictionary<EnemyType, string>() {
         [EnemyType.Base] = "Enemies/baseEnemy",
         [EnemyType.Tank] = "Enemies/tankEnemy",
+        [EnemyType.ZigZag] = "Enemies/zigZagEnemy",
     };
 
     private static Dictionary<ProjectileType, string> _projectilePathByType = new Dictionary<ProjectileType, string>()

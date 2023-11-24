@@ -63,7 +63,6 @@ public class LoadLevelState : IParameterizedState<string>
         
         CreateHud();
 
-
         //GameObject pauseMenu = 
         //_uiFactory.CreatePauseMenu();
         //pauseMenu.SetActive(false);
@@ -97,11 +96,6 @@ public class LoadLevelState : IParameterizedState<string>
     {
         _audioService.Construct(_levelStaticData.LevelMusic);
     }
-
-/*    private void AddCurrentLevelStaticDataToGame()
-    {
-        Game.CurrentLevelStaticData = _levelStaticData;
-    }*/
 
     private void CreateHud()
     {

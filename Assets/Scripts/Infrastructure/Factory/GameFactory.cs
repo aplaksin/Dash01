@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -19,7 +20,7 @@ public class GameFactory : IGameFactory
     private Dictionary<Vector2, Vector3> _cellPositionByCoords;
     private Dictionary<Vector2, GameObject> _blocksByCoords;
     private Dictionary<Vector2,Vector3> _blocksCoords;
-    private IAudioService _audioService;
+    //private IAudioService _audioService;
     public GameFactory(IAssetProvider assetProvider, IStaticDataService staticDataService, IPoolingService poolingService, IInputService inputInputService)
     {
         _assetProvider = assetProvider;
@@ -32,7 +33,7 @@ public class GameFactory : IGameFactory
 
     public void Construct(Vector3 scaleVector)
     {
-        _audioService = AllServices.Container.Single<IAudioService>();
+        //_audioService = AllServices.Container.Single<IAudioService>();
         _cellPositionByCoords = new Dictionary<Vector2, Vector3>();
         _blocksByCoords = new Dictionary<Vector2, GameObject>();
         _blocksCoords = new Dictionary<Vector2, Vector3>();
@@ -57,6 +58,8 @@ public class GameFactory : IGameFactory
         enemy.InitProperties(stage);
         enemy.transform.localScale = _scaleVector;
         enemy.transform.position = new Vector3(_cellPositionByCoords[new Vector2(spawnPoint.x, 0)].x, spawnPoint.y, 0);
+
+        SelectBehaviourByType(enemyType, enemy);
 
         return enemy;
     }
@@ -92,13 +95,36 @@ public class GameFactory : IGameFactory
     {
         return _assetProvider.Instantiate(AssetPath.HudPath);
     } 
+
+    public GameObject CreateDamageBorder()
+    {
+        return _assetProvider.Instantiate(AssetPath.DamageBorderPath);
+    }
+
     public GameObject CreatePauseMenu()
     {
         return _assetProvider.Instantiate(AssetPath.PauseMenuPath);
     }
 
 
-
+    private void SelectBehaviourByType(EnemyType enemyType, Enemy enemy)
+    {
+        switch (enemyType)
+        {
+            case EnemyType.ZigZag:
+                //TODO fix
+                List<Vector3> list = _cellPositionByCoords.Values.ToList();
+                enemy.EnemyBeheviour = new ZigzagEnemyBehaviour(enemy.transform, list[0], list[list.Count - 1], enemy._moveSpeed);
+                break;
+            case EnemyType.Base:
+            case EnemyType.Tank:
+                enemy.EnemyBeheviour = new MoveDownBeheviour(enemy.transform, enemy.MoveSpeed);
+                break;
+            default:
+                enemy.EnemyBeheviour = new MoveDownBeheviour(enemy.transform, enemy.MoveSpeed);
+                break;
+        }
+    }
     private void AddScaleVector(Vector3 scaleVector)
     {
         if(scaleVector != Vector3.zero)

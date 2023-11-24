@@ -33,11 +33,19 @@ public class MainMenuState : IParameterizedState<string>
     private void SubscribeOnMenuEvents()
     {
         UIEventManager.OnClickStartBtn += EnterLoadLavel;
+        UIEventManager.OnClickToggleSoundBtn += ToggleSound;
     }
 
     private void UnsubscribeOnMenuEvents()
     {
         UIEventManager.OnClickStartBtn -= EnterLoadLavel;
+        UIEventManager.OnClickToggleSoundBtn -= ToggleSound;
+    }
+
+    private void ToggleSound()
+    {
+        _audioService.MuteMusic();
+        _audioService.MuteSFX();
     }
 
     private void EnterLoadLavel()

@@ -1,10 +1,19 @@
+using System.Collections;
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
     public EnemyType _type;
-    private float _moveSpeed;
+
+    [SerializeField]
+    private ParticleSystem _particleDamage;
+
+    [SerializeField]
+    private ParticleSystem _particleDeath;
+
+    public float _moveSpeed;
     private int _damage;
     private int _hp;
     private float _currentHp;
@@ -12,10 +21,13 @@ public class Enemy : MonoBehaviour
 
     private Vector3 direction = Vector3.down;
     private IPoolingService _poolService;
-    private const float  MIN_Y_POSITION = -1f;
+    private const float  MIN_Y_POSITION = -0.5f;
     private EnemyStaticData _enemyStaticData;
     private IAudioService _audioService;
     public EnemyType Type { get { return _type; } }
+    public float MoveSpeed { get { return _moveSpeed; } }
+    public IEnemyBeheviour EnemyBeheviour;
+
 
     public void Construct(EnemyStaticData enemyStaticData, IPoolingService poolingService, IAudioService audioService)
     {
@@ -52,51 +64,62 @@ public class Enemy : MonoBehaviour
             _poolService.ReturnEnemy(this);
             EventManager.CallOnDamageEvent(_damage);
         }
-        var step = _moveSpeed * Time.deltaTime; // calculate distance to move
-        transform.position = Vector3.MoveTowards(transform.position, transform.position+direction, step);
+
+        if (EnemyBeheviour == null)
+        {
+            Move();
+        }
+        else
+        {
+            EnemyBeheviour.GoExecute(Time.deltaTime);
+        }
+
+        //Move();
+
     }
 
-    /*    private void OnEnable()
-        {
-            EventManager.OnEnemyDeath += EnmemyDeath;
-        }  
-        private void OnDisable()
-        {
-            EventManager.OnEnemyDeath -= EnmemyDeath;
-        }*/
-
-
+    private void Move()
+    {
+        var step = _moveSpeed * Time.deltaTime;
+        transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, step);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Projectile projectile = collision.GetComponent<Projectile>();
         if (projectile != null)
         {
-            TakeDmage(projectile.Damage);
+            StartCoroutine(TakeDmage(projectile.Damage));
+            //TakeDmage(projectile.Damage);
             projectile.OnDamageEnemy();
             
         }
     }
 
-/*    private void EnmemyDeath()
-    {
-
-    }*/
-
-    private void TakeDmage(float damage)
+    private IEnumerator TakeDmage(float damage)
     {
         _currentHp -= damage;
-        if(_currentHp<=0)
+
+        if (_currentHp<=0)
         {
+            
+            _particleDeath.Play();
+            yield return new WaitForSeconds(_particleDeath.main.duration);
+            
             _currentHp=_hp;
-            UnsubscribeOnEvents();
+            //UnsubscribeOnEvents();
             InitBaseParams();
+
+            
+            
             _poolService.ReturnEnemy(this);
             EventManager.CallOnEnemyDeathEvent(_score);
             _audioService.PlaySFX(_enemyStaticData.DeathClip);
         }
         else
         {
+            _particleDamage.Play();
+            yield return new WaitForSeconds(_particleDamage.main.duration);
             _audioService.PlaySFX(_enemyStaticData.TakeDamageClip);
         }
     }
@@ -107,7 +130,7 @@ public class Enemy : MonoBehaviour
         _damage += stage.AdditionalDamage;
     }
 
-    private void SubscribeOnEvents()
+/*    private void SubscribeOnEvents()
     {
         EventManager.OnChangeGameStage += ChangePropertiesByStage;
     }
@@ -115,6 +138,6 @@ public class Enemy : MonoBehaviour
     private void UnsubscribeOnEvents()
     {
         EventManager.OnChangeGameStage -= ChangePropertiesByStage;
-    }
+    }*/
 
 }

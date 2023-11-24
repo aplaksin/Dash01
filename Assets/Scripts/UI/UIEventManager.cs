@@ -8,6 +8,7 @@ public static class UIEventManager
     public static event Action OnClickRestartBtn;
     public static event Action OnClickExitBtn;
     public static event Action OnClickPauseBtn;
+    public static event Action OnClickToggleSoundBtn;
 
     public static void CallOnClickStartBtnEvent()
     {
@@ -29,6 +30,10 @@ public static class UIEventManager
     public static void CallOnClickPauseBtnEvent()
     {
         OnClickPauseBtn?.Invoke();
+    }
+    public static void CallOnClickToggleSoundBtnEvent()
+    {
+        OnClickToggleSoundBtn?.Invoke();
     }
 
 }
