@@ -1,16 +1,21 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class BootstrapState : IState
 {
-    private const string MAIN_MENU_SCENE_NAME = "MainMenu";
     private readonly GameStateMachine _gameStateMachine;
+    private readonly SceneLoader _sceneLoader;
+    //private const string INITIAL_SCENE_NAME = "Initial";
+    
+    private const string MAIN_MENU_SCENE_NAME = "MainMenu";
     private readonly AllServices _services;
     private AudioSource _musicSource;
     private AudioSource _fxSource;
 
-    public BootstrapState(GameStateMachine gameStateMashine, AllServices services, AudioSource musicSource, AudioSource fxSource)
+    public BootstrapState(GameStateMachine gameStateMashine, SceneLoader sceneLoader, AllServices services, AudioSource musicSource, AudioSource fxSource)
     {
         _gameStateMachine = gameStateMashine;
+        //_sceneLoader = sceneLoader;
         _services = services;
         _musicSource = musicSource;
         _fxSource = fxSource;
@@ -20,6 +25,8 @@ public class BootstrapState : IState
 
     public void Enter()
     {
+
+        //_sceneLoader.LoadScene(INITIAL_SCENE_NAME, EnterMainMenuScene);
         EnterMainMenuScene();
     }
 
@@ -35,6 +42,7 @@ public class BootstrapState : IState
 
 
         _services.RegisterSingle<IInputService>(Inputservice());
+        //_services.RegisterSingle<IPersistentProgressService>(new PersistentProgressService());
 
         _services.RegisterSingle<IAssetProvider>(new AssetProvider());
         
@@ -44,8 +52,12 @@ public class BootstrapState : IState
         _services.RegisterSingle<IWindowService>(new WindowService(_services.Single<IUIFactory>(), _gameStateMachine, _services.Single<IAudioService>()));
         
         _services.RegisterSingle<IPoolingService>(new PoolingService(_services.Single<IAssetProvider>(), _services.Single<IStaticDataService>(), _services.Single<IAudioService>()));
-        _services.RegisterSingle<IGameFactory>(new GameFactory(_services.Single<IAssetProvider>(), _services.Single<IPoolingService>(), _services.Single<IInputService>()));
+        _services.RegisterSingle<IGameFactory>(new GameFactory(_services.Single<IAssetProvider>(), _services.Single<IStaticDataService>(), _services.Single<IPoolingService>(), _services.Single<IInputService>()));
+        
+        
+        //_services.RegisterSingle<ISaveLoadService>(new SaveLoadService(_services.Single<IPersistentProgressService>(), _services.Single<IGameFactory>()));
 
+        
     }
 
     private void RegisterStaticDataService()
@@ -60,6 +72,10 @@ public class BootstrapState : IState
         _gameStateMachine.Enter<MainMenuState, string>(MAIN_MENU_SCENE_NAME);
     }
 
+    /*    private void EnterLoadLavel()
+        {
+            _gameStateMashine.Enter<LoadLevelState, string>(LEVEL_SCENE_NAME);
+        }*/
     private IInputService Inputservice()
     {
         if (Application.isEditor || SystemInfo.deviceType == DeviceType.Desktop)

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7378350648437754048}
   - component: {fileID: 3473019753411724524}
   - component: {fileID: 2292092402278363684}
+  - component: {fileID: 3214359792306405649}
   m_Layer: 5
   m_Name: StartBtn
   m_TagString: Untagged
@@ -37,7 +38,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 160}
+  m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7378350648437754048
 CanvasRenderer:
@@ -67,7 +68,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 27c0089d6612f6649a8a123544e2fc66, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e01fd6cacf4c7e64bb7dd2556b135edc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -133,6 +134,35 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3214359792306405649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573258646454675153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8effefb6054bcae49956d04dd5094e4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bg: {fileID: 3473019753411724524}
+  bgList:
+  - {fileID: 21300000, guid: 53d1d5fe0f566da46b4f55c00e729a91, type: 3}
+  - {fileID: 21300000, guid: 67b9d2fc3eff14a418fb3a78aeefc50e, type: 3}
+  - {fileID: 21300000, guid: f307087634f46a747843c25bf7a1096b, type: 3}
+  - {fileID: 21300000, guid: ddcfca3e45f6b2943b643a3efe540d13, type: 3}
+  - {fileID: 21300000, guid: c60d6823fc23ee445956c949faff8f0a, type: 3}
+  - {fileID: 21300000, guid: 1f518151606dabe4183c60ee28b193bb, type: 3}
+  - {fileID: 21300000, guid: eb3681c7bcd985449b97de400381f8cb, type: 3}
+  - {fileID: 21300000, guid: af81bbd370298b44aa0a38b1cd89d395, type: 3}
+  - {fileID: 21300000, guid: ce9a911d33065ff4ebee21656d9c70da, type: 3}
+  - {fileID: 21300000, guid: c2fa482b1b40adc4f85f85da4966d926, type: 3}
+  - {fileID: 21300000, guid: 40645ad81557c8d4eaa281656a0efa19, type: 3}
+  - {fileID: 21300000, guid: fa16e4a54bb91304b8e4d1d63a4aadc8, type: 3}
+  - {fileID: 21300000, guid: de4aa99d516563f4bb975a145f6a6295, type: 3}
+  - {fileID: 21300000, guid: 34039595e40cbc344a22da3a6c843a61, type: 3}
+  _animationDelay: 0.05
 --- !u!1 &1375280840579230421
 GameObject:
   m_ObjectHideFlags: 0

@@ -75,7 +75,6 @@ public class PoolingService : IPoolingService
 
     public void ReturnEnemy(Enemy enemy)
     {
-        Game.GameContext.RemoveActiveEnemy(enemy);
         enemy.gameObject.transform.position = Vector3.zero;
         enemy.gameObject.SetActive(false);
         _enemiesByType[enemy.Type].Enqueue(enemy);

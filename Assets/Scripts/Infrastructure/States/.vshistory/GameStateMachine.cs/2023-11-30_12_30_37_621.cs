@@ -6,6 +6,7 @@ public class GameStateMachine
 {
     private readonly Dictionary<Type, IExitableState> _states;
     private IExitableState _activeState;
+    private SceneLoader _sceneLoader;
 
     public GameStateMachine(SceneLoader sceneLoader, LoadingScreen loadingCurtain, AllServices services, ICoroutineRunner coroutineRunner, AudioSource musicSource, AudioSource fxSource)
     {
@@ -19,6 +20,7 @@ public class GameStateMachine
 
         };
 
+        _sceneLoader = sceneLoader;
     }
 
     public void Enter<TState>() where TState : class, IState

@@ -6,22 +6,25 @@ using UnityEngine;
 public class GameFactory : IGameFactory
 {
 
+
     public Dictionary<Vector2, Vector3> BlocksCoords { get { return _blocksCoords; } }
 
+    //private List<Vector2> _blocks = new List<Vector2>();
     private readonly IAssetProvider _assetProvider;
     private readonly IPoolingService _poolingService;
-
+    //private readonly IStaticDataService _staticDataService;
     private readonly IInputService _inputService;
-
+    //private LevelStaticData levelStaticData;
 
     private Vector3 _scaleVector;
     private Dictionary<Vector2, Vector3> _cellPositionByCoords;
     private Dictionary<Vector2, GameObject> _blocksByCoords;
     private Dictionary<Vector2,Vector3> _blocksCoords;
-
-    public GameFactory(IAssetProvider assetProvider, IPoolingService poolingService, IInputService inputInputService)
+    //private IAudioService _audioService;
+    public GameFactory(IAssetProvider assetProvider, IStaticDataService staticDataService, IPoolingService poolingService, IInputService inputInputService)
     {
         _assetProvider = assetProvider;
+        //_staticDataService = staticDataService;
         _poolingService = poolingService;
         _inputService = inputInputService;
     }
@@ -30,6 +33,7 @@ public class GameFactory : IGameFactory
 
     public void Construct(Vector3 scaleVector)
     {
+        //_audioService = AllServices.Container.Single<IAudioService>();
         _cellPositionByCoords = new Dictionary<Vector2, Vector3>();
         _blocksByCoords = new Dictionary<Vector2, GameObject>();
         _blocksCoords = new Dictionary<Vector2, Vector3>();
@@ -56,7 +60,7 @@ public class GameFactory : IGameFactory
         enemy.transform.position = new Vector3(_cellPositionByCoords[new Vector2(spawnPoint.x, 0)].x, spawnPoint.y, 0);
 
         SelectBehaviourByType(enemyType, enemy);
-        
+
         return enemy;
     }
     

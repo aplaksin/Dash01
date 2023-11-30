@@ -14,8 +14,6 @@ public class Enemy : MonoBehaviour
     private ParticleSystem _particleDeath;
     public EnemyType Type { get { return _type; } }
     public float MoveSpeed { get { return _moveSpeed; } }
-    public int Id { get { return _id; } }
-
     public IEnemyBeheviour EnemyBeheviour;
 
     public float _moveSpeed;
@@ -29,21 +27,21 @@ public class Enemy : MonoBehaviour
     private EnemyStaticData _enemyStaticData;
     private IAudioService _audioService;
     private bool _isDead = false;
-    private int _id;
+
 
     public void Construct(EnemyStaticData enemyStaticData, IPoolingService poolingService, IAudioService audioService)
     {
         _poolService = poolingService;
         _enemyStaticData = enemyStaticData;
         _audioService = audioService;
-        _id = gameObject.GetInstanceID();
+        
         if (_type != enemyStaticData.Type)
         {
             Debug.Log($"========== Wrong EnemyStaticData for this {_type} - {enemyStaticData.Type}");
         }
 
         InitBaseParams();
-        
+
     }
 
     public void InitProperties(GameStageStaticData stage)
@@ -98,7 +96,7 @@ public class Enemy : MonoBehaviour
             _currentHp =_hp;
             
             InitBaseParams();
-            
+
             _poolService.ReturnEnemy(this);
             EventManager.CallOnEnemyDeathEvent(_score);
             _audioService.PlaySFX(_enemyStaticData.DeathClip);

@@ -1,12 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 public class GameContext
-{ 
-    public int Score { get { return _score; } }
-    public float SpawnEnemyDelay { get { return _spawnEnemyDelay; } }
-    public GameStageStaticData CurrentStage { get { return _currentStage; } }
-
-
+{
     private int _playerHP;
     private int _score = 0;
     private float _spawnEnemyDelay = 2f;
@@ -14,7 +9,9 @@ public class GameContext
     private Dictionary<int, GameStageStaticData> _gameStageByScore = new Dictionary<int, GameStageStaticData>();
     private IAudioService _audioService;
     private IAssetProvider _assetProvider;
-    private Dictionary<int, Enemy> _activeEnemyes = new Dictionary<int, Enemy>();
+    public int Score { get { return _score; } }
+    public float SpawnEnemyDelay { get { return _spawnEnemyDelay; } }
+    public GameStageStaticData CurrentStage { get { return _currentStage; } }
 
     public GameContext(LevelStaticData levelStaticData, IAudioService audioService, IAssetProvider assetProvider)
     {
@@ -27,26 +24,6 @@ public class GameContext
         _audioService = audioService;
         SubscribeOnEvents();
         _assetProvider = assetProvider;
-    }
-
-    public void AddActiveEnemy(Enemy enemy)
-    {
-        _activeEnemyes.Add(enemy.Id, enemy);
-    }
-
-    public void RemoveActiveEnemy(Enemy enemy)
-    {
-        _activeEnemyes.Remove(enemy.Id);
-    }
-
-    public int GetEnemyesCount()
-    {
-        return _activeEnemyes.Count;
-    }
-
-    public void Clear()
-    {
-        UnsubscribeOnEvents();
     }
 
     private void ConstructGameProgressionStages(GameStageStaticData[] gameStagesArr )
@@ -112,7 +89,10 @@ public class GameContext
         
     }
 
-
+    public void Clear()
+    {
+        UnsubscribeOnEvents();
+    }
 
 
 

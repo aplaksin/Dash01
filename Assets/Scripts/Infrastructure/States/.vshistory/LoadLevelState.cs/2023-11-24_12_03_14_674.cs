@@ -27,7 +27,9 @@ public class LoadLevelState : IParameterizedState<string>
         _loadingCurtain = loadingCurtain;
         _gameFactory = gameFactory;
         _staticDataService = staticDataService;
+        //_levelStaticData = _staticDataService.GetLevelStaticDataByKey(LevelDataName);
         _poolingService = poolingService;
+        //_uiFactory = uIFactory;
         _windowService = windowService;
         _audioService = audioService;
         _assetProvider = assetProvider;
@@ -37,6 +39,7 @@ public class LoadLevelState : IParameterizedState<string>
     {
         _levelDataName = sceneName;
         _levelStaticData = _staticDataService.GetLevelStaticDataByKey(_levelDataName);
+        _loadingCurtain.Show();
         _sceneLoader.LoadScene(sceneName, OnLoaded);
     }
     public void Exit()
@@ -54,11 +57,15 @@ public class LoadLevelState : IParameterizedState<string>
         Vector3 scaleVector = CalcScaleVector();
         PrepareGameFactory(scaleVector);
 
+        //AddCurrentLevelStaticDataToGame();
         Dictionary<Vector2, Vector3>  cellpositionsByCoords = CreateGameGrid(scaleVector);
         CreatePlayer(scaleVector, cellpositionsByCoords);
         
         CreateHud();
 
+        //GameObject pauseMenu = 
+        //_uiFactory.CreatePauseMenu();
+        //pauseMenu.SetActive(false);
 
         _gameStateMachine.Enter<GameLoopState, LevelStaticData>(_levelStaticData);
     }
@@ -100,7 +107,8 @@ public class LoadLevelState : IParameterizedState<string>
 
     private Vector3 CalcScaleVector()
     {
-
+        //int resolutionHorizontal = (int) UnityEditor.Handles.GetMainGameViewSize().x;
+        //int resolutionVertical = (int) UnityEditor.Handles.GetMainGameViewSize().y;
         int resolutionHorizontal = Screen.width;
         int resolutionVertical = Screen.height;
 
@@ -118,6 +126,10 @@ public class LoadLevelState : IParameterizedState<string>
         return resolutionVertical / cameraSize;
     }
 
+/*    private float CalcScaleCoefficient(int resolutionHorisontal, int gridWidth, float pixelsPerUnit)
+    {
+        return (resolutionHorisontal / gridWidth) / pixelsPerUnit;
+    }*/
     private float CalcScaleCoefficient(int resolutionHorisontal, int gridWidth, float pixelsPerUnit, float cellSpace, Vector2 padding)
     {
         return ((resolutionHorisontal - (2 * padding.x * pixelsPerUnit + (gridWidth - 1) * cellSpace * pixelsPerUnit)) / gridWidth) / pixelsPerUnit;
@@ -130,5 +142,12 @@ public class LoadLevelState : IParameterizedState<string>
         float correctPositionX = aspectRatio * camSize;
         Camera.main.transform.position = new Vector3(correctPositionX, camSize, -10);
     }
+
+/*    private void InformProgressReaders()
+    {
+        foreach (ISavedProgressReader progressReader in _gameFactory.ProgressReaders)
+            progressReader.LoadProgress(_progressService.PlayerProgress);
+    }*/
+
 
 }

@@ -98,7 +98,7 @@ public class Enemy : MonoBehaviour
             _currentHp =_hp;
             
             InitBaseParams();
-            
+
             _poolService.ReturnEnemy(this);
             EventManager.CallOnEnemyDeathEvent(_score);
             _audioService.PlaySFX(_enemyStaticData.DeathClip);

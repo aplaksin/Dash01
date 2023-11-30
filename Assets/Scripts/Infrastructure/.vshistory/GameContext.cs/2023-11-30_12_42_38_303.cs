@@ -34,16 +34,6 @@ public class GameContext
         _activeEnemyes.Add(enemy.Id, enemy);
     }
 
-    public void RemoveActiveEnemy(Enemy enemy)
-    {
-        _activeEnemyes.Remove(enemy.Id);
-    }
-
-    public int GetEnemyesCount()
-    {
-        return _activeEnemyes.Count;
-    }
-
     public void Clear()
     {
         UnsubscribeOnEvents();

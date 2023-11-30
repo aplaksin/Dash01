@@ -12,11 +12,6 @@ public class Enemy : MonoBehaviour
 
     [SerializeField]
     private ParticleSystem _particleDeath;
-    public EnemyType Type { get { return _type; } }
-    public float MoveSpeed { get { return _moveSpeed; } }
-    public int Id { get { return _id; } }
-
-    public IEnemyBeheviour EnemyBeheviour;
 
     public float _moveSpeed;
     private int _damage;
@@ -24,26 +19,30 @@ public class Enemy : MonoBehaviour
     private float _currentHp;
     private int _score;
 
+    private Vector3 direction = Vector3.down;
     private IPoolingService _poolService;
     private const float  MIN_Y_POSITION = -0.5f;
     private EnemyStaticData _enemyStaticData;
     private IAudioService _audioService;
-    private bool _isDead = false;
-    private int _id;
+    public EnemyType Type { get { return _type; } }
+    public float MoveSpeed { get { return _moveSpeed; } }
+    public IEnemyBeheviour EnemyBeheviour;
+
 
     public void Construct(EnemyStaticData enemyStaticData, IPoolingService poolingService, IAudioService audioService)
     {
         _poolService = poolingService;
         _enemyStaticData = enemyStaticData;
         _audioService = audioService;
-        _id = gameObject.GetInstanceID();
+        
         if (_type != enemyStaticData.Type)
         {
             Debug.Log($"========== Wrong EnemyStaticData for this {_type} - {enemyStaticData.Type}");
         }
 
         InitBaseParams();
-        
+
+        //SubscribeOnEvents();
     }
 
     public void InitProperties(GameStageStaticData stage)
@@ -57,7 +56,6 @@ public class Enemy : MonoBehaviour
         _hp = _enemyStaticData.Hp;
         _currentHp = _hp;
         _score =_enemyStaticData.Score;
-        _isDead = false;
     }
 
     private void Update()
@@ -67,11 +65,21 @@ public class Enemy : MonoBehaviour
             EventManager.CallOnDamageEvent(_damage);
         }
 
-        if (!_isDead)
+        if (EnemyBeheviour == null)
+        {
+            Move();
+        }
+        else
         {
             EnemyBeheviour.GoExecute(Time.deltaTime);
         }
 
+    }
+
+    private void Move()
+    {
+        var step = _moveSpeed * Time.deltaTime;
+        transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, step);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -80,6 +88,7 @@ public class Enemy : MonoBehaviour
         if (projectile != null)
         {
             StartCoroutine(TakeDmage(projectile.Damage));
+            //TakeDmage(projectile.Damage);
             projectile.OnDamageEnemy();
             
         }
@@ -91,13 +100,15 @@ public class Enemy : MonoBehaviour
 
         if (_currentHp<=0)
         {
-            _isDead = true;
+            
             _particleDeath.Play();
             yield return new WaitForSeconds(_particleDeath.main.duration);
             
-            _currentHp =_hp;
-            
+            _currentHp=_hp;
+            //UnsubscribeOnEvents();
             InitBaseParams();
+
+            
             
             _poolService.ReturnEnemy(this);
             EventManager.CallOnEnemyDeathEvent(_score);
@@ -116,5 +127,15 @@ public class Enemy : MonoBehaviour
         _moveSpeed *= stage.EnemySpeedScale !=0 ? stage.EnemySpeedScale : 1;
         _damage += stage.AdditionalDamage;
     }
+
+/*    private void SubscribeOnEvents()
+    {
+        EventManager.OnChangeGameStage += ChangePropertiesByStage;
+    }
+
+    private void UnsubscribeOnEvents()
+    {
+        EventManager.OnChangeGameStage -= ChangePropertiesByStage;
+    }*/
 
 }

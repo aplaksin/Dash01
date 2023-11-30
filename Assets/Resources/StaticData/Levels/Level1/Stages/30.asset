@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c380c0b2ff66a1409a33ac8f0855ad3, type: 3}
   m_Name: 30
   m_EditorClassIdentifier: 
-  ScoreStage: 30
-  EnemySpeedScale: 1.5
+  ScoreStage: 20
+  EnemySpeedScale: 1.7
   AdditionalDamage: 1
-  SpawnDelay: 1.5
+  SpawnDelay: 0.74
   enemySpawnProbabilities:
   - enemyType: 0
     probability: 50
