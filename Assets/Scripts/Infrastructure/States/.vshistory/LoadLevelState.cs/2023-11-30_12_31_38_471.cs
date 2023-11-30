@@ -36,13 +36,12 @@ public class LoadLevelState : IParameterizedState<string>
     public void Enter(string sceneName)
     {
         _levelDataName = sceneName;
-        //_loadingCurtain.Show();
         _levelStaticData = _staticDataService.GetLevelStaticDataByKey(_levelDataName);
         _sceneLoader.LoadScene(sceneName, OnLoaded);
     }
     public void Exit()
     {
-        //_loadingCurtain.Hide();
+        _loadingCurtain.Hide();
     }
     private void OnLoaded()
     {
