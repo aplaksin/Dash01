@@ -14,7 +14,8 @@ public class GameContext
     private Dictionary<int, GameStageStaticData> _gameStageByScore = new Dictionary<int, GameStageStaticData>();
     private IAudioService _audioService;
     private IAssetProvider _assetProvider;
-    private Dictionary<int, Enemy> _activeEnemyes = new Dictionary<int, Enemy>();
+    private Dictionary<int, Enemy> _activeEnemies = new Dictionary<int, Enemy>();
+    private List<IEnemyBuff> _enemyBuffs =  new List<IEnemyBuff>();
 
     public GameContext(LevelStaticData levelStaticData, IAudioService audioService, IAssetProvider assetProvider)
     {
@@ -29,19 +30,52 @@ public class GameContext
         _assetProvider = assetProvider;
     }
 
+    public void AddEnemyBuff(List<IEnemyBuff> buffList)
+    {
+        foreach(IEnemyBuff enemyBuff in buffList)
+        {
+            _enemyBuffs.Add(enemyBuff);
+        }
+        
+    }
+
+    public void RemoveEnemyBuff(List<IEnemyBuff> buffList)
+    {
+        foreach (IEnemyBuff enemyBuff in buffList)
+        {
+            foreach(Enemy enemy in _activeEnemies.Values)
+            {
+                enemyBuff.RemoveBuff(enemy);
+            }
+            
+            _enemyBuffs.Remove(enemyBuff);
+        }
+    }
+
+    public void ApplyEnemyBuffs()
+    {
+        foreach(Enemy enemy in _activeEnemies.Values)
+        {
+            foreach(IEnemyBuff buff in _enemyBuffs)
+            {
+                buff.ApplyBuff(enemy);
+            }
+        }
+    }
+
     public void AddActiveEnemy(Enemy enemy)
     {
-        _activeEnemyes.Add(enemy.Id, enemy);
+        _activeEnemies.Add(enemy.Id, enemy);
     }
 
     public void RemoveActiveEnemy(Enemy enemy)
     {
-        _activeEnemyes.Remove(enemy.Id);
+        _activeEnemies.Remove(enemy.Id);
     }
 
     public int GetEnemyesCount()
     {
-        return _activeEnemyes.Count;
+        return _activeEnemies.Count;
     }
 
     public void Clear()

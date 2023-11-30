@@ -1,20 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyMoveDown : IEnemyAction
 {
     private Transform _transform;
     private float _moveSpeed;
-    public EnemyMoveDown(Transform transform, float moveSpeed)
+    private Enemy _enemy;
+    public EnemyMoveDown(Transform transform, float moveSpeed, Enemy enemy)
     {
         _transform = transform;
         _moveSpeed = moveSpeed;
+        _enemy = enemy;
     }
 
     public void Act(float deltaTime)
     {
-        var step = _moveSpeed * Time.deltaTime;
+        var step = _enemy.MoveSpeed * Time.deltaTime;
         _transform.position = Vector3.MoveTowards(_transform.position, _transform.position + Vector3.down, step);
     }
 }

@@ -5,9 +5,9 @@ public class MoveDownBeheviour : IEnemyBeheviour
 {
     private EnemyMoveDown _moveDown;
 
-    public MoveDownBeheviour(Transform transform, float moveSpeed)
+    public MoveDownBeheviour(Transform transform, float moveSpeed, Enemy enemy)
     {
-        _moveDown = new EnemyMoveDown(transform, moveSpeed);
+        _moveDown = new EnemyMoveDown(transform, moveSpeed, enemy);
     }
 
     

@@ -105,19 +105,27 @@ public class GameFactory : IGameFactory
 
     private void SelectBehaviourByType(EnemyType enemyType, Enemy enemy)
     {
+        List<Vector3> list = _cellPositionByCoords.Values.ToList();
         switch (enemyType)
         {
             case EnemyType.ZigZag:
-                //TODO fix
-                List<Vector3> list = _cellPositionByCoords.Values.ToList();
-                enemy.EnemyBeheviour = new ZigzagEnemyBehaviour(enemy.transform, list[0], list[list.Count - 1], enemy._moveSpeed);
+                //TODO fix List<Vector3> list = _cellPositionByCoords.Values.ToList();
+
+                enemy.EnemyBeheviour = new ZigzagEnemyBehaviour(enemy.transform, list[0], list[list.Count - 1], enemy._moveSpeed, enemy);
+                break;
+            case EnemyType.SpeedBufferHorizontal:
+
+                //enemy.BuffsList.Add(new EnemySpeedBuff(3f));
+                enemy.EnemyBeheviour = new BufferSpeedHorizontal(enemy.transform, list[0], list[list.Count - 1], enemy._moveSpeed, 9, enemy);
+                Game.GameContext.AddEnemyBuff(enemy.BuffsList);
+                //Game.GameContext.ApplyEnemyBuffs();
                 break;
             case EnemyType.Base:
             case EnemyType.Tank:
-                enemy.EnemyBeheviour = new MoveDownBeheviour(enemy.transform, enemy.MoveSpeed);
+                enemy.EnemyBeheviour = new MoveDownBeheviour(enemy.transform, enemy.MoveSpeed, enemy);
                 break;
             default:
-                enemy.EnemyBeheviour = new MoveDownBeheviour(enemy.transform, enemy.MoveSpeed);
+                enemy.EnemyBeheviour = new MoveDownBeheviour(enemy.transform, enemy.MoveSpeed, enemy);
                 break;
         }
     }

@@ -23,3 +23,5 @@ MonoBehaviour:
     probability: 20
   - enemyType: 2
     probability: 30
+  - enemyType: 3
+    probability: 20

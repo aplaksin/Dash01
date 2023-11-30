@@ -3,5 +3,6 @@
     Base,
     Tank,
     ZigZag,
+    SpeedBufferHorizontal,
 
 }

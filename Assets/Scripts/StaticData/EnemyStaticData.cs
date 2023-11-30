@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "EnemyStaticData", menuName = "StaticData/Enemy")]
@@ -18,5 +19,7 @@ public class EnemyStaticData : ScriptableObject
 
     public AudioClip DeathClip;
     public AudioClip TakeDamageClip;
+
+    public List<EnemyBuffSettings> EnemyBuffSettings;
 
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 15
   m_EditorClassIdentifier: 
   ScoreStage: 15
-  EnemySpeedScale: 1.2
+  EnemySpeedScale: 0
   AdditionalDamage: 0
   SpawnDelay: 1.8
   enemySpawnProbabilities:
@@ -23,3 +23,5 @@ MonoBehaviour:
     probability: 30
   - enemyType: 2
     probability: 70
+  - enemyType: 3
+    probability: 30

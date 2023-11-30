@@ -19,6 +19,7 @@ public static class AssetPath
         [EnemyType.Base] = "Enemies/baseEnemy",
         [EnemyType.Tank] = "Enemies/tankEnemy",
         [EnemyType.ZigZag] = "Enemies/zigZagEnemy",
+        [EnemyType.SpeedBufferHorizontal] = "Enemies/bufferSpeedHorizontal",
     };
 
     private static Dictionary<ProjectileType, string> _projectilePathByType = new Dictionary<ProjectileType, string>()
