@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class ImageAnimator : MonoBehaviour
 {
+    [SerializeField]
+    private AnimationType _animationType;
 
     [SerializeField]
     private Image _bgFirst;

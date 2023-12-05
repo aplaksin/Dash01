@@ -209,6 +209,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1185462204877849766, guid: 846e150c797cb244688e4c3dde777917, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 553046537fdefbb479a72681db7e4167, type: 3}
     - target: {fileID: 2180767802088075752, guid: 846e150c797cb244688e4c3dde777917, type: 3}
       propertyPath: m_Name
       value: menu
@@ -300,8 +304,47 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2180767802088075752, guid: 846e150c797cb244688e4c3dde777917, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 475211839}
   m_SourcePrefab: {fileID: 100100000, guid: 846e150c797cb244688e4c3dde777917, type: 3}
+--- !u!1 &475211836 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2180767802088075752, guid: 846e150c797cb244688e4c3dde777917, type: 3}
+  m_PrefabInstance: {fileID: 475211835}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &475211837 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1185462204877849766, guid: 846e150c797cb244688e4c3dde777917, type: 3}
+  m_PrefabInstance: {fileID: 475211835}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &475211839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475211836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fde2d6fcae42ec744ab51f139eaec4ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bgFirst: {fileID: 475211837}
+  _bgSecond: {fileID: 0}
+  _bgList:
+  - {fileID: 21300000, guid: 553046537fdefbb479a72681db7e4167, type: 3}
+  - {fileID: 21300000, guid: cc759fde108d02f4f9c4f5ada17bf674, type: 3}
+  - {fileID: 21300000, guid: e9bbbc395dc8bd84b8cd21657f6d8c3c, type: 3}
+  fadeTime: 1
+  fadeTimeDelta: 0.1
 --- !u!1 &1062210550
 GameObject:
   m_ObjectHideFlags: 0

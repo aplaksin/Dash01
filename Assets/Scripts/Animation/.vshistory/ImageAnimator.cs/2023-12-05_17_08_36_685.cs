@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class ImageAnimator : MonoBehaviour
 {
+    [SerializeField]
+    private AnimationType _animationType;
 
     [SerializeField]
     private Image _bgFirst;
@@ -88,11 +90,11 @@ public class ImageAnimator : MonoBehaviour
                 _currentBgIndex = 0;
             }
 
-            _bgFirst.sprite = _bgSecond.sprite;
+            _bg1.sprite = _bg2.sprite;
 
-            _bgSecond.CrossFadeAlpha(0, 0.001f, false);
-            _bgSecond.sprite = _bgList[_currentBgIndex];
-            _bgSecond.CrossFadeAlpha(1, fadeTime, false);
+            _bg2.CrossFadeAlpha(0, 0.001f, false);
+            _bg2.sprite = _bgList[currentBgIndex];
+            _bg2.CrossFadeAlpha(1, fadeTime, false);
 
             _currentBgIndex++;
         }

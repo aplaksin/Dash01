@@ -6,14 +6,11 @@ using UnityEngine.UI;
 
 public class ImageAnimator : MonoBehaviour
 {
+    [SerializeField]
+    private AnimationType _animationType;
 
     [SerializeField]
-    private Image _bgFirst;
-
-    [SerializeField]
-    private Image _bgSecond;
-
-
+    private Image _bg;
 
     [SerializeField]
     private List<Sprite> _bgList;
@@ -36,7 +33,7 @@ public class ImageAnimator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _bgFirst.sprite = _bgList[_currentBgIndex];
+        _bg.sprite = _bgList[_currentBgIndex];
         _currentBgIndex++;
     }
 
@@ -53,7 +50,7 @@ public class ImageAnimator : MonoBehaviour
         if(_currentTimer >= _animationDelay)
         {
             _currentBgIndex += _animationDirection;
-            _bgFirst.sprite = _bgList[_currentBgIndex];
+            _bg.sprite = _bgList[_currentBgIndex];
             _currentTimer = 0;
         }
 
@@ -83,18 +80,18 @@ public class ImageAnimator : MonoBehaviour
         {
             _currentFadeTimer = 0;
 
-            if (_currentBgIndex >= _bgList.Count)
+            if (currentBgIndex >= bgList.Count)
             {
-                _currentBgIndex = 0;
+                currentBgIndex = 0;
             }
 
-            _bgFirst.sprite = _bgSecond.sprite;
+            bg1.sprite = bg2.sprite;
 
-            _bgSecond.CrossFadeAlpha(0, 0.001f, false);
-            _bgSecond.sprite = _bgList[_currentBgIndex];
-            _bgSecond.CrossFadeAlpha(1, fadeTime, false);
+            bg2.CrossFadeAlpha(0, 0.001f, false);
+            bg2.sprite = bgList[currentBgIndex];
+            bg2.CrossFadeAlpha(1, fadeTime, false);
 
-            _currentBgIndex++;
+            currentBgIndex++;
         }
     }
 

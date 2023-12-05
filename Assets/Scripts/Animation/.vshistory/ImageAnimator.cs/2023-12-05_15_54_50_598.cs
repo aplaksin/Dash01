@@ -1,19 +1,13 @@
-using System.Collections;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ImageAnimator : MonoBehaviour
 {
-
     [SerializeField]
-    private Image _bgFirst;
-
+    private AnimationType _animationType;
     [SerializeField]
-    private Image _bgSecond;
-
-
+    private Image _bg;
 
     [SerializeField]
     private List<Sprite> _bgList;
@@ -22,13 +16,6 @@ public class ImageAnimator : MonoBehaviour
     private float _animationDelay = 0.05f;
 
 
-    [SerializeField]
-    private float fadeTime = 1f;
-
-    [SerializeField]
-    private float fadeTimeDelta = 0.1f;
-
-    private float _currentFadeTimer = 0;
     private int _currentBgIndex = 0;
     private float _currentTimer = 0;
     private int _animationDirection = 1;
@@ -36,24 +23,24 @@ public class ImageAnimator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _bgFirst.sprite = _bgList[_currentBgIndex];
+        _bg.sprite = _bgList[_currentBgIndex];
         _currentBgIndex++;
     }
 
     // Update is called once per frame
     private void Update()
     {
-        ReversedAnimation(Time.deltaTime);
+        AnimateBg(Time.deltaTime);
     }
 
-    private void ReversedAnimation(float deltaTime)
+    private void AnimateBg(float deltaTime)
     {
         _currentTimer += deltaTime;
 
         if(_currentTimer >= _animationDelay)
         {
             _currentBgIndex += _animationDirection;
-            _bgFirst.sprite = _bgList[_currentBgIndex];
+            _bg.sprite = _bgList[_currentBgIndex];
             _currentTimer = 0;
         }
 
@@ -71,31 +58,7 @@ public class ImageAnimator : MonoBehaviour
                 _animationDirection = 1;
             }
         }
-    }
 
-    private void CircledFade()
-    {
-        if (_currentFadeTimer < fadeTime)
-        {
-            _currentFadeTimer += Time.deltaTime;
-        }
-        else
-        {
-            _currentFadeTimer = 0;
-
-            if (_currentBgIndex >= _bgList.Count)
-            {
-                _currentBgIndex = 0;
-            }
-
-            _bgFirst.sprite = _bgSecond.sprite;
-
-            _bgSecond.CrossFadeAlpha(0, 0.001f, false);
-            _bgSecond.sprite = _bgList[_currentBgIndex];
-            _bgSecond.CrossFadeAlpha(1, fadeTime, false);
-
-            _currentBgIndex++;
-        }
     }
 
 }
