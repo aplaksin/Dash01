@@ -15,9 +15,12 @@ MonoBehaviour:
   LevelKey: Level1
   PlayerSpawnCoords: {x: 3, y: 1}
   GameGridData: {fileID: 11400000, guid: 790bd9c393168b84696157d963eabe34, type: 2}
-  PlayerHP: 70
+  PlayerHP: 5
   GameStageStaticDatas:
   - {fileID: 11400000, guid: 0d8cb8964a5b2184d8cb562b05762a25, type: 2}
   - {fileID: 11400000, guid: f66f184c3985f884b9fdeda14cede72b, type: 2}
   - {fileID: 11400000, guid: 33f5f7ed964f03b4cba542c211eb7e6a, type: 2}
+  - {fileID: 11400000, guid: 5c43ee9f660f6494ea5f1527f0f21169, type: 2}
+  - {fileID: 11400000, guid: 85914399c527aae4eaa06018163dc5ab, type: 2}
+  - {fileID: 11400000, guid: 48fc7bd9ce1b8464f85420d342854ba9, type: 2}
   LevelMusic: {fileID: 8300000, guid: c1f45f8d13bc0c04ba261b2262e9924e, type: 3}

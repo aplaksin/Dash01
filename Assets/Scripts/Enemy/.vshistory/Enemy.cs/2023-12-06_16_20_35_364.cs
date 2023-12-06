@@ -14,12 +14,12 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private ParticleSystem _particleDeath;
     public EnemyType Type { get { return _type; } }
-    public float MoveSpeed { get { return _moveSpeed + Game.GameContext.GetBuffValueByType(EnemyBuffType.Speed); } }
+    public float MoveSpeed { get { return _moveSpeed + AdditionalSpeed; } }
     public string Id { get { return _id; } }
 
     public List<IEnemyBuff> BuffsList = new List<IEnemyBuff>();
     public IEnemyBeheviour EnemyBeheviour;
-    //public float AdditionalSpeed = 0;
+    public float AdditionalSpeed = 0;
 
 
     public float _moveSpeed;
@@ -65,7 +65,7 @@ public class Enemy : MonoBehaviour
         _currentHp = _hp;
         _score =_enemyStaticData.Score;
         _isDead = false;
-        //AdditionalSpeed = 0;
+        AdditionalSpeed = 0;
         BuffsList.Clear();
         SetupBuffs(_enemyStaticData);
     }

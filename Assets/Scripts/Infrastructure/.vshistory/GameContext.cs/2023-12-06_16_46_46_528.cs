@@ -54,14 +54,12 @@ public class GameContext
     {
         foreach (IEnemyBuff enemyBuff in buffList)
         {
-
-            if (_enemyBuffsByType.ContainsKey(enemyBuff.Type))
+            foreach(Enemy enemy in _activeEnemies.Values)
             {
-                float newValue = _enemyBuffsByType[enemyBuff.Type] - enemyBuff.Value;
-                _enemyBuffsByType[enemyBuff.Type] = newValue;
-                Debug.Log("RemoveEnemyBuff newValue" + newValue);
+                enemyBuff.RemoveBuff(enemy);
+                Debug.Log("RemoveBuff - "+ enemy);
             }
-
+            
             //_enemyBuffs.Remove(enemyBuff);
         }
     }
@@ -78,7 +76,7 @@ public class GameContext
             }
         }*/
 
-/*    public void ApplyEnemyBuffs(Enemy enemy)
+    public void ApplyEnemyBuffs(Enemy enemy)
     {
 
         foreach (IEnemyBuff buff in _enemyBuffs)
@@ -87,20 +85,7 @@ public class GameContext
             Debug.Log("ApplyEnemyBuffs - " + enemy);
         }
 
-    }*/
-
-    public float GetBuffValueByType(EnemyBuffType buffType)
-    {
-        if(_enemyBuffsByType.ContainsKey(buffType))
-        {
-            return _enemyBuffsByType[buffType];
-        }
-        else
-        {
-            return 0;
-        }
     }
-
 
     public void AddActiveEnemy(Enemy enemy)
     {

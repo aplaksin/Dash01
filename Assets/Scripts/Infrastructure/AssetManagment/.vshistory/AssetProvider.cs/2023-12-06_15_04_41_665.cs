@@ -29,7 +29,6 @@ public class AssetProvider : IAssetProvider
 
     public void Initialize()
     {
-        //TODO
         throw new System.NotImplementedException();
     }
 

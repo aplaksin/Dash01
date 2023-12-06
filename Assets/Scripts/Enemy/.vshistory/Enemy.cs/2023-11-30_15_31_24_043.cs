@@ -14,12 +14,12 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private ParticleSystem _particleDeath;
     public EnemyType Type { get { return _type; } }
-    public float MoveSpeed { get { return _moveSpeed + Game.GameContext.GetBuffValueByType(EnemyBuffType.Speed); } }
-    public string Id { get { return _id; } }
+    public float MoveSpeed { get { return _moveSpeed + AdditionalSpeed; } }
+    public int Id { get { return _id; } }
 
     public List<IEnemyBuff> BuffsList = new List<IEnemyBuff>();
     public IEnemyBeheviour EnemyBeheviour;
-    //public float AdditionalSpeed = 0;
+    public float AdditionalSpeed = 0;
 
 
     public float _moveSpeed;
@@ -33,14 +33,14 @@ public class Enemy : MonoBehaviour
     private EnemyStaticData _enemyStaticData;
     private IAudioService _audioService;
     private bool _isDead = false;
-    private string _id;
+    private int _id;
 
     public void Construct(EnemyStaticData enemyStaticData, IPoolingService poolingService, IAudioService audioService)
     {
         _poolService = poolingService;
         _enemyStaticData = enemyStaticData;
         _audioService = audioService;
-        _id = gameObject.name;
+        _id = gameObject.GetInstanceID();
 
         if (_type != enemyStaticData.Type)
         {
@@ -65,7 +65,7 @@ public class Enemy : MonoBehaviour
         _currentHp = _hp;
         _score =_enemyStaticData.Score;
         _isDead = false;
-        //AdditionalSpeed = 0;
+        AdditionalSpeed = 0;
         BuffsList.Clear();
         SetupBuffs(_enemyStaticData);
     }
@@ -127,7 +127,7 @@ public class Enemy : MonoBehaviour
             
             _currentHp =_hp;
             RemoveBuffs();
-            
+            InitBaseParams();
 
             _poolService.ReturnEnemy(this);
             EventManager.CallOnEnemyDeathEvent(_score);

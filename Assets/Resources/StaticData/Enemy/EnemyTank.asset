@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: EnemyTank
   m_EditorClassIdentifier: 
   Hp: 2
-  Damage: 0
-  MoveSpeed: 0.5
+  Damage: 1
+  MoveSpeed: 0.7
   Type: 1
-  Score: 2
+  Score: 1
   DeathClip: {fileID: 8300000, guid: abc35f626f798384cbea941315e8f803, type: 3}
   TakeDamageClip: {fileID: 8300000, guid: 0da5dea3ca1a17d4790e2a1fd9faf78e, type: 3}
+  EnemyBuffSettings: []

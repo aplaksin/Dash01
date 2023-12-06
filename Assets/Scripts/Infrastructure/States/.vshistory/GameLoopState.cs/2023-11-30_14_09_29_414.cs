@@ -62,7 +62,7 @@ public class GameLoopState : IParameterizedState<LevelStaticData>
             enemy.gameObject.SetActive(true);
             Game.GameContext.AddActiveEnemy(enemy);
             //Debug.Log(Game.GameContext.GetEnemyesCount());
-            //Game.GameContext.ApplyEnemyBuffs();
+            Game.GameContext.ApplyEnemyBuffs();
             yield return new WaitForSeconds(spawnDelay);
         }
     }

@@ -59,7 +59,6 @@ public class GameContext
             {
                 float newValue = _enemyBuffsByType[enemyBuff.Type] - enemyBuff.Value;
                 _enemyBuffsByType[enemyBuff.Type] = newValue;
-                Debug.Log("RemoveEnemyBuff newValue" + newValue);
             }
 
             //_enemyBuffs.Remove(enemyBuff);

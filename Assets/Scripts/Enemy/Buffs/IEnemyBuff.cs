@@ -1,6 +1,6 @@
 
 public interface IEnemyBuff
 {
-    void ApplyBuff(Enemy enemy);
-    void RemoveBuff(Enemy enemy);
+    EnemyBuffType Type { get; }
+    float Value { get; }
 }

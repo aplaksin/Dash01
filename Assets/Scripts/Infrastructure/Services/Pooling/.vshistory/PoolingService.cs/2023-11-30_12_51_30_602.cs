@@ -21,7 +21,6 @@ public class PoolingService : IPoolingService
     private GameObject _enemiesPoolWrapper;
     private GameObject _projectilesPoolWrapper;
 
-    private int _totalEnemiesCount = 0;
     public PoolingService(IAssetProvider assetProvider, IStaticDataService staticDataService, IAudioService audioService)
     {
         _assetProvider = assetProvider;
@@ -77,7 +76,6 @@ public class PoolingService : IPoolingService
     public void ReturnEnemy(Enemy enemy)
     {
         Game.GameContext.RemoveActiveEnemy(enemy);
-        enemy.InitBaseParams();
         enemy.gameObject.transform.position = Vector3.zero;
         enemy.gameObject.SetActive(false);
         _enemiesByType[enemy.Type].Enqueue(enemy);
@@ -146,10 +144,8 @@ public class PoolingService : IPoolingService
         for (int i = 0; i < count; i++)
         {
             GameObject obj = _assetProvider.Instantiate(path);
-            _totalEnemiesCount++;
             obj.SetActive(false);
             Enemy enemy = obj.GetComponent<Enemy>();
-            obj.name = $"{enemy.Type}-{_totalEnemiesCount}";
             obj.transform.SetParent(_enemiesPoolWrapper.transform);
             enemy.Construct(data, this, _audioService);
             queue.Enqueue(enemy);

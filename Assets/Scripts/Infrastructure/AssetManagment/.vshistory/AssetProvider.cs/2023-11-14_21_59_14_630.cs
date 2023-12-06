@@ -1,5 +1,6 @@
-﻿using UnityEngine;
-
+﻿using System.Threading.Tasks;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class AssetProvider : IAssetProvider
 {
@@ -29,8 +30,26 @@ public class AssetProvider : IAssetProvider
 
     public void Initialize()
     {
-        //TODO
         throw new System.NotImplementedException();
     }
 
+/*    public Task<GameObject> Instantiate(string path, Vector3 at)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public Task<GameObject> Instantiate(string path)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public Task<T> Load<T>(AssetReference monsterDataPrefabReference) where T : class
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public Task<T> Load<T>(string address) where T : class
+    {
+        throw new System.NotImplementedException();
+    }*/
 }

@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c380c0b2ff66a1409a33ac8f0855ad3, type: 3}
-  m_Name: 0
+  m_Name: 60
   m_EditorClassIdentifier: 
-  ScoreStage: 0
-  EnemySpeedScale: 0
+  ScoreStage: 60
+  EnemySpeedScale: 1.6
   AdditionalDamage: 0
-  SpawnDelay: 2
+  SpawnDelay: 1.1
   enemySpawnProbabilities:
   - enemyType: 0
-    probability: 80
+    probability: 50
   - enemyType: 1
-    probability: 15
+    probability: 25
   - enemyType: 2
-    probability: 5
+    probability: 30
   - enemyType: 3
-    probability: 0
+    probability: 25
