@@ -36,7 +36,7 @@ public class PauseWindow : WindowBase
 
     public void OnPauseBtnClick()
     {
-        //TODO check this func
+        //TODO check this f
         //Debug.Log("OnPauseBtnClick");
         //UIEventManager.CallOnClickPauseBtnEvent();
     }

@@ -213,6 +213,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 553046537fdefbb479a72681db7e4167, type: 3}
+    - target: {fileID: 1375280840579230421, guid: 846e150c797cb244688e4c3dde777917, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2180767802088075752, guid: 846e150c797cb244688e4c3dde777917, type: 3}
       propertyPath: m_Name
       value: menu
@@ -299,6 +303,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4691383386132644879, guid: 846e150c797cb244688e4c3dde777917, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6003427909833496633, guid: 846e150c797cb244688e4c3dde777917, type: 3}
+      propertyPath: _toggleSoundBtn
+      value: 
+      objectReference: {fileID: 1504641840}
+    - target: {fileID: 6749526084674199155, guid: 846e150c797cb244688e4c3dde777917, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9062171192308374298, guid: 846e150c797cb244688e4c3dde777917, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -398,3 +414,14 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1504641840 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6243435742981380627, guid: 846e150c797cb244688e4c3dde777917, type: 3}
+  m_PrefabInstance: {fileID: 475211835}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

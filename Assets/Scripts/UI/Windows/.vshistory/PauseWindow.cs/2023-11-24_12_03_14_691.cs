@@ -2,24 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class PauseWindow : WindowBase
 {
     private GameStateMachine _gameStateMachine;
-
-    [SerializeField]
-    private Toggle _soundToggle;
-
     private IAudioService _audioService;
 
     public void Construct(GameStateMachine gameStateMachine, IAudioService audioService)
     {
         _gameStateMachine = gameStateMachine;
         _audioService = audioService;
-        _soundToggle.isOn = _audioService.IsSoundOn;
-
-
         PauseGame();
         //EventManager.OnGameOver += OnGameOver;
     }
@@ -36,14 +28,14 @@ public class PauseWindow : WindowBase
 
     public void OnPauseBtnClick()
     {
-        //TODO check this func
         //Debug.Log("OnPauseBtnClick");
         //UIEventManager.CallOnClickPauseBtnEvent();
     }
 
     public void OnSoundTurn()
-    {   
-        _audioService.ToggleAllSounds();
+    {
+        _audioService.MuteMusic();
+        _audioService.MuteSFX();
     }
 
     protected override void Cleanup()
@@ -60,6 +52,11 @@ public class PauseWindow : WindowBase
         Time.timeScale = 1f;
     }
 
+/*    private void OnGameOver()
+    {
+        PauseGame();
+        _closeButton.transform.gameObject.SetActive(false);
+    }*/
 
 
 }

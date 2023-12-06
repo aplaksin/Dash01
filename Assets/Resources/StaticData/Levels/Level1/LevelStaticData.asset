@@ -23,4 +23,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5c43ee9f660f6494ea5f1527f0f21169, type: 2}
   - {fileID: 11400000, guid: 85914399c527aae4eaa06018163dc5ab, type: 2}
   - {fileID: 11400000, guid: 48fc7bd9ce1b8464f85420d342854ba9, type: 2}
+  - {fileID: 11400000, guid: afce3af5f29dad4428b9fd7438730230, type: 2}
   LevelMusic: {fileID: 8300000, guid: c1f45f8d13bc0c04ba261b2262e9924e, type: 3}

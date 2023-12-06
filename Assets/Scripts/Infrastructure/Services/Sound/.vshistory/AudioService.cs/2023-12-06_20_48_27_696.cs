@@ -10,9 +10,8 @@ public class AudioService : IAudioService
     private AudioClip _mainMenuMusic;
     private AudioClip _gameOverMusic;
     private IAssetProvider _assetProvider;
-    private bool _isSoundOn;
-    public bool IsSoundOn { get { return _isSoundOn; } }
 
+    public bool IsSoundOn { get; }
 
     //private Dictionary<SoundType, AudioClip> _audioClipsByType = new Dictionary<SoundType, AudioClip>();
     public AudioService(AudioSource musicSource, AudioSource fxSource, IAssetProvider assetProvider)
@@ -22,7 +21,7 @@ public class AudioService : IAudioService
         _assetProvider = assetProvider;
         _mainMenuMusic = _assetProvider.GetAudioClip(AssetPath.MainMenuMusicPath);
         _gameOverMusic = _assetProvider.GetAudioClip(AssetPath.GameOverMusicPath);
-        _isSoundOn = true;
+       
     }
 
     public void Construct(AudioClip levelMusic)
@@ -59,21 +58,14 @@ public class AudioService : IAudioService
         _musicSource.Pause();
     }
 
-    public void ToggleMusic()
+    public void MuteMusic()
     {
         _musicSource.mute = !_musicSource.mute;
     }
 
-    public void ToggleSFX()
+    public void MuteSFX()
     {
         _fxSource.mute = !_fxSource.mute;
-    }
-
-    public void ToggleAllSounds()
-    {
-        ToggleSFX();
-        ToggleMusic();
-        _isSoundOn = !_isSoundOn;
     }
 
     public void ChangeMusicVolume(float value)

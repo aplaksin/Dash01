@@ -9,12 +9,12 @@ public interface IAudioService : IService
     void PlayMusic(AudioClip musicClip);
     void StopMusic();
 
-    void ToggleMusic();
+    void MuteMusic();
 
     void PlayLevelMusic();
     void PlayMainMenuMusic();
     void PlayGameOverMusic();
-    void ToggleSFX();
+    void MuteSFX();
 
     bool IsSoundOn { get; }
 

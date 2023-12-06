@@ -14,7 +14,7 @@ public class UiMenu : MonoBehaviour
     private Button _exitBtn;
 
     [SerializeField]
-    private Toggle _toggleSoundBtn;
+    private Button _toggleSoundBtn;
 
     public void OnClickStartBtn()
     {

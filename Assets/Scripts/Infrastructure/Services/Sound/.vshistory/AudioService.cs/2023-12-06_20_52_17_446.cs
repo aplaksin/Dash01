@@ -22,7 +22,7 @@ public class AudioService : IAudioService
         _assetProvider = assetProvider;
         _mainMenuMusic = _assetProvider.GetAudioClip(AssetPath.MainMenuMusicPath);
         _gameOverMusic = _assetProvider.GetAudioClip(AssetPath.GameOverMusicPath);
-        _isSoundOn = true;
+        IsSoundOn = true;
     }
 
     public void Construct(AudioClip levelMusic)
@@ -59,21 +59,21 @@ public class AudioService : IAudioService
         _musicSource.Pause();
     }
 
-    public void ToggleMusic()
+    public void MuteMusic()
     {
         _musicSource.mute = !_musicSource.mute;
     }
 
-    public void ToggleSFX()
+    public void MuteSFX()
     {
         _fxSource.mute = !_fxSource.mute;
     }
 
-    public void ToggleAllSounds()
+    public void MuteAll()
     {
-        ToggleSFX();
-        ToggleMusic();
-        _isSoundOn = !_isSoundOn;
+        MuteSFX();
+        MuteMusic();
+        IsSoundOn = !IsSoundOn;
     }
 
     public void ChangeMusicVolume(float value)

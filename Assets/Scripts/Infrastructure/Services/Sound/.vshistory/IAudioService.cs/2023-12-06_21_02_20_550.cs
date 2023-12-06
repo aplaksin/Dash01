@@ -14,7 +14,7 @@ public interface IAudioService : IService
     void PlayLevelMusic();
     void PlayMainMenuMusic();
     void PlayGameOverMusic();
-    void ToggleSFX();
+    void MuteSFX();
 
     bool IsSoundOn { get; }
 

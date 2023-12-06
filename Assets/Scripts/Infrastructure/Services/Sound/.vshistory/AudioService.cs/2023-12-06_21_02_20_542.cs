@@ -64,14 +64,14 @@ public class AudioService : IAudioService
         _musicSource.mute = !_musicSource.mute;
     }
 
-    public void ToggleSFX()
+    public void MuteSFX()
     {
         _fxSource.mute = !_fxSource.mute;
     }
 
     public void ToggleAllSounds()
     {
-        ToggleSFX();
+        MuteSFX();
         ToggleMusic();
         _isSoundOn = !_isSoundOn;
     }

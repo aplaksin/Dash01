@@ -59,20 +59,20 @@ public class AudioService : IAudioService
         _musicSource.Pause();
     }
 
-    public void ToggleMusic()
+    public void MuteMusic()
     {
         _musicSource.mute = !_musicSource.mute;
     }
 
-    public void ToggleSFX()
+    public void MuteSFX()
     {
         _fxSource.mute = !_fxSource.mute;
     }
 
     public void ToggleAllSounds()
     {
-        ToggleSFX();
-        ToggleMusic();
+        MuteSFX();
+        MuteMusic();
         _isSoundOn = !_isSoundOn;
     }
 

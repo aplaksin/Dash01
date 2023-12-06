@@ -6,6 +6,9 @@ public class GameContext
     public float SpawnEnemyDelay { get { return _spawnEnemyDelay; } }
     public GameStageStaticData CurrentStage { get { return _currentStage; } }
 
+    public bool IsSoundOn;
+
+
     private int _playerHP;
     private int _score = 0;
     private float _spawnEnemyDelay = 2f;
@@ -28,6 +31,7 @@ public class GameContext
         _audioService = audioService;
         SubscribeOnEvents();
         _assetProvider = assetProvider;
+        IsSoundOn = _audioService.IsSoundOn;
     }
 
     public void AddEnemyBuff(List<IEnemyBuff> buffList)
@@ -118,11 +122,18 @@ public class GameContext
     {
         EventManager.OnEnemyDeath += OnScoreChanged;
         EventManager.OnDamage += OnHpChanged;
+        UIEventManager.OnClickToggleSoundBtn += OnSoundToggle;
     } 
     private void UnsubscribeOnEvents()
     {
         EventManager.OnEnemyDeath -= OnScoreChanged;
         EventManager.OnDamage -= OnHpChanged;
+        UIEventManager.OnClickToggleSoundBtn -= OnSoundToggle;
+    }
+
+    private void OnSoundToggle()
+    {
+        IsSoundOn = !IsSoundOn;
     }
 
     private void OnScoreChanged(int score)

@@ -45,7 +45,7 @@ public class MainMenuState : IParameterizedState<string>
     private void ToggleSound()
     {
         _audioService.ToggleMusic();
-        _audioService.ToggleSFX();
+        _audioService.MuteSFX();
     }
 
     private void EnterLoadLavel()

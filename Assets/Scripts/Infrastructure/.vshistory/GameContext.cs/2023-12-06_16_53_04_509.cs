@@ -6,6 +6,7 @@ public class GameContext
     public float SpawnEnemyDelay { get { return _spawnEnemyDelay; } }
     public GameStageStaticData CurrentStage { get { return _currentStage; } }
 
+
     private int _playerHP;
     private int _score = 0;
     private float _spawnEnemyDelay = 2f;
@@ -61,8 +62,32 @@ public class GameContext
                 Debug.Log("RemoveEnemyBuff newValue" + newValue);
             }
 
+            //_enemyBuffs.Remove(enemyBuff);
         }
     }
+
+    /*    public void ApplyEnemyBuffs()
+        {
+            foreach(Enemy enemy in _activeEnemies.Values)
+            {
+                foreach(IEnemyBuff buff in _enemyBuffs)
+                {
+                    buff.ApplyBuff(enemy);
+                    Debug.Log("ApplyEnemyBuffs - " + enemy);
+                }
+            }
+        }*/
+
+/*    public void ApplyEnemyBuffs(Enemy enemy)
+    {
+
+        foreach (IEnemyBuff buff in _enemyBuffs)
+        {
+            buff.ApplyBuff(enemy);
+            Debug.Log("ApplyEnemyBuffs - " + enemy);
+        }
+
+    }*/
 
     public float GetBuffValueByType(EnemyBuffType buffType)
     {
