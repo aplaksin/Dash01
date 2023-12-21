@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class GameLoopState : IParameterizedState<LevelStaticData>
+public class GameLoopState : IParameterizedState<LevelStaticData>//TODO del loadlevelstaticdata
 {
     private IGameFactory _gameFactory;
     private EnemySpawner _enemySpawner;
     private ICoroutineRunner _coroutineRunner;
     private IWindowService _windowService;
     private IAudioService _audioService;
-    private LevelStaticData _levelStaticData;
+    //private LevelStaticData _levelStaticData;
     private Coroutine _enemySpawnCoroutine;
     private DamageBorder _damageBorder;
 
@@ -22,7 +22,7 @@ public class GameLoopState : IParameterizedState<LevelStaticData>
 
     public void Enter(LevelStaticData levelStaticData)
     {
-        _levelStaticData = levelStaticData;
+        //_levelStaticData = levelStaticData;
         _enemySpawner = new EnemySpawner(_gameFactory);
         _enemySpawnCoroutine = _coroutineRunner.StartCoroutine(SpawnEnemies(Game.GameContext.SpawnEnemyDelay));
         EventManager.OnGameOver += OnGameOver;

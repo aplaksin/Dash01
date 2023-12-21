@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
+using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 using UnityEngine;
-
+using static UnityEngine.EventSystems.EventTrigger;
+using Random = UnityEngine.Random;
 
 public class PoolingService : IPoolingService
 {
@@ -22,6 +25,13 @@ public class PoolingService : IPoolingService
     private GameObject _projectilesPoolWrapper;
 
     private int _totalEnemiesCount = 0;
+
+    private List<Sprite> _enemySkins = new List<Sprite>();
+    private List<Sprite> _projectileSkins = new List<Sprite>();
+
+    private Dictionary<EnemyType, Sprite> _enemySkinsByType = new Dictionary<EnemyType, Sprite>();
+    private Dictionary<ProjectileType, Sprite> _projectileSkinsByType = new Dictionary<ProjectileType, Sprite>();
+
     public PoolingService(IAssetProvider assetProvider, IStaticDataService staticDataService, IAudioService audioService)
     {
         _assetProvider = assetProvider;
@@ -93,12 +103,21 @@ public class PoolingService : IPoolingService
     private void CreateEnemiesPool()
     {
         _enemiesByType = new Dictionary<EnemyType, Queue<Enemy>>();
-
+        _enemySkinsByType.Clear();
         foreach (EnemyType enemyType in Enum.GetValues(typeof(EnemyType)))
         {
             Queue<Enemy> enemiesQueue = new Queue<Enemy>();
             string path = AssetPath.GetEnemyPathByType(enemyType);
             EnemyStaticData enemyStaticData = _staticDataService.GetEnemyDataByType(enemyType);
+
+
+            //TODO for every enemy type separated skin selection +++ move it inside gameFactory?
+            _enemySkins = enemyStaticData.SkinListStaticData.SpritesList;
+            int spriteIndex = Random.Range(0, _enemySkins.Count);
+            Sprite sprite = _enemySkins[spriteIndex];
+            _enemySkinsByType.Add(enemyType, sprite);
+            _enemySkins.Remove(sprite);
+
             AddEnemiesToQueue(path, ref enemiesQueue, enemyStaticData, InitialCapacity);
             
 
@@ -126,12 +145,21 @@ public class PoolingService : IPoolingService
     private void CreateProjectilesPool()
     {
         _projectilesByType = new Dictionary<ProjectileType, Queue<Projectile>>();
-
+        _projectileSkinsByType.Clear();
         foreach (ProjectileType projectileType in Enum.GetValues(typeof(ProjectileType)))
         {
             Queue<Projectile> projectilesQueue = new Queue<Projectile>(InitialCapacity);
             string path = AssetPath.GetProjectilePathByType(projectileType);
             ProjectileStaticData projectileStaticData = _staticDataService.GetProjectileDataByType(projectileType);
+
+            //TODO for every enemy type separated skin selection +++ move it inside gameFactory?
+            Debug.Log(projectileStaticData.SkinListStaticData);
+            _projectileSkins = projectileStaticData.SkinListStaticData.SpritesList;
+            int spriteIndex = Random.Range(0, _projectileSkins.Count);
+            Sprite sprite = _projectileSkins[spriteIndex];
+            _projectileSkinsByType.Add(projectileType, sprite);
+            _enemySkins.Remove(sprite);
+
             AddProjectilesToQueue(path, ref projectilesQueue, projectileStaticData, InitialCapacity);
 
             _projectilesByType[projectileType] = projectilesQueue;
@@ -149,6 +177,8 @@ public class PoolingService : IPoolingService
             _totalEnemiesCount++;
             obj.SetActive(false);
             Enemy enemy = obj.GetComponent<Enemy>();
+            SpriteRenderer spriteRenderer = obj.GetComponent<SpriteRenderer>();
+            spriteRenderer.sprite = _enemySkinsByType[enemy.Type];
             obj.name = $"{enemy.Type}-{_totalEnemiesCount}";
             obj.transform.SetParent(_enemiesPoolWrapper.transform);
             enemy.Construct(data, this, _audioService);
@@ -164,6 +194,8 @@ public class PoolingService : IPoolingService
             GameObject obj = _assetProvider.Instantiate(path);
             obj.SetActive(false);
             Projectile projectile = obj.GetComponent<Projectile>();
+            SpriteRenderer spriteRenderer = obj.GetComponent<SpriteRenderer>();
+            spriteRenderer.sprite = _projectileSkinsByType[projectile.Type];
             obj.transform.SetParent(_projectilesPoolWrapper.transform);
             projectile.Construct(data, this, _audioService);
             queue.Enqueue(projectile);

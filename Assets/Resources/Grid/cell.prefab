@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4691616663004422757}
   - component: {fileID: 7905313352038981778}
+  - component: {fileID: -3249120302766797268}
   m_Layer: 0
   m_Name: cell
   m_TagString: Untagged
@@ -84,3 +85,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-3249120302766797268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7257134896773396437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4527a73ed9f945d40babb2c70997deec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bgFirst: {fileID: 7905313352038981778}
+  _bgList:
+  - {fileID: 21300000, guid: a78b6a959c717aa48ae229b95a99b335, type: 3}
+  - {fileID: 21300000, guid: a40d0568d1c695b418d10ff3ad534d47, type: 3}
+  - {fileID: 21300000, guid: b26ed612f63441946a9e35c82fbcf652, type: 3}
+  - {fileID: 21300000, guid: d376c0ca77742e44abba964e188b558c, type: 3}
+  - {fileID: 21300000, guid: 39b14f3b416a7074482f63014d416389, type: 3}
+  - {fileID: 21300000, guid: 80f22dba02cc8bd4e86e28dca152b65e, type: 3}
+  - {fileID: 21300000, guid: 15380ef9bbe655945b5b03f66d2463bd, type: 3}
+  - {fileID: 21300000, guid: dbd473d113cf560498bcaa3febcc07c7, type: 3}
+  - {fileID: 21300000, guid: 3bd545fb15f7d9b4083416f45258517a, type: 3}
+  - {fileID: 21300000, guid: 972838056ba1c5348a3312790ab96aa0, type: 3}
+  - {fileID: 21300000, guid: 988d2bc722670a74a9c850a6f0a41158, type: 3}
+  - {fileID: 21300000, guid: 71549ac050e2c9742abd87e761b3664e, type: 3}
+  - {fileID: 21300000, guid: 4cc096be610f4014bab7a24ce9187452, type: 3}
+  - {fileID: 21300000, guid: 0a7440655c7b37249bc7883980e4aa7d, type: 3}
+  - {fileID: 21300000, guid: b85c8664405cb01418dfc34e77f02cf8, type: 3}
+  - {fileID: 21300000, guid: 484fd2254582257428d79c5c18dfc42d, type: 3}
+  - {fileID: 21300000, guid: d9170121bf845c94092cb4aaee068a0e, type: 3}
+  - {fileID: 21300000, guid: 6e4236468d4d9114c985db2f27f03cea, type: 3}
+  - {fileID: 21300000, guid: 2b3572b1d5bd4bb4185ebbfd25eecc80, type: 3}
+  - {fileID: 21300000, guid: a8c24336f208fe241906f4d234b1cf2b, type: 3}
+  _animationDelay: 0.05

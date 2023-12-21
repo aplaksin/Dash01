@@ -22,4 +22,6 @@ public class EnemyStaticData : ScriptableObject
 
     public List<EnemyBuffSettings> EnemyBuffSettings;
 
+    public SkinListStaticData SkinListStaticData;
+
 }

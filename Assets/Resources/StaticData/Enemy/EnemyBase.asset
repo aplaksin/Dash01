@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Hp: 1
   Damage: 1
-  MoveSpeed: 1.2
+  MoveSpeed: 1.3
   Type: 0
   Score: 1
   DeathClip: {fileID: 8300000, guid: abc35f626f798384cbea941315e8f803, type: 3}
   TakeDamageClip: {fileID: 8300000, guid: 0da5dea3ca1a17d4790e2a1fd9faf78e, type: 3}
   EnemyBuffSettings: []
+  SkinListStaticData: {fileID: 11400000, guid: 6df6d9d853ebe84449481238eccec7d2, type: 2}

@@ -14,7 +14,7 @@ public class PlayerMove : MonoBehaviour
     private GameObject _fireBlock;
 
     [SerializeField]
-    private float _moveSpeed = 1f;
+    private float _moveSpeed = 1f;//5
 
     public void Init(Dictionary<Vector2, Vector3> cellPositionByCoords, Dictionary<Vector2, GameObject> blocksByCoords, Vector2 currentPlayerCoords, IInputService inputService, IGameFactory gameFactory)
     {
