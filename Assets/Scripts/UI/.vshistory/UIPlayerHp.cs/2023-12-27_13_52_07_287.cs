@@ -56,7 +56,7 @@ public class UIPlayerHp : MonoBehaviour
         }
     }
 
-/*    private void ChangeHpText(int hp)
+    private void ChangeHpText(int hp)
     {
         _currentHp = hp;
         UpdateText();
@@ -65,5 +65,5 @@ public class UIPlayerHp : MonoBehaviour
     private void UpdateText()
     {
         _hpTextField.text = $"{_hpText} {_currentHp}";
-    }*/
+    }
 }

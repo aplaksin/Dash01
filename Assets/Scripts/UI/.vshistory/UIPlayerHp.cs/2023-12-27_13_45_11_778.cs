@@ -36,27 +36,14 @@ public class UIPlayerHp : MonoBehaviour
     private void OnEnable()
     {
         //EventManager.OnHpChanged += ChangeHpText;
-        EventManager.OnHpChanged += ChangeHpIcons;
     }
     private void OnDisable()
     {
         //EventManager.OnHpChanged -= ChangeHpText;
-        EventManager.OnHpChanged -= ChangeHpIcons;
     }
 
 
-    private void ChangeHpIcons(int hp)
-    {
-        for (int i = 0; i < _hpImagesList.Count; i++)
-        {
-            if(i >= hp)
-            {
-                _hpImagesList[i].SetActive(false);
-            }
-        }
-    }
-
-/*    private void ChangeHpText(int hp)
+    private void ChangeHpText(int hp)
     {
         _currentHp = hp;
         UpdateText();
@@ -65,5 +52,5 @@ public class UIPlayerHp : MonoBehaviour
     private void UpdateText()
     {
         _hpTextField.text = $"{_hpText} {_currentHp}";
-    }*/
+    }
 }
