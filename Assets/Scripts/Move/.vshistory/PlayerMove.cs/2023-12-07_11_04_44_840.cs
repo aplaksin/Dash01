@@ -12,12 +12,11 @@ public class PlayerMove : MonoBehaviour
     private Vector3 _movePosition;
     private bool _isMoving = false;
     private GameObject _fireBlock;
-    private GameContext _gameContext;
-    private Vector2 _currentMoveDirection = Vector2.zero;
+
     [SerializeField]
     private float _moveSpeed = 1f;//5
 
-    public void Init(Dictionary<Vector2, Vector3> cellPositionByCoords, Dictionary<Vector2, GameObject> blocksByCoords, Vector2 currentPlayerCoords, IInputService inputService, IGameFactory gameFactory, GameContext gameContext)
+    public void Init(Dictionary<Vector2, Vector3> cellPositionByCoords, Dictionary<Vector2, GameObject> blocksByCoords, Vector2 currentPlayerCoords, IInputService inputService, IGameFactory gameFactory)
     {
         _cellPositionByCoords = cellPositionByCoords;
         _blocksByCoords = blocksByCoords;
@@ -25,7 +24,6 @@ public class PlayerMove : MonoBehaviour
         _inputService = inputService;
         _inputService.SubscribeOnMoveEvent(Move);
         _gameFactory = gameFactory;
-        _gameContext = gameContext;
     }
 
     private void Update()
@@ -33,7 +31,7 @@ public class PlayerMove : MonoBehaviour
         if (_movePosition != Vector3.zero)
         {
             _isMoving = true;
-            var step = _moveSpeed * Time.deltaTime;
+            var step = _moveSpeed * Time.deltaTime; 
             transform.position = Vector3.MoveTowards(transform.position, _movePosition, step);
 
             if (Vector3.Distance(transform.position, _movePosition) < 0.001f)
@@ -41,11 +39,10 @@ public class PlayerMove : MonoBehaviour
 
                 transform.position = _movePosition;
                 _movePosition = Vector3.zero;
-                _currentMoveDirection = Vector2.zero;
                 _isMoving = false;
                 if (_fireBlock != null)
                 {
-
+                    
                     Projectile projectile = _gameFactory.CreateProjectile(_fireBlock.transform.position);
                     projectile.gameObject.SetActive(true);
                     projectile.PlayShootSFX();
@@ -67,12 +64,11 @@ public class PlayerMove : MonoBehaviour
 
     private void Move(Vector2 direction)
     {
-
-        if (direction != Vector2.zero)
+        
+        if(direction != Vector2.zero)
         {
             CalcMovePlayerPosition(direction);
         }
-
     }
 
     private void CalcMovePlayerPosition(Vector2 direction)
@@ -80,7 +76,7 @@ public class PlayerMove : MonoBehaviour
         Vector2 currentDirection = direction;
         Vector3 moveTarget = Vector3.zero;
 
-        if (CanMove(direction))
+        if (!_isMoving)
         {
             while (_cellPositionByCoords.ContainsKey(_currentPlayerCoords + direction) && !_blocksByCoords.ContainsKey(_currentPlayerCoords + direction))
             {
@@ -93,34 +89,10 @@ public class PlayerMove : MonoBehaviour
                     _fireBlock = _blocksByCoords[currentDirection + direction];
                 }
             }
-            _currentMoveDirection = direction;
+
             _movePosition = moveTarget;
         }
 
     }
 
-    private bool CanMove(Vector2 direction)
-    {
-        if (direction != Vector2.zero)
-        {
-            if (!_isMoving)
-            {
-                return true;
-            }
-            else if (Game.CanPlayerSwipeDirection)
-            {
-                if(_currentMoveDirection != Vector2.zero)
-                {
-                    if(_currentMoveDirection == -direction)
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        }
-
-        return false;
-    }
 }

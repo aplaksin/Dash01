@@ -75,7 +75,7 @@ public class GameFactory : IGameFactory
         player.transform.position = cellpositionsByCoords[spawnPoint];
     }
     
-    public GameObject CreatePlayer(Vector2 spawnPoint, Vector3 scaleVector, Dictionary<Vector2, Vector3> cellpositionsByCoords, GameContext gameContext)
+    public GameObject CreatePlayer(Vector2 spawnPoint, Vector3 scaleVector, Dictionary<Vector2, Vector3> cellpositionsByCoords)
     {
         GameObject player = _assetProvider.Instantiate(AssetPath.PlayerPath);
         player.transform.localScale = scaleVector;
@@ -84,7 +84,7 @@ public class GameFactory : IGameFactory
         
         PlayerMove playerMove = player.transform.GetComponent<PlayerMove>();
 
-        playerMove.Init(cellpositionsByCoords, _blocksByCoords, spawnPoint, _inputService, this, gameContext);
+        playerMove.Init(cellpositionsByCoords, _blocksByCoords, spawnPoint, _inputService, this);
         
         return player;
     }

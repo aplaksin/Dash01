@@ -56,7 +56,7 @@ public class LoadLevelState : IParameterizedState<string>
         PrepareGameFactory(scaleVector);
 
         Dictionary<Vector2, Vector3>  cellpositionsByCoords = CreateGameGrid(scaleVector);
-        CreatePlayer(scaleVector, cellpositionsByCoords, Game.GameContext);
+        CreatePlayer(scaleVector, cellpositionsByCoords);
         
         CreateHud();
 
@@ -71,9 +71,9 @@ public class LoadLevelState : IParameterizedState<string>
         return _gameFactory.CreateGameGrid(_levelStaticData, scaleVector);
     }
 
-    private GameObject CreatePlayer(Vector3 scaleVector, Dictionary<Vector2, Vector3> cellpositionsByCoords, GameContext gameContext)
+    private GameObject CreatePlayer(Vector3 scaleVector, Dictionary<Vector2, Vector3> cellpositionsByCoords)
     {
-        return _gameFactory.CreatePlayer(_levelStaticData.PlayerSpawnCoords, scaleVector, cellpositionsByCoords, gameContext);
+        return _gameFactory.CreatePlayer(_levelStaticData.PlayerSpawnCoords, scaleVector, cellpositionsByCoords);
     }
 
     private void PrepareGameFactory(Vector3 scaleVector)

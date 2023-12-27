@@ -107,14 +107,11 @@ public class PlayerMove : MonoBehaviour
             {
                 return true;
             }
-            else if (Game.CanPlayerSwipeDirection)
+            else if (_gameContext.CanPlayerSwitchMoveDirection)
             {
                 if(_currentMoveDirection != Vector2.zero)
                 {
-                    if(_currentMoveDirection == -direction)
-                    {
-                        return true;
-                    }
+
                 }
             }
 

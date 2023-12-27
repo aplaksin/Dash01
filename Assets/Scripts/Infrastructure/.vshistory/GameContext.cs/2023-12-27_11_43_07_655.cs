@@ -5,9 +5,7 @@ public class GameContext
     public int Score { get { return _score; } }
     public float SpawnEnemyDelay { get { return _spawnEnemyDelay; } }
     public GameStageStaticData CurrentStage { get { return _currentStage; } }
-
-    //TODO remove just for tests
-    public bool CanPlayerSwitchMoveDirection { get { return _canPlayerSwitchMoveDirection; } set { _canPlayerSwitchMoveDirection = value; } }
+    public bool CanPlayerSwitchMoveDirection { get { return _canPlayerSwitchMoveDirection; } }
 
 
     private int _playerHP;

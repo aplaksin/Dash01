@@ -34,11 +34,6 @@ public class PauseWindow : WindowBase
         _gameStateMachine.Enter<LoadLevelState, string>(SceneManager.GetActiveScene().name);
     }
 
-    public void OnToggleCanPlayerSwipeDirection()
-    {
-        Game.CanPlayerSwipeDirection = !Game.CanPlayerSwipeDirection;
-    }
-
     public void OnPauseBtnClick()
     {
         //TODO check this func

@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
+using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 using Random = UnityEngine.Random;
 
 public class PoolingService : IPoolingService
@@ -150,7 +153,7 @@ public class PoolingService : IPoolingService
             ProjectileStaticData projectileStaticData = _staticDataService.GetProjectileDataByType(projectileType);
 
             //TODO for every enemy type separated skin selection +++ move it inside gameFactory?
-            //Debug.Log(projectileStaticData.SkinListStaticData);
+            Debug.Log(projectileStaticData.SkinListStaticData);
             _projectileSkins = projectileStaticData.SkinListStaticData.SpritesList;
             int spriteIndex = Random.Range(0, _projectileSkins.Count);
             Sprite sprite = _projectileSkins[spriteIndex];

@@ -6,10 +6,6 @@ public class GameContext
     public float SpawnEnemyDelay { get { return _spawnEnemyDelay; } }
     public GameStageStaticData CurrentStage { get { return _currentStage; } }
 
-    //TODO remove just for tests
-    public bool CanPlayerSwitchMoveDirection { get { return _canPlayerSwitchMoveDirection; } set { _canPlayerSwitchMoveDirection = value; } }
-
-
     private int _playerHP;
     private int _score = 0;
     private float _spawnEnemyDelay = 2f;
@@ -20,7 +16,6 @@ public class GameContext
     private Dictionary<string, Enemy> _activeEnemies = new Dictionary<string, Enemy>();
     //private List<IEnemyBuff> _enemyBuffs =  new List<IEnemyBuff>();
     private Dictionary<EnemyBuffType, float> _enemyBuffsByType = new Dictionary<EnemyBuffType, float>();
-    private bool _canPlayerSwitchMoveDirection;
 
     public GameContext(LevelStaticData levelStaticData, IAudioService audioService, IAssetProvider assetProvider)
     {
@@ -33,7 +28,6 @@ public class GameContext
         _audioService = audioService;
         SubscribeOnEvents();
         _assetProvider = assetProvider;
-        _canPlayerSwitchMoveDirection = levelStaticData.CanPlayerSwitchMoveDirection;
     }
 
     public void AddEnemyBuff(List<IEnemyBuff> buffList)

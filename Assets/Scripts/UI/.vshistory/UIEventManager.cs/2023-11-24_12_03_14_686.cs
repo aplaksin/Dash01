@@ -34,6 +34,6 @@ public static class UIEventManager
     public static void CallOnClickToggleSoundBtnEvent()
     {
         OnClickToggleSoundBtn?.Invoke();
-    } 
+    }
 
 }

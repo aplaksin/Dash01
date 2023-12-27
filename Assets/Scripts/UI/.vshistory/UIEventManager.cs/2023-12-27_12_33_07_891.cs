@@ -9,6 +9,7 @@ public static class UIEventManager
     public static event Action OnClickExitBtn;
     public static event Action OnClickPauseBtn;
     public static event Action OnClickToggleSoundBtn;
+    public static event Action OnClickCanPlayerSwipeDirection;
 
     public static void CallOnClickStartBtnEvent()
     {
@@ -35,5 +36,9 @@ public static class UIEventManager
     {
         OnClickToggleSoundBtn?.Invoke();
     } 
+    public static void CallOnClickCanPlayerSwipeDirectionBtnEvent()
+    {
+        OnClickCanPlayerSwipeDirection?.Invoke();
+    }
 
 }

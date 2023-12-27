@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -13,7 +14,8 @@ public class PlayerMove : MonoBehaviour
     private bool _isMoving = false;
     private GameObject _fireBlock;
     private GameContext _gameContext;
-    private Vector2 _currentMoveDirection = Vector2.zero;
+    private Vector2 _moveDirection;
+
     [SerializeField]
     private float _moveSpeed = 1f;//5
 
@@ -33,7 +35,7 @@ public class PlayerMove : MonoBehaviour
         if (_movePosition != Vector3.zero)
         {
             _isMoving = true;
-            var step = _moveSpeed * Time.deltaTime;
+            var step = _moveSpeed * Time.deltaTime; 
             transform.position = Vector3.MoveTowards(transform.position, _movePosition, step);
 
             if (Vector3.Distance(transform.position, _movePosition) < 0.001f)
@@ -41,11 +43,10 @@ public class PlayerMove : MonoBehaviour
 
                 transform.position = _movePosition;
                 _movePosition = Vector3.zero;
-                _currentMoveDirection = Vector2.zero;
                 _isMoving = false;
                 if (_fireBlock != null)
                 {
-
+                    
                     Projectile projectile = _gameFactory.CreateProjectile(_fireBlock.transform.position);
                     projectile.gameObject.SetActive(true);
                     projectile.PlayShootSFX();
@@ -67,21 +68,21 @@ public class PlayerMove : MonoBehaviour
 
     private void Move(Vector2 direction)
     {
-
-        if (direction != Vector2.zero)
+        
+        if(direction != Vector2.zero)
         {
             CalcMovePlayerPosition(direction);
         }
-
     }
 
     private void CalcMovePlayerPosition(Vector2 direction)
     {
         Vector2 currentDirection = direction;
         Vector3 moveTarget = Vector3.zero;
+        //Debug.Log(_gameContext.CanPlayerSwitchMoveDirection);
 
-        if (CanMove(direction))
-        {
+
+
             while (_cellPositionByCoords.ContainsKey(_currentPlayerCoords + direction) && !_blocksByCoords.ContainsKey(_currentPlayerCoords + direction))
             {
                 currentDirection = _currentPlayerCoords + direction;
@@ -92,35 +93,30 @@ public class PlayerMove : MonoBehaviour
                 {
                     _fireBlock = _blocksByCoords[currentDirection + direction];
                 }
+
+                
             }
-            _currentMoveDirection = direction;
+            _moveDirection = Vector2.zero;
             _movePosition = moveTarget;
-        }
+        
 
     }
 
     private bool CanMove(Vector2 direction)
     {
-        if (direction != Vector2.zero)
+        if (direction != Vector2.zero && (!_isMoving || _gameContext.CanPlayerSwitchMoveDirection))
         {
-            if (!_isMoving)
+
+            if ((_isMoving && _moveDirection != Vector2.zero) &&
+                (_moveDirection == -direction || _moveDirection == direction))
             {
                 return true;
             }
-            else if (Game.CanPlayerSwipeDirection)
-            {
-                if(_currentMoveDirection != Vector2.zero)
-                {
-                    if(_currentMoveDirection == -direction)
-                    {
-                        return true;
-                    }
-                }
-            }
 
-            return false;
+
         }
 
         return false;
-    }
+    }   
+
 }
