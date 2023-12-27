@@ -54,8 +54,8 @@ public class GridGeneratorStandart : IGridGenerator
                 //var cell = Object.Instantiate(prefab, new Vector3(0, 0, 0), Quaternion.identity);
                 var cell = prefab;
                 cell.name = $"{cell.name}-{j}-{i}";
-                cell.transform.localScale = new Vector3(cell.transform.localScale.x * _scaleVector.x, cell.transform.localScale.y * _scaleVector.y, cell.transform.localScale.z * _scaleVector.z);
-                //cell.transform.localScale = _scaleVector;
+                //cell.transform.localScale = new Vector3(cell.transform.localScale.x * scaleVector.x, cell.transform.localScale.y * scaleVector.y, cell.transform.localScale.z * scaleVector.z);
+                cell.transform.localScale = _scaleVector;
                 cell.transform.position = new Vector3(
                     positionByScalePointerHorizontal + cell.transform.localScale.x / 2 ,
                     positionByScalePointerVertical + cell.transform.localScale.y / 2,
