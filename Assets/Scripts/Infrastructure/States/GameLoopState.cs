@@ -23,6 +23,7 @@ public class GameLoopState : IParameterizedState<LevelStaticData>//TODO del load
     public void Enter(LevelStaticData levelStaticData)
     {
         //_levelStaticData = levelStaticData;
+        CreateTutorial();
         _enemySpawner = new EnemySpawner(_gameFactory);
         _enemySpawnCoroutine = _coroutineRunner.StartCoroutine(SpawnEnemies(Game.GameContext.SpawnEnemyDelay));
         EventManager.OnGameOver += OnGameOver;
@@ -31,6 +32,8 @@ public class GameLoopState : IParameterizedState<LevelStaticData>//TODO del load
         EventManager.OnDamage += _damageBorder.ShowHide;
 
         _audioService.PlayLevelMusic();
+
+        
     }
 
     private void OnGameOver()
@@ -51,6 +54,11 @@ public class GameLoopState : IParameterizedState<LevelStaticData>//TODO del load
          
         return damageBorderObj.GetComponent<DamageBorder>();
 
+    }
+
+    private void CreateTutorial()
+    {
+        _gameFactory.CreateTutorial();
     }
 
     private  IEnumerator SpawnEnemies(float spawnDelay)

@@ -8,7 +8,7 @@ public interface IGameFactory : IService
     Enemy CreateEnemy(Vector2 spawnPoint, EnemyType enemyType, GameStageStaticData stage);
     Projectile CreateProjectile(Vector2 spawnPoint);
     GameObject CreateHud();
-
+    GameObject CreateTutorial();
     GameObject CreateDamageBorder();
     Dictionary<Vector2, Vector3> CreateGameGrid(LevelStaticData levelStaticData, Vector3 scaleVector);
     Dictionary<Vector2, Vector3> BlocksCoords { get ; }

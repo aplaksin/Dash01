@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    [SerializeField] private float _moveSpeed = 6f;//5
+    [SerializeField] private SkinListStaticData _skinsStaticData;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+
     private IInputService _inputService;
     private IGameFactory _gameFactory;
 
@@ -14,8 +18,7 @@ public class PlayerMove : MonoBehaviour
     private GameObject _fireBlock;
     private GameContext _gameContext;
     private Vector2 _currentMoveDirection = Vector2.zero;
-    [SerializeField]
-    private float _moveSpeed = 1f;//5
+    
 
     public void Init(Dictionary<Vector2, Vector3> cellPositionByCoords, Dictionary<Vector2, GameObject> blocksByCoords, Vector2 currentPlayerCoords, IInputService inputService, IGameFactory gameFactory, GameContext gameContext)
     {
@@ -26,6 +29,9 @@ public class PlayerMove : MonoBehaviour
         _inputService.SubscribeOnMoveEvent(Move);
         _gameFactory = gameFactory;
         _gameContext = gameContext;
+
+        //TODO перенести в отдельный скрипт + хп и тд + мб статик дату для всех настроек дать
+        ApplyRandomSkin();
     }
 
     private void Update()
@@ -122,5 +128,10 @@ public class PlayerMove : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void ApplyRandomSkin()
+    {
+        _spriteRenderer.sprite = _skinsStaticData.SpritesList[Random.Range(0, _skinsStaticData.SpritesList.Count)];
     }
 }

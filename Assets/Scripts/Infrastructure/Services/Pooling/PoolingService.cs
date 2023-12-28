@@ -113,7 +113,7 @@ public class PoolingService : IPoolingService
             int spriteIndex = Random.Range(0, _enemySkins.Count);
             Sprite sprite = _enemySkins[spriteIndex];
             _enemySkinsByType.Add(enemyType, sprite);
-            _enemySkins.Remove(sprite);
+            //_enemySkins.Remove(sprite);
 
             AddEnemiesToQueue(path, ref enemiesQueue, enemyStaticData, InitialCapacity);
             

@@ -19,6 +19,9 @@ public class GameFactory : IGameFactory
     private Dictionary<Vector2, GameObject> _blocksByCoords;
     private Dictionary<Vector2,Vector3> _blocksCoords;
 
+    private float _skaleCoeffForTanks = 1.4f;
+    private float _skinCoeffForPlayer = 1.5f;
+
     public GameFactory(IAssetProvider assetProvider, IPoolingService poolingService, IInputService inputInputService)
     {
         _assetProvider = assetProvider;
@@ -51,7 +54,16 @@ public class GameFactory : IGameFactory
     {
         Enemy enemy = _poolingService.GetEnemyByType(enemyType);
         enemy.InitProperties(stage);
-        enemy.transform.localScale = _scaleVector;
+        
+        if(EnemyType.Tank == enemyType)
+        {
+            enemy.transform.localScale = _scaleVector * _skaleCoeffForTanks;
+        }
+        else
+        {
+            enemy.transform.localScale = _scaleVector;
+        }
+
         enemy.transform.position = new Vector3(_cellPositionByCoords[new Vector2(spawnPoint.x, 0)].x, spawnPoint.y, 0);
 
         SelectBehaviourByType(enemyType, enemy);
@@ -78,7 +90,7 @@ public class GameFactory : IGameFactory
     public GameObject CreatePlayer(Vector2 spawnPoint, Vector3 scaleVector, Dictionary<Vector2, Vector3> cellpositionsByCoords, GameContext gameContext)
     {
         GameObject player = _assetProvider.Instantiate(AssetPath.PlayerPath);
-        player.transform.localScale = scaleVector;
+        player.transform.localScale = scaleVector * _skinCoeffForPlayer;
         SetPlayerPositionOnGrid(player, spawnPoint, cellpositionsByCoords);
         //player.transform.position = new Vector3(spawnPoint.x + player.transform.localScale.x / 2, spawnPoint.y + player.transform.localScale.y / 2, 0);
         
@@ -104,6 +116,10 @@ public class GameFactory : IGameFactory
         return _assetProvider.Instantiate(AssetPath.PauseMenuPath);
     }
 
+    public GameObject CreateTutorial()
+    {
+        return _assetProvider.Instantiate(AssetPath.UITutorial);
+    }
 
     private void SelectBehaviourByType(EnemyType enemyType, Enemy enemy)
     {

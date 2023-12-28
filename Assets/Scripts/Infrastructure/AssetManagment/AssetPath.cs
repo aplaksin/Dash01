@@ -7,6 +7,7 @@ public static class AssetPath
     public const string HudPath = "Hud/hud";
     public const string DamageBorderPath = "Hud/damageBorder";
     public static string MenuPath = "UI/menu";
+    public static string UITutorial = "UI/Tutorial";
     public static string PauseMenuPath = "UI/PauseMenu";
     public const string CellPath = "Grid/cell";
     public const string BlockPath = "Grid/block";
