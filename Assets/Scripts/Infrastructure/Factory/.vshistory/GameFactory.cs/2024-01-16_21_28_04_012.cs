@@ -19,11 +19,9 @@ public class GameFactory : IGameFactory
     private Dictionary<Vector2, GameObject> _blocksByCoords;
     private Dictionary<Vector2,Vector3> _blocksCoords;
 
-    //TODO вынести нахер отсюда
-    private float _scaleCoeffForTanks = 1.3f;
+    private float _skaleCoeffForTanks = 1.4f;
     private float _skinCoeffForPlayer = 1.6f;
-    private float _skinCoeffForEnemy = 1.75f;
-    private float _skinCoeffForProjectile = 1.2f;
+    private float _skinCoeffForEnemy = 1.5f;
 
     public GameFactory(IAssetProvider assetProvider, IPoolingService poolingService, IInputService inputInputService)
     {
@@ -50,7 +48,6 @@ public class GameFactory : IGameFactory
     {
         Projectile projectile = _poolingService.GetProjectileByType(ProjectileType.Base);
         projectile.transform.position = spawnPoint;
-        projectile.transform.localScale = _scaleVector * _skinCoeffForProjectile;
         return projectile;
     }
 
@@ -58,14 +55,14 @@ public class GameFactory : IGameFactory
     {
         Enemy enemy = _poolingService.GetEnemyByType(enemyType);
         enemy.InitProperties(stage);
-        Vector3 scale = _scaleVector * _skinCoeffForEnemy;
-        if (EnemyType.Tank == enemyType)
+        
+        if(EnemyType.Tank == enemyType)
         {
-            enemy.transform.localScale = scale * _scaleCoeffForTanks;
+            enemy.transform.localScale = _scaleVector * _skaleCoeffForTanks;
         }
         else
         {
-            enemy.transform.localScale = scale;
+            enemy.transform.localScale = _scaleVector;
         }
 
         enemy.transform.position = new Vector3(_cellPositionByCoords[new Vector2(spawnPoint.x, 0)].x, spawnPoint.y, 0);
