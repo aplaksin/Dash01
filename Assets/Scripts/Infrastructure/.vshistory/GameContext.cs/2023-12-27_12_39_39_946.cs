@@ -21,7 +21,7 @@ public class GameContext
     //private List<IEnemyBuff> _enemyBuffs =  new List<IEnemyBuff>();
     private Dictionary<EnemyBuffType, float> _enemyBuffsByType = new Dictionary<EnemyBuffType, float>();
     private bool _canPlayerSwitchMoveDirection;
-    private GameStageStaticData _interpolationStage;
+
     public GameContext(LevelStaticData levelStaticData, IAudioService audioService, IAssetProvider assetProvider)
     {
         _playerHP = levelStaticData.PlayerHP;
@@ -118,7 +118,6 @@ public class GameContext
     private void SetActiveStage(GameStageStaticData stage)
     {
         _currentStage = stage;
-        _interpolationStage = stage;
     }
 
     private void SubscribeOnEvents()
@@ -135,73 +134,18 @@ public class GameContext
     private void OnScoreChanged(int score)
     {
         _score += score;
+        GameStageStaticData stage;
+        //TODO score range, not constant score
+         _gameStageByScore.TryGetValue(_score, out stage);
 
-        /*        GameStageStaticData stage;
-                //TODO score range, not constant score
-                 _gameStageByScore.TryGetValue(_score, out stage);
-
-                if (stage != null)
-                {
-                    EventManager.CallOnChangeGameStage(stage);
-                    _currentStage = stage;
-                    _spawnEnemyDelay = stage.SpawnDelay;
-                }*/
-
-        TestGameStageInterpolation(score);
+        if (stage != null)
+        {
+            EventManager.CallOnChangeGameStage(stage);
+            _currentStage = stage;
+            _spawnEnemyDelay = stage.SpawnDelay;
+        }
 
         EventManager.CallOnScoreChanged(_score);
-    }
-
-    private void TestGameStageInterpolation(int score)
-    {
-        //TODO переиспользовать gameStageStaticData а не бахать все время заново
-        //l;l;l;l
-        //alpha = sqrt(score) / 32 # на 1000 скоре альфа будет == 1 и мы будем на максимуме сложности
-        //current_parameter = (1 - alpha) * initial_parameter + alpha * end_parameter
-        GameStageStaticData gameStageStaticData = new GameStageStaticData();
-        gameStageStaticData.enemySpawnProbabilities = new EnemySpawnProbability[_interpolationStage.enemySpawnProbabilities.Length];
-
-        for (int i = 0; i < _interpolationStage.enemySpawnProbabilities.Length; i++)
-        {
-            gameStageStaticData.enemySpawnProbabilities[i] = new EnemySpawnProbability(_interpolationStage.enemySpawnProbabilities[i].enemyType, _interpolationStage.enemySpawnProbabilities[i].probability);
-        }
-
-        gameStageStaticData.EnemySpeedScale = CalcStageParamByScore(_score, _interpolationStage.EnemySpeedScale, _interpolationStage.CfEnemySpeedScale);
-        gameStageStaticData.SpawnDelay = CalcStageParamByScore(_score, _interpolationStage.SpawnDelay, _interpolationStage.CfSpawnDelay);
-
-        for(int i = 0; i < _interpolationStage.enemySpawnProbabilities.Length; i++)
-        {
-            gameStageStaticData.enemySpawnProbabilities[i].probability = CalcStageParamByScore(_score, _interpolationStage.enemySpawnProbabilities[i].probability, _interpolationStage.CfEnemySpawnProbabilities[i].probability);
-        }
-
-        EventManager.CallOnChangeGameStage(gameStageStaticData);
-        _currentStage = gameStageStaticData;
-        _spawnEnemyDelay = gameStageStaticData.SpawnDelay;
-
-        Debug.Log("++++++++++++++++++++++++++++++++++++++");
-        Debug.Log("Score ==== " + _score);
-
-        Debug.Log("gameStageStaticData.EnemySpeedScale - "+ gameStageStaticData.EnemySpeedScale);
-        Debug.Log("gameStageStaticData.SpawnDelay - " + gameStageStaticData.SpawnDelay);
-        for (int i = 0; i < _interpolationStage.enemySpawnProbabilities.Length; i++)
-        {
-            Debug.Log("enemySpawnProbabilities - " + gameStageStaticData.enemySpawnProbabilities[i].Debug());
-        }
-        
-
-        Debug.Log("++++++++++++++++++++++++++++++++++++++");
-
-    }
-
-    private float CalcStageParamByScore(int score, float initParam, float endParam)
-    {
-        float param = 0.0f;
-        float alpha = Mathf.Sqrt(score) / 20;
-        param = (1 - alpha) * initParam + alpha * endParam;
-
-
-
-        return param;
     }
 
     private void OnHpChanged(int hp)
@@ -212,7 +156,6 @@ public class GameContext
 
         if(_playerHP <= 0)
         {
-            Debug.Log("_playerHP <= 0");
             Clear();
             EventManager.CallOnGameOver();
             _audioService.PlayGameOverMusic();

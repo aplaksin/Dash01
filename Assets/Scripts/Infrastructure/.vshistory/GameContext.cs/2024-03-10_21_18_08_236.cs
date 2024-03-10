@@ -196,7 +196,7 @@ public class GameContext
     private float CalcStageParamByScore(int score, float initParam, float endParam)
     {
         float param = 0.0f;
-        float alpha = Mathf.Sqrt(score) / 20;
+        float alpha = Mathf.Sqrt(score) / 16;
         param = (1 - alpha) * initParam + alpha * endParam;
 
 

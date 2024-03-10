@@ -25,12 +25,11 @@ public class GameLoopState : IParameterizedState<LevelStaticData>//TODO del load
         //_levelStaticData = levelStaticData;
         CreateTutorial();
         _enemySpawner = new EnemySpawner(_gameFactory);
-        //_enemySpawnCoroutine = _coroutineRunner.StartCoroutine(SpawnEnemies(Game.GameContext.SpawnEnemyDelay));//TODO check SpawnEnemyDelay
-        _enemySpawnCoroutine = _coroutineRunner.StartCoroutine(SpawnEnemies());//TODO check SpawnEnemyDelay
+        _enemySpawnCoroutine = _coroutineRunner.StartCoroutine(SpawnEnemies(Game.GameContext.SpawnEnemyDelay));//TODO check SpawnEnemyDelay
 
         _damageBorder = CreateDamageBorder();
         EventManager.OnDamage += _damageBorder.ShowHide;
-        EventManager.OnGameOver += OnGameOver;
+
         _audioService.PlayLevelMusic();
 
         
@@ -38,8 +37,6 @@ public class GameLoopState : IParameterizedState<LevelStaticData>//TODO del load
 
     private void OnGameOver()
     {
-        Debug.Log("OnGameOver");
-        //TODO перенести остановку времени в контекст
         _windowService.OpenWindowById(WindowId.GameOver);
     }
 
@@ -63,8 +60,7 @@ public class GameLoopState : IParameterizedState<LevelStaticData>//TODO del load
         _gameFactory.CreateTutorial();
     }
 
-    //private  IEnumerator SpawnEnemies(float spawnDelay)
-    private  IEnumerator SpawnEnemies()
+    private  IEnumerator SpawnEnemies(float spawnDelay)
     {
 
         while (true)
@@ -74,7 +70,7 @@ public class GameLoopState : IParameterizedState<LevelStaticData>//TODO del load
             Game.GameContext.AddActiveEnemy(enemy);
             //Debug.Log(Game.GameContext.GetEnemyesCount());
             //Game.GameContext.ApplyEnemyBuffs();
-            yield return new WaitForSeconds(Game.GameContext.SpawnEnemyDelay);
+            yield return new WaitForSeconds(spawnDelay);
         }
     }
 }

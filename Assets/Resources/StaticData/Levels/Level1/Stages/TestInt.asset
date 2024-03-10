@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c380c0b2ff66a1409a33ac8f0855ad3, type: 3}
+  m_Name: TestInt
+  m_EditorClassIdentifier: 
+  ScoreStage: 0
+  EnemySpeedScale: 1
+  AdditionalDamage: 0
+  SpawnDelay: 2
+  enemySpawnProbabilities:
+  - enemyType: 0
+    probability: 100
+  - enemyType: 1
+    probability: 0
+  - enemyType: 2
+    probability: 0
+  - enemyType: 3
+    probability: 0
+  CfEnemySpeedScale: 1.7
+  CfSpawnDelay: 0.8
+  CfEnemySpawnProbabilities:
+  - enemyType: 0
+    probability: 35
+  - enemyType: 1
+    probability: 25
+  - enemyType: 2
+    probability: 25
+  - enemyType: 3
+    probability: 15

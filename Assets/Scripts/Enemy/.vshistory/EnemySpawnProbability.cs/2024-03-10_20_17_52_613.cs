@@ -6,12 +6,6 @@ using UnityEngine;
 [Serializable]
 public class EnemySpawnProbability
 {
-    public EnemySpawnProbability(EnemyType type, float prob)
-    {
-        enemyType = type;
-        probability = prob;
-    }
-
     public EnemyType enemyType;
     public float probability;
 

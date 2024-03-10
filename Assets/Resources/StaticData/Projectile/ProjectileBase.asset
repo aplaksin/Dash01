@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ProjectileBase
   m_EditorClassIdentifier: 
   Damage: 1
-  MoveSpeed: 2
+  MoveSpeed: 20
   Type: 0
   ShootSound: {fileID: 8300000, guid: 633a9465fd488d148b8e83fcc5e4d190, type: 3}
   SkinListStaticData: {fileID: 11400000, guid: 25b70bbcd858284408f4548bbf4673d5, type: 2}

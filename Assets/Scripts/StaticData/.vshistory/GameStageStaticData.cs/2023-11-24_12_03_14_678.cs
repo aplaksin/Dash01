@@ -9,9 +9,6 @@ public class GameStageStaticData : ScriptableObject
     public float SpawnDelay = 0;
     public EnemySpawnProbability[] enemySpawnProbabilities;
 
-    public float CfEnemySpeedScale = 0f;
-    public float CfSpawnDelay = 0;
-    public EnemySpawnProbability[] CfEnemySpawnProbabilities;
     public EnemyType[] GetEnemyTypes()
     {
         EnemyType[] enemyTypes = new EnemyType[enemySpawnProbabilities.Length];

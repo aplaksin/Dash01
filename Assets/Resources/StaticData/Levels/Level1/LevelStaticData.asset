@@ -22,11 +22,5 @@ MonoBehaviour:
   PlayerHP: 5
   CanPlayerSwitchMoveDirection: 0
   GameStageStaticDatas:
-  - {fileID: 11400000, guid: 0d8cb8964a5b2184d8cb562b05762a25, type: 2}
-  - {fileID: 11400000, guid: f66f184c3985f884b9fdeda14cede72b, type: 2}
-  - {fileID: 11400000, guid: 33f5f7ed964f03b4cba542c211eb7e6a, type: 2}
-  - {fileID: 11400000, guid: 5c43ee9f660f6494ea5f1527f0f21169, type: 2}
-  - {fileID: 11400000, guid: 85914399c527aae4eaa06018163dc5ab, type: 2}
-  - {fileID: 11400000, guid: 48fc7bd9ce1b8464f85420d342854ba9, type: 2}
-  - {fileID: 11400000, guid: afce3af5f29dad4428b9fd7438730230, type: 2}
+  - {fileID: 11400000, guid: a17785601dbf948498c75cc392bb8d81, type: 2}
   LevelMusic: {fileID: 8300000, guid: c1f45f8d13bc0c04ba261b2262e9924e, type: 3}

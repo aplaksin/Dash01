@@ -8,7 +8,7 @@ public class ProjectileStaticData : ScriptableObject
     [Range(1f, 30f)]
     public float Damage;
 
-    [Range(0.1f, 30f)]
+    [Range(0.1f, 10f)]
     public float MoveSpeed;
 
     public ProjectileType Type;

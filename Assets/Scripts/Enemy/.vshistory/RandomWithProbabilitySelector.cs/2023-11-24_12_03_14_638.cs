@@ -11,7 +11,7 @@ public static class RandomWithProbabilitySelector
         {
             throw new ArgumentException("choisesArrayLength != probability.Length");
         }
-        //TODO del comments
+
         float[] probabilitySum = new float[choisesArrayLength];
 
         // `prob_sum[i]` содержит сумму всех `probability[j]` для `0 <= j <= i`

@@ -59,7 +59,6 @@ public class GameFactory : IGameFactory
         Enemy enemy = _poolingService.GetEnemyByType(enemyType);
         enemy.InitProperties(stage);
         Vector3 scale = _scaleVector * _skinCoeffForEnemy;
-
         if (EnemyType.Tank == enemyType)
         {
             enemy.transform.localScale = scale * _scaleCoeffForTanks;
