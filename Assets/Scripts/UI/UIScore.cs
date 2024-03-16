@@ -10,7 +10,7 @@ public class UIScore : MonoBehaviour
 
 
     private int _currentScore = 0;
-
+    private int _scoreMultiplier = 10;
     private void Start()
     {
         _scoreText = _scoreTextField.text;
@@ -19,7 +19,7 @@ public class UIScore : MonoBehaviour
 
     private void UpdateText()
     {
-        _scoreTextField.text = $"{_scoreText} {_currentScore}";
+        _scoreTextField.text = $"{_scoreText} {_currentScore * _scoreMultiplier}";
     }
 
     private void OnEnable()

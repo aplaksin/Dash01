@@ -40,7 +40,7 @@ public class GridGeneratorStandart : IGridGenerator
                 Vector2 currentCoords = new Vector2(j, i);
 
                 GameObject prefab;
-
+                //TODO clear comments
                 if (blocksList.Contains(currentCoords))
                 {
                     //prefab = _blockPrefab; 0.6318452
@@ -57,8 +57,8 @@ public class GridGeneratorStandart : IGridGenerator
                 cell.transform.localScale = new Vector3(cell.transform.localScale.x * _scaleVector.x, cell.transform.localScale.y * _scaleVector.y, cell.transform.localScale.z * _scaleVector.z);
                 //cell.transform.localScale = _scaleVector;
                 cell.transform.position = new Vector3(
-                    positionByScalePointerHorizontal + cell.transform.localScale.x / 2 ,
-                    positionByScalePointerVertical + cell.transform.localScale.y / 2,
+                    positionByScalePointerHorizontal + _scaleVector.x / 2 ,
+                    positionByScalePointerVertical + _scaleVector.y / 2,
                     0);
                 cellPositionByCoords.Add(currentCoords, cell.transform.position);
 

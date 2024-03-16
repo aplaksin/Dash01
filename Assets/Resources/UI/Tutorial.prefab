@@ -131,7 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _image: {fileID: 2377484252443348611}
   _canvasGroup: {fileID: 8142157137508457557}
-  _swipeSprite: {fileID: 21300000, guid: cd250158bb9b49f41a425f57358c561a, type: 3}
+  _swipeSprite: {fileID: 21300000, guid: fe6d645239cc5b94e97f08f137a579b7, type: 3}
   _wasdSprite: {fileID: 21300000, guid: 32c0859b110f66540ba2e7db12a78ae2, type: 3}
   _fadeStep: 0.01
   _fadeStepDelay: 0.05

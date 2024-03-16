@@ -158,7 +158,7 @@ public class GameContext
         //l;l;l;l
         //alpha = sqrt(score) / 32 # на 1000 скоре альфа будет == 1 и мы будем на максимуме сложности
         //current_parameter = (1 - alpha) * initial_parameter + alpha * end_parameter
-        GameStageStaticData gameStageStaticData = new GameStageStaticData();
+        GameStageStaticData gameStageStaticData = ScriptableObject.CreateInstance<GameStageStaticData>();
         gameStageStaticData.enemySpawnProbabilities = new EnemySpawnProbability[_interpolationStage.enemySpawnProbabilities.Length];
 
         for (int i = 0; i < _interpolationStage.enemySpawnProbabilities.Length; i++)
@@ -196,11 +196,13 @@ public class GameContext
     private float CalcStageParamByScore(int score, float initParam, float endParam)
     {
         float param = 0.0f;
-        float alpha = Mathf.Sqrt(score) / 20;
+        //float alpha = Mathf.Sqrt(score) / 20;
+        float b = Mathf.Min(1, 1 / (score * 0.005f));
+        float alpha = - 0.2f + Mathf.Sqrt(score) / 20 + b * 0.1f * Mathf.Sin(0.5f * score);
+        alpha = Mathf.Clamp(alpha, 0, 1);
+
         param = (1 - alpha) * initParam + alpha * endParam;
-
-
-
+        
         return param;
     }
 

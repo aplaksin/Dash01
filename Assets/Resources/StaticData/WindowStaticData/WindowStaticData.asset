@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Configs:
   - WindowId: 1
-    Template: {fileID: 4665009449682231679, guid: ee1da160aa7ba454ba691300b334ab1a, type: 3}
+    Template: {fileID: 4383659425548614632, guid: ee1da160aa7ba454ba691300b334ab1a, type: 3}
   - WindowId: 2
-    Template: {fileID: 874847078728180822, guid: 317b0ac4bdeffc843a2de64a2d2e0205, type: 3}
+    Template: {fileID: 6661854283117767333, guid: 317b0ac4bdeffc843a2de64a2d2e0205, type: 3}
