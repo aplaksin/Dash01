@@ -10,7 +10,7 @@ public class UIScore : MonoBehaviour
 
 
     private int _currentScore = 0;
-    private int _scoreMultiplier = 25;//TODO переделать и почистить вообще
+    private int _scoreMultiplier = 10;
     private void Start()
     {
         _scoreText = _scoreTextField.text;

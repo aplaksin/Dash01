@@ -11,7 +11,7 @@ public class GameOverMenu : WindowBase
     private string _scoreText;
     private int _score;
     private GameStateMachine _gameStateMachine;
-    private int _scoreMultiplier = 25;//TODO переделать и почистить вообще
+    private int _scoreMultiplier = 10;//TODO переделать и почистить вообще
     public void Construct(GameStateMachine gameStateMachine, int score)
     {
         _gameStateMachine = gameStateMachine;

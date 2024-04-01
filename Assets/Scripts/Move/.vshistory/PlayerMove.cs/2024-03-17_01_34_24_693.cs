@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    [SerializeField] private float _moveSpeed = 2f;//5 6
+    [SerializeField] private float _moveSpeed = 6f;//5
     [SerializeField] private SkinListStaticData _skinsStaticData;
     [SerializeField] private SpriteRenderer _spriteRenderer;
 

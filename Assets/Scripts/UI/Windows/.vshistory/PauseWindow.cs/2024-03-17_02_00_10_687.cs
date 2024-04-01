@@ -18,7 +18,7 @@ public class PauseWindow : WindowBase
         _gameStateMachine = gameStateMachine;
         _audioService = audioService;
         _soundToggle.SetIsOnWithoutNotify(!_audioService.IsSoundOn);
-        Debug.Log("_audioService.IsSoundOn   " + _audioService.IsSoundOn);
+
 
         PauseGame();
         //EventManager.OnGameOver += OnGameOver;

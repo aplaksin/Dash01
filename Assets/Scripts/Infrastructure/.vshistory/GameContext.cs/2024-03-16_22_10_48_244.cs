@@ -197,32 +197,12 @@ public class GameContext
     {
         float param = 0.0f;
         //float alpha = Mathf.Sqrt(score) / 20;
-
-/*        float b = Mathf.Min(1, 1 / (score * 0.005f));
+        float b = Mathf.Min(1, 1 / (score * 0.005f));
         float alpha = - 0.2f + Mathf.Sqrt(score) / 20 + b * 0.1f * Mathf.Sin(0.5f * score);
         alpha = Mathf.Clamp(alpha, 0, 1);
 
-        param = (1 - alpha) * initParam + alpha * endParam;*/
-        
-        float b = 0.0f;
-
-        if(score >= 15) 
-        {
-            b = Mathf.Min(1, 1 / (score * 0.005f));
-        }
-
-        float alpha = (5 * Mathf.Log(score) + 2 * Mathf.Sqrt(score)) * 0.0125f + b * Mathf.Max(-0.05f, 0.1f * Mathf.Sin(0.25f * score));
         param = (1 - alpha) * initParam + alpha * endParam;
-
-        /*
-
-         давай такую формулу
-        (5*log(x)+2*sqrt(x))*0.0125 + b*max(-0.05, 0.1*sin(0.25*x))
-        и при расчете б, 
-        if score < 15:
-            b = 0
-        else:
-            та формула*/
+        
         return param;
     }
 

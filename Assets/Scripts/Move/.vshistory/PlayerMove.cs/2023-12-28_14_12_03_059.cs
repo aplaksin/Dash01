@@ -1,10 +1,9 @@
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    [SerializeField] private float _moveSpeed = 2f;//5 6
+    [SerializeField] private float _moveSpeed = 6f;//5
     [SerializeField] private SkinListStaticData _skinsStaticData;
     [SerializeField] private SpriteRenderer _spriteRenderer;
 
@@ -19,8 +18,7 @@ public class PlayerMove : MonoBehaviour
     private GameObject _fireBlock;
     private GameContext _gameContext;
     private Vector2 _currentMoveDirection = Vector2.zero;
-
-    private float currentMoveDuration = 0.0f;
+    
 
     public void Init(Dictionary<Vector2, Vector3> cellPositionByCoords, Dictionary<Vector2, GameObject> blocksByCoords, Vector2 currentPlayerCoords, IInputService inputService, IGameFactory gameFactory, GameContext gameContext)
     {
@@ -41,17 +39,11 @@ public class PlayerMove : MonoBehaviour
         if (_movePosition != Vector3.zero)
         {
             _isMoving = true;
-            currentMoveDuration += Time.deltaTime;
-            float step = currentMoveDuration / _moveSpeed;
+            var step = _moveSpeed * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, _movePosition, step);
 
-            //float step = _moveSpeed * Time.deltaTime;
-
-            //transform.position = Vector3.MoveTowards(transform.position, _movePosition, step);
-
-            transform.position = Vector3.MoveTowards(transform.position, _movePosition, EaseOutExpo(step));
             if (Vector3.Distance(transform.position, _movePosition) < 0.001f)
             {
-                currentMoveDuration = 0.0f;
 
                 transform.position = _movePosition;
                 _movePosition = Vector3.zero;
@@ -109,8 +101,6 @@ public class PlayerMove : MonoBehaviour
             }
             _currentMoveDirection = direction;
             _movePosition = moveTarget;
-            //Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime, speed);
-            
         }
 
     }
@@ -143,10 +133,5 @@ public class PlayerMove : MonoBehaviour
     private void ApplyRandomSkin()
     {
         _spriteRenderer.sprite = _skinsStaticData.SpritesList[Random.Range(0, _skinsStaticData.SpritesList.Count)];
-    }
-
-    private float EaseOutExpo(float k)
-    {
-        return k == 1f ? 1f : 1f - Mathf.Pow(2f, -10f * k);
     }
 }
