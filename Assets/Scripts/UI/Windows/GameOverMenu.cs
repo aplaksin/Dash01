@@ -17,7 +17,7 @@ public class GameOverMenu : WindowBase
         _gameStateMachine = gameStateMachine;
         _scoreText = _scoreTextField.text;
         _score = score;
-
+        _scoreMultiplier = Game.GameContext.ScoreUIMultiplier;
         UpdateText();
         PauseGame();
     }

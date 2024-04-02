@@ -6,6 +6,7 @@ public class GameContext
     public float SpawnEnemyDelay { get { return _spawnEnemyDelay; } }
     public GameStageStaticData CurrentStage { get { return _currentStage; } }
 
+    public int ScoreUIMultiplier { get { return _scoreUIMiltiplier; } }
     //TODO remove just for tests
     public bool CanPlayerSwitchMoveDirection { get { return _canPlayerSwitchMoveDirection; } set { _canPlayerSwitchMoveDirection = value; } }
 
@@ -22,6 +23,7 @@ public class GameContext
     private Dictionary<EnemyBuffType, float> _enemyBuffsByType = new Dictionary<EnemyBuffType, float>();
     private bool _canPlayerSwitchMoveDirection;
     private GameStageStaticData _interpolationStage;
+    private int _scoreUIMiltiplier;
     public GameContext(LevelStaticData levelStaticData, IAudioService audioService, IAssetProvider assetProvider)
     {
         _playerHP = levelStaticData.PlayerHP;
@@ -34,6 +36,7 @@ public class GameContext
         SubscribeOnEvents();
         _assetProvider = assetProvider;
         _canPlayerSwitchMoveDirection = levelStaticData.CanPlayerSwitchMoveDirection;
+        _scoreUIMiltiplier = levelStaticData.ScoreMultiplier;
     }
 
     public void AddEnemyBuff(List<IEnemyBuff> buffList)
@@ -64,7 +67,7 @@ public class GameContext
             {
                 float newValue = _enemyBuffsByType[enemyBuff.Type] - enemyBuff.Value;
                 _enemyBuffsByType[enemyBuff.Type] = newValue;
-                Debug.Log("RemoveEnemyBuff newValue" + newValue);
+                
             }
 
         }
@@ -178,18 +181,13 @@ public class GameContext
         _currentStage = gameStageStaticData;
         _spawnEnemyDelay = gameStageStaticData.SpawnDelay;
 
-        Debug.Log("++++++++++++++++++++++++++++++++++++++");
-        Debug.Log("Score ==== " + _score);
-
-        Debug.Log("gameStageStaticData.EnemySpeedScale - "+ gameStageStaticData.EnemySpeedScale);
-        Debug.Log("gameStageStaticData.SpawnDelay - " + gameStageStaticData.SpawnDelay);
         for (int i = 0; i < _interpolationStage.enemySpawnProbabilities.Length; i++)
         {
             Debug.Log("enemySpawnProbabilities - " + gameStageStaticData.enemySpawnProbabilities[i].Debug());
         }
         
 
-        Debug.Log("++++++++++++++++++++++++++++++++++++++");
+        
 
     }
 
@@ -214,15 +212,6 @@ public class GameContext
         float alpha = (5 * Mathf.Log(score) + 2 * Mathf.Sqrt(score)) * 0.0125f + b * Mathf.Max(-0.05f, 0.1f * Mathf.Sin(0.25f * score));
         param = (1 - alpha) * initParam + alpha * endParam;
 
-        /*
-
-         давай такую формулу
-        (5*log(x)+2*sqrt(x))*0.0125 + b*max(-0.05, 0.1*sin(0.25*x))
-        и при расчете б, 
-        if score < 15:
-            b = 0
-        else:
-            та формула*/
         return param;
     }
 
@@ -234,7 +223,7 @@ public class GameContext
 
         if(_playerHP <= 0)
         {
-            Debug.Log("_playerHP <= 0");
+            
             Clear();
             EventManager.CallOnGameOver();
             _audioService.PlayGameOverMusic();

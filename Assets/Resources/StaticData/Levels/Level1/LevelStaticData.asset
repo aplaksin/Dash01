@@ -20,6 +20,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ab3f062bf2199564780a1b1d724d931e, type: 2}
   - {fileID: 11400000, guid: 76b481477c0e6314b9f198fcbeacfaec, type: 2}
   PlayerHP: 5
+  ScoreMultiplier: 25
   CanPlayerSwitchMoveDirection: 0
   GameStageStaticDatas:
   - {fileID: 11400000, guid: a17785601dbf948498c75cc392bb8d81, type: 2}

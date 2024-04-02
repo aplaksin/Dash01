@@ -14,8 +14,10 @@ public class UIScore : MonoBehaviour
     private void Start()
     {
         _scoreText = _scoreTextField.text;
+        _scoreMultiplier = Game.GameContext.ScoreUIMultiplier;
         UpdateText();
     }
+
 
     private void UpdateText()
     {
@@ -24,17 +26,23 @@ public class UIScore : MonoBehaviour
 
     private void OnEnable()
     {
-
         EventManager.OnScoreChanged += AddScore;
+        EventManager.OnGameOver += HideScore;
     }
     private void OnDisable()
     {
         EventManager.OnScoreChanged -= AddScore;
+        EventManager.OnGameOver -= HideScore;
     }
 
     private void AddScore(int score)
     {
         _currentScore = score;
         UpdateText();
+    }
+
+    private void HideScore()
+    {
+        _scoreTextField.transform.gameObject.SetActive(false);
     }
 }

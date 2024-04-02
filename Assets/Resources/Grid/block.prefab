@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4773876398575545845}
   - component: {fileID: 1843114079481812564}
   - component: {fileID: -2195009507639263123}
+  - component: {fileID: 5640148887866307451}
   m_Layer: 0
   m_Name: block
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -122,3 +123,18 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 80c88f4bc187e99429a891cf157d79e2, type: 3}
   - {fileID: 21300000, guid: 3abde64d9fd4ca748bd5a2a65a5ab9a3, type: 3}
   _animationDelay: 0.1
+--- !u!114 &5640148887866307451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7127859371970453988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4715b5b6e0027e94aa1c7f3615dd0b12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationSpeed: 9
+  scaleFactor: 1.1
+  isLooped: 1

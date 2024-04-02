@@ -220,6 +220,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8493594776518678522, guid: d598c1258118a53438d44f4e5b6dbf77, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8493594776518678522, guid: d598c1258118a53438d44f4e5b6dbf77, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8493594776518678522, guid: d598c1258118a53438d44f4e5b6dbf77, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1080
+      objectReference: {fileID: 0}
+    - target: {fileID: 8493594776518678522, guid: d598c1258118a53438d44f4e5b6dbf77, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1920
+      objectReference: {fileID: 0}
     - target: {fileID: 8493594776518678524, guid: d598c1258118a53438d44f4e5b6dbf77, type: 3}
       propertyPath: m_Name
       value: Curtain
@@ -466,7 +482,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1283162284786365806, guid: 8604303ff88b7c846a4d8276d3b49764, type: 3}
       propertyPath: m_Volume
-      value: 0.134
+      value: 0.069
       objectReference: {fileID: 0}
     - target: {fileID: 3719632280420080877, guid: 8604303ff88b7c846a4d8276d3b49764, type: 3}
       propertyPath: _fxSource
@@ -482,7 +498,7 @@ PrefabInstance:
       objectReference: {fileID: 921439019}
     - target: {fileID: 4158809372336060745, guid: 8604303ff88b7c846a4d8276d3b49764, type: 3}
       propertyPath: m_Volume
-      value: 0.138
+      value: 0.478
       objectReference: {fileID: 0}
     - target: {fileID: 8722742988643689062, guid: 8604303ff88b7c846a4d8276d3b49764, type: 3}
       propertyPath: m_Name

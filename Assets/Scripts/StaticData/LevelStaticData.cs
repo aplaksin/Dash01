@@ -9,6 +9,7 @@ public class LevelStaticData : ScriptableObject
     public GameGridStaticData GameGridData;
     public List<GameGridStaticData> GameGridStaticDataList = new List<GameGridStaticData>();
     public int PlayerHP;
+    public int ScoreMultiplier = 25;
     public bool CanPlayerSwitchMoveDirection = false;
     //TODO del SpawnProbabilityByType
     //public SpawnProbabilityByType[] EnemyTypes;
