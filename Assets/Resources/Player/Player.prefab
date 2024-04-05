@@ -97,6 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1429fafe50ae2db4cacb510427395900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 15
+  _moveSpeed: 10
   _skinsStaticData: {fileID: 11400000, guid: bd141f49877e6f041b10fb8098ce1071, type: 2}
   _spriteRenderer: {fileID: 5948045748140873212}

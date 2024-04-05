@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TestInt
   m_EditorClassIdentifier: 
   ScoreStage: 0
-  EnemySpeedScale: 1
+  EnemySpeedScale: 0.8
   AdditionalDamage: 0
   SpawnDelay: 2
   enemySpawnProbabilities:

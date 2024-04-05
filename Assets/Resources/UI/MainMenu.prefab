@@ -89,6 +89,7 @@ GameObject:
   - component: {fileID: 3473019753411724524}
   - component: {fileID: 2292092402278363684}
   - component: {fileID: 2508793170839892613}
+  - component: {fileID: 7126819935402218556}
   m_Layer: 5
   m_Name: StartBtn
   m_TagString: Untagged
@@ -144,7 +145,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e01fd6cacf4c7e64bb7dd2556b135edc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -217,46 +218,67 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 573258646454675153}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af0b92c7e9df713439f2d7ea702b1e54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _bgFirst: {fileID: 3473019753411724524}
   _bgList:
-  - {fileID: 63323025, guid: 21d70efb71459614fba5f92f85ad7763, type: 3}
-  - {fileID: -652894059, guid: 21d70efb71459614fba5f92f85ad7763, type: 3}
-  - {fileID: 1270483514, guid: 21d70efb71459614fba5f92f85ad7763, type: 3}
-  - {fileID: 458609158, guid: 21d70efb71459614fba5f92f85ad7763, type: 3}
-  - {fileID: 798707227, guid: 21d70efb71459614fba5f92f85ad7763, type: 3}
-  - {fileID: 1975460861, guid: 21d70efb71459614fba5f92f85ad7763, type: 3}
-  - {fileID: 218487327, guid: 21d70efb71459614fba5f92f85ad7763, type: 3}
-  - {fileID: -1554555565, guid: 21d70efb71459614fba5f92f85ad7763, type: 3}
-  - {fileID: -1701162297, guid: 21d70efb71459614fba5f92f85ad7763, type: 3}
-  - {fileID: 1986939337, guid: 21d70efb71459614fba5f92f85ad7763, type: 3}
-  - {fileID: 971897732, guid: 21d70efb71459614fba5f92f85ad7763, type: 3}
-  - {fileID: 1221461357, guid: 21d70efb71459614fba5f92f85ad7763, type: 3}
-  - {fileID: 160133698, guid: 21d70efb71459614fba5f92f85ad7763, type: 3}
-  - {fileID: 1665182122, guid: 21d70efb71459614fba5f92f85ad7763, type: 3}
-  - {fileID: 2145077377, guid: 21d70efb71459614fba5f92f85ad7763, type: 3}
-  - {fileID: 1076998439, guid: 21d70efb71459614fba5f92f85ad7763, type: 3}
-  - {fileID: -217949210, guid: 21d70efb71459614fba5f92f85ad7763, type: 3}
-  - {fileID: -181516517, guid: 21d70efb71459614fba5f92f85ad7763, type: 3}
-  - {fileID: -1958375790, guid: 21d70efb71459614fba5f92f85ad7763, type: 3}
-  - {fileID: -1136729968, guid: 21d70efb71459614fba5f92f85ad7763, type: 3}
-  - {fileID: 34536861, guid: 21d70efb71459614fba5f92f85ad7763, type: 3}
-  - {fileID: 992205832, guid: 21d70efb71459614fba5f92f85ad7763, type: 3}
-  - {fileID: 430370998, guid: 21d70efb71459614fba5f92f85ad7763, type: 3}
-  - {fileID: 1786091114, guid: 21d70efb71459614fba5f92f85ad7763, type: 3}
-  - {fileID: -829161610, guid: 21d70efb71459614fba5f92f85ad7763, type: 3}
-  - {fileID: 1451257513, guid: 21d70efb71459614fba5f92f85ad7763, type: 3}
-  - {fileID: 775276918, guid: 21d70efb71459614fba5f92f85ad7763, type: 3}
-  - {fileID: 1412757865, guid: 21d70efb71459614fba5f92f85ad7763, type: 3}
-  - {fileID: -1479945069, guid: 21d70efb71459614fba5f92f85ad7763, type: 3}
-  - {fileID: -1288050375, guid: 21d70efb71459614fba5f92f85ad7763, type: 3}
-  - {fileID: 1319742964, guid: 21d70efb71459614fba5f92f85ad7763, type: 3}
-  - {fileID: -659162179, guid: 21d70efb71459614fba5f92f85ad7763, type: 3}
+  - {fileID: -1928071649, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
+  - {fileID: 265976796, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
+  - {fileID: -2026447636, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
+  - {fileID: 731534067, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
+  - {fileID: 2062580930, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
+  - {fileID: -1251126645, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
+  - {fileID: 280261826, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
+  - {fileID: -636750935, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
+  - {fileID: 2107663591, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
+  - {fileID: -555476760, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
+  - {fileID: -993179100, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
+  - {fileID: -1985096249, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
+  - {fileID: -1028436171, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
+  - {fileID: -617745299, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
+  - {fileID: 1096843858, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
+  - {fileID: 1337400409, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
+  - {fileID: 1769476937, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
+  - {fileID: 167054424, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
+  - {fileID: 1182196630, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
+  - {fileID: 1978660061, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
+  - {fileID: 78203159, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
+  - {fileID: 1437268929, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
+  - {fileID: -108021809, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
+  - {fileID: 2110063399, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
+  - {fileID: 1445800652, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
+  - {fileID: 828810178, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
+  - {fileID: -2080453428, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
+  - {fileID: -532809096, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
+  - {fileID: 1655739870, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
+  - {fileID: 1371853335, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
+  - {fileID: 1402871132, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
+  - {fileID: 1054385710, guid: 06de1bc1b6e0e9d49989e5c531d84e84, type: 3}
   _animationDelay: 0.04
+--- !u!95 &7126819935402218556
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573258646454675153}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4ace8577049f2a6409d2c15b4903f460, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1375280840579230421
 GameObject:
   m_ObjectHideFlags: 0

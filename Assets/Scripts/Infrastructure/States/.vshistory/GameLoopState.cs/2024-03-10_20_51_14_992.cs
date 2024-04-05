@@ -38,7 +38,7 @@ public class GameLoopState : IParameterizedState<LevelStaticData>//TODO del load
 
     private void OnGameOver()
     {
-        
+        Debug.Log("OnGameOver");
         //TODO перенести остановку времени в контекст
         _windowService.OpenWindowById(WindowId.GameOver);
     }

@@ -42,13 +42,14 @@ public class PlayerMove : MonoBehaviour
         {
             _isMoving = true;
             currentMoveDuration += Time.deltaTime;
-            float step = currentMoveDuration * _moveSpeed * Time.deltaTime;
+            //float step = currentMoveDuration / _moveSpeed;
 
-            //float step = _moveSpeed * Time.deltaTime;
 
-            //transform.position = Vector3.MoveTowards(transform.position, _movePosition, step);
+            float step = _moveSpeed * Time.deltaTime;
 
-            transform.position = Vector3.MoveTowards(transform.position, _movePosition, EaseOutExpo(step));
+            transform.position = Vector3.MoveTowards(transform.position, _movePosition, step);
+
+            //transform.position = Vector3.MoveTowards(transform.position, _movePosition, EaseOutExpo(step));
             if (Vector3.Distance(transform.position, _movePosition) < 0.001f)
             {
                 //Debug.Log("currentMoveDuration " + currentMoveDuration);
@@ -150,5 +151,4 @@ public class PlayerMove : MonoBehaviour
     {
         return k == 1f ? 1f : 1f - Mathf.Pow(2f, -10f * k);
     }
-
 }

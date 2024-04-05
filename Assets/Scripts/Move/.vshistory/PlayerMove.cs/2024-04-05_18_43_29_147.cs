@@ -42,7 +42,8 @@ public class PlayerMove : MonoBehaviour
         {
             _isMoving = true;
             currentMoveDuration += Time.deltaTime;
-            float step = currentMoveDuration * _moveSpeed * Time.deltaTime;
+            float step = currentMoveDuration / _moveSpeed;
+
 
             //float step = _moveSpeed * Time.deltaTime;
 
@@ -150,5 +151,4 @@ public class PlayerMove : MonoBehaviour
     {
         return k == 1f ? 1f : 1f - Mathf.Pow(2f, -10f * k);
     }
-
 }

@@ -44,6 +44,7 @@ public class PlayerMove : MonoBehaviour
             currentMoveDuration += Time.deltaTime;
             float step = currentMoveDuration * _moveSpeed * Time.deltaTime;
 
+
             //float step = _moveSpeed * Time.deltaTime;
 
             //transform.position = Vector3.MoveTowards(transform.position, _movePosition, step);
@@ -150,5 +151,4 @@ public class PlayerMove : MonoBehaviour
     {
         return k == 1f ? 1f : 1f - Mathf.Pow(2f, -10f * k);
     }
-
 }
