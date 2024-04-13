@@ -35,6 +35,14 @@ public class EnemySpawner
         return enemy;
     }
 
+    public Enemy SpawnTutorialEnemy(GameStageStaticData stage)
+    {
+        EnemyType enemyType = RandomWithProbabilitySelector.GetRandom<EnemyType>(stage.GetEnemyTypes(), stage.GetEnemySpawnProbabilities());
+        Enemy enemy = _gameFactory.CreateEnemy(GetRandomSpawnPoint(), enemyType, stage, true);
+        
+        return enemy;
+    }
+
     //private void Get
 
     public Vector2 GetRandomSpawnPoint()

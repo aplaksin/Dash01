@@ -18,19 +18,39 @@ public class UITutorial : MonoBehaviour
 
     private void OnEnable()
     {
-        Hide();
+        
+        EventManager.OnTutorialDone += Hide;
+
+        if(Game.IsTutorialDone)
+        {
+            Hide();
+        }
+    }
+
+    private void OnDisable()
+    {
+        EventManager.OnTutorialDone -= Hide;
     }
 
     private void SelectImageByDevice()
     {
-        if (Application.isEditor || SystemInfo.deviceType == DeviceType.Desktop)
+/*        if (Application.isEditor || SystemInfo.deviceType == DeviceType.Desktop)
         {
             _image.sprite = _wasdSprite;
         }
         else
         {
             _image.sprite = _swipeSprite;
-        }          
+        }  */   
+        
+        if(Application.isMobilePlatform)
+        {
+            _image.sprite = _swipeSprite;
+        }
+        else
+        {
+            _image.sprite = _wasdSprite;
+        }
     }
 
     public void Hide()

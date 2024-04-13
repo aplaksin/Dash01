@@ -4,11 +4,9 @@ public class GameBootstrapper : MonoBehaviour, ICoroutineRunner
 {
     public LoadingScreen loadingCurtain;
 
-    [SerializeField]
-    private AudioSource _musicSource;
+    [SerializeField] private AudioSource _musicSource;
+    [SerializeField] private AudioSource _fxSource;
 
-    [SerializeField]
-    private AudioSource _fxSource;
     private Game _game;
 
     private void Awake()
@@ -17,8 +15,6 @@ public class GameBootstrapper : MonoBehaviour, ICoroutineRunner
         DontDestroyOnLoad(loadingCurtain.gameObject);
         _game = new Game(this, loadingCurtain, _musicSource, _fxSource);
         _game.GameStateMachine.Enter<BootstrapState>();
-
-
     }
 
 }

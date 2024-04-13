@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour
 
     public List<IEnemyBuff> BuffsList = new List<IEnemyBuff>();
     public IEnemyBeheviour EnemyBeheviour;
+    public bool IsTutorialEnemy = false;
     //public float AdditionalSpeed = 0;
 
 
@@ -65,6 +66,7 @@ public class Enemy : MonoBehaviour
         _currentHp = _hp;
         _score =_enemyStaticData.Score;
         _isDead = false;
+        IsTutorialEnemy = false;
         //AdditionalSpeed = 0;
         BuffsList.Clear();
         SetupBuffs(_enemyStaticData);
@@ -129,8 +131,20 @@ public class Enemy : MonoBehaviour
             RemoveBuffs();
             
 
+
+            if(IsTutorialEnemy)
+            {
+                ScaleAnimation scaleAnimation = transform.GetComponent<ScaleAnimation>();
+                scaleAnimation.gameObject.SetActive(false);
+                EventManager.CallOnTutorialEnemyDeathEvent();
+            }
+            else
+            {
+                EventManager.CallOnEnemyDeathEvent(_score);
+            }
+
             _poolService.ReturnEnemy(this);
-            EventManager.CallOnEnemyDeathEvent(_score);
+
             _audioService.PlaySFX(_enemyStaticData.DeathClip);
         }
         else

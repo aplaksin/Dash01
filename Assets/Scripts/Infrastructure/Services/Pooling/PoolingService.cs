@@ -103,23 +103,25 @@ public class PoolingService : IPoolingService
         _enemySkinsByType.Clear();
         foreach (EnemyType enemyType in Enum.GetValues(typeof(EnemyType)))
         {
-            Queue<Enemy> enemiesQueue = new Queue<Enemy>();
-            string path = AssetPath.GetEnemyPathByType(enemyType);
-            EnemyStaticData enemyStaticData = _staticDataService.GetEnemyDataByType(enemyType);
+            if(enemyType != EnemyType.Tutorial)
+            {
+                Queue<Enemy> enemiesQueue = new Queue<Enemy>();
+                string path = AssetPath.GetEnemyPathByType(enemyType);
+                EnemyStaticData enemyStaticData = _staticDataService.GetEnemyDataByType(enemyType);
 
 
-            //TODO for every enemy type separated skin selection +++ move it inside gameFactory?
-            _enemySkins = enemyStaticData.SkinListStaticData.SpritesList;
-            int spriteIndex = Random.Range(0, _enemySkins.Count);
-            Sprite sprite = _enemySkins[spriteIndex];
-            _enemySkinsByType.Add(enemyType, sprite);
-            //_enemySkins.Remove(sprite);
+                //TODO for every enemy type separated skin selection +++ move it inside gameFactory?
+                _enemySkins = enemyStaticData.SkinListStaticData.SpritesList;
+                int spriteIndex = Random.Range(0, _enemySkins.Count);
+                Sprite sprite = _enemySkins[spriteIndex];
+                _enemySkinsByType.Add(enemyType, sprite);
+                //_enemySkins.Remove(sprite);
 
-            AddEnemiesToQueue(path, ref enemiesQueue, enemyStaticData, InitialCapacity);
+                AddEnemiesToQueue(path, ref enemiesQueue, enemyStaticData, InitialCapacity);
             
 
-            _enemiesByType[enemyType] = enemiesQueue;
-
+                _enemiesByType[enemyType] = enemiesQueue;
+            }
         }
         
     }

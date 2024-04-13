@@ -500,6 +500,14 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 0.478
       objectReference: {fileID: 0}
+    - target: {fileID: 4191208318811262340, guid: 8604303ff88b7c846a4d8276d3b49764, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8682448654678049234, guid: 8604303ff88b7c846a4d8276d3b49764, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8722742988643689062, guid: 8604303ff88b7c846a4d8276d3b49764, type: 3}
       propertyPath: m_Name
       value: GameBootstrapper

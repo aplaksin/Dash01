@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1843114079481812564}
   - component: {fileID: -2195009507639263123}
   - component: {fileID: 5640148887866307451}
+  - component: {fileID: 5592161000816013736}
   m_Layer: 0
   m_Name: block
   m_TagString: Untagged
@@ -100,12 +101,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bgFirst: {fileID: 1843114079481812564}
   _bgList:
-  - {fileID: 21300000, guid: ffd2bdedbf118464b8f1fe447c4f3229, type: 3}
-  - {fileID: 21300000, guid: 238ae4cc9046ab24cb62f6afcb77e334, type: 3}
-  - {fileID: 21300000, guid: 4070a4b9722d24842b1698444456294d, type: 3}
-  - {fileID: 21300000, guid: e50848886c825904f9c143beb401cf12, type: 3}
-  - {fileID: 21300000, guid: 51162a5450c1ac84db9390b589292f39, type: 3}
-  - {fileID: 21300000, guid: 33a366f94e0491946b7efad5a47668ef, type: 3}
   - {fileID: 21300000, guid: 0c39e9dc907808249a09b4f1ed4c9f55, type: 3}
   - {fileID: 21300000, guid: baeffee98e062024f8ea459384457037, type: 3}
   - {fileID: 21300000, guid: e492588333ad1b54c814cb8ca0d42535, type: 3}
@@ -138,3 +133,17 @@ MonoBehaviour:
   animationSpeed: 9
   scaleFactor: 1.1
   isLooped: 1
+--- !u!114 &5592161000816013736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7127859371970453988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc2ccfe011eb7c74eab9a83a31c3e6b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetPosition: {x: 0, y: 0, z: 0}
+  ExpandSpeed: 1

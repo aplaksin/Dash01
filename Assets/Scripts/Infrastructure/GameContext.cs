@@ -1,7 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 public class GameContext
-{ 
+{
+    public bool IsPlayerAuthorised = false;
+    public bool IsTutorialDone = false;
+    public int PlayerBestScore = 0;
     public int Score { get { return _score; } }
     public float SpawnEnemyDelay { get { return _spawnEnemyDelay; } }
     public GameStageStaticData CurrentStage { get { return _currentStage; } }
@@ -24,6 +27,7 @@ public class GameContext
     private bool _canPlayerSwitchMoveDirection;
     private GameStageStaticData _interpolationStage;
     private int _scoreUIMiltiplier;
+
     public GameContext(LevelStaticData levelStaticData, IAudioService audioService, IAssetProvider assetProvider)
     {
         _playerHP = levelStaticData.PlayerHP;
@@ -37,6 +41,7 @@ public class GameContext
         _assetProvider = assetProvider;
         _canPlayerSwitchMoveDirection = levelStaticData.CanPlayerSwitchMoveDirection;
         _scoreUIMiltiplier = levelStaticData.ScoreMultiplier;
+
     }
 
     public void AddEnemyBuff(List<IEnemyBuff> buffList)
@@ -181,10 +186,10 @@ public class GameContext
         _currentStage = gameStageStaticData;
         _spawnEnemyDelay = gameStageStaticData.SpawnDelay;
 
-        for (int i = 0; i < _interpolationStage.enemySpawnProbabilities.Length; i++)
+/*        for (int i = 0; i < _interpolationStage.enemySpawnProbabilities.Length; i++)
         {
             Debug.Log("enemySpawnProbabilities - " + gameStageStaticData.enemySpawnProbabilities[i].Debug());
-        }
+        }*/
         
 
         

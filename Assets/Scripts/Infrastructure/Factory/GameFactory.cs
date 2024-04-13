@@ -54,7 +54,7 @@ public class GameFactory : IGameFactory
         return projectile;
     }
 
-    public Enemy CreateEnemy(Vector2 spawnPoint, EnemyType enemyType, GameStageStaticData stage)
+    public Enemy CreateEnemy(Vector2 spawnPoint, EnemyType enemyType, GameStageStaticData stage, bool isTutorial = false)
     {
         Enemy enemy = _poolingService.GetEnemyByType(enemyType);
         enemy.InitProperties(stage);
@@ -71,7 +71,17 @@ public class GameFactory : IGameFactory
 
         enemy.transform.position = new Vector3(_cellPositionByCoords[new Vector2(spawnPoint.x, 0)].x, spawnPoint.y, 0);
 
-        SelectBehaviourByType(enemyType, enemy);
+        if(isTutorial)
+        {
+            SelectBehaviourByType(EnemyType.Tutorial, enemy);
+            enemy.IsTutorialEnemy = true;
+            enemy.gameObject.AddComponent(typeof(ScaleAnimation));
+        }
+        else
+        {
+            SelectBehaviourByType(enemyType, enemy);
+        }
+        
         
         return enemy;
     }
@@ -121,7 +131,7 @@ public class GameFactory : IGameFactory
         return _assetProvider.Instantiate(AssetPath.PauseMenuPath);
     }
 
-    public GameObject CreateTutorial()
+    public GameObject CreateTutorialImage()
     {
         return _assetProvider.Instantiate(AssetPath.UITutorial);
     }
@@ -134,14 +144,17 @@ public class GameFactory : IGameFactory
             case EnemyType.ZigZag:
                 //TODO fix List<Vector3> list = _cellPositionByCoords.Values.ToList();
 
-                enemy.EnemyBeheviour = new ZigzagEnemyBehaviour(enemy.transform, list[0], list[list.Count - 1], enemy._moveSpeed, enemy);
+                enemy.EnemyBeheviour = new ZigzagEnemyBehaviour(enemy.transform, list[0], list[list.Count - 1], enemy.MoveSpeed, enemy);
                 break;
             case EnemyType.SpeedBufferHorizontal:
 
                 //enemy.BuffsList.Add(new EnemySpeedBuff(3f));
-                enemy.EnemyBeheviour = new BufferSpeedHorizontal(enemy.transform, list[0], list[list.Count - 1], enemy._moveSpeed, 9, enemy);
+                enemy.EnemyBeheviour = new BufferSpeedHorizontal(enemy.transform, list[0], list[list.Count - 1], enemy.MoveSpeed, 9, enemy);//TODO 
                 Game.GameContext.AddEnemyBuff(enemy.BuffsList);
                 //Game.GameContext.ApplyEnemyBuffs();
+                break;
+            case EnemyType.Tutorial:
+                enemy.EnemyBeheviour = new TutorialBeheviour(enemy.transform, enemy);
                 break;
             case EnemyType.Base:
             case EnemyType.Tank:
@@ -167,6 +180,11 @@ public class GameFactory : IGameFactory
 
     private GameGridStaticData SelectGameGridStaticData(LevelStaticData levelStaticData)
     {
+        if(!Game.IsTutorialDone)
+        {
+            return levelStaticData.GameGridStaticDataList[0];
+        }
+
         return levelStaticData.GameGridStaticDataList.Count > 0 ? levelStaticData.GameGridStaticDataList[Random.Range(0, levelStaticData.GameGridStaticDataList.Count)] : levelStaticData.GameGridData;
     }
 

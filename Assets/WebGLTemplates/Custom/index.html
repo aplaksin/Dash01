@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="<<<TemplateData/diagnostics.css>>>">
     <script src="<<<TemplateData/diagnostics.js>>>"></script>
 #endif
+
+	<!-- Yandex Games SDK -->
+	<script src="https://yandex.ru/games/sdk/v2"></script>
+
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
@@ -40,6 +44,39 @@
 		  display: block;
 		}
 	</style>
+	
+
+	<script>
+	
+		YaGames
+		.init()
+		.then(ysdk => {
+			console.log('Yandex SDK initialized');
+			window.ysdk = ysdk;
+			initPlayer();
+			getLb();
+	});
+		
+	
+
+	var player;
+
+	function initPlayer() {
+		return ysdk.getPlayer({ scopes: false }).then(_player => {
+				player = _player;
+
+				
+			});
+	};
+	
+	var lb;
+
+	function getLb() {ysdk.getLeaderboards()
+	  .then(_lb => lb = _lb);
+	}
+	</script>
+
+	
     <script>
 
       var container = document.querySelector("#unity-container");
@@ -140,13 +177,14 @@
       canvas.style.background = "url('" + buildUrl + "/{{{ BACKGROUND_FILENAME.replace(/'/g, '%27') }}}') center / cover";
 #endif
       loadingBar.style.display = "block";
-
+	  var MyGameInstance = null;
       var script = document.createElement("script");
       script.src = loaderUrl;
       script.onload = () => {
         createUnityInstance(canvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
               }).then((unityInstance) => {
+			  MyGameInstance = unityInstance;
                 loadingBar.style.display = "none";
 #if SHOW_DIAGNOSTICS
                 diagnostics_icon.onclick = () => {

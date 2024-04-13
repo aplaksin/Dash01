@@ -6,6 +6,8 @@ public class Game
 
     //public static LevelStaticData CurrentLevelStaticData;
     public static GameContext GameContext;
+    public static bool IsTutorialDone = false;
+    public static Yandex Yandex;
     public static bool CanPlayerSwipeDirection = false;
     public Game(ICoroutineRunner coroutineRunner, LoadingScreen loadingCurtain, AudioSource musicSource, AudioSource fxSource)
     {

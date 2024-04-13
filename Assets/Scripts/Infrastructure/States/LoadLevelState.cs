@@ -60,7 +60,7 @@ public class LoadLevelState : IParameterizedState<string>
         
         CreateHud();
 
-        Debug.Log("void OnLoaded()");
+        //Debug.Log("void OnLoaded()");
         _gameStateMachine.Enter<GameLoopState, LevelStaticData>(_levelStaticData);
     }
 

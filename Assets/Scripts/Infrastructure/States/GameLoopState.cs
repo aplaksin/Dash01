@@ -11,6 +11,8 @@ public class GameLoopState : IParameterizedState<LevelStaticData>//TODO del load
     //private LevelStaticData _levelStaticData;
     private Coroutine _enemySpawnCoroutine;
     private DamageBorder _damageBorder;
+    private int _tutorialEnemiesCount = 0;
+    private int _maxTutorialEnemiesCount = 1;
 
     public GameLoopState(IGameFactory gameFactory, ICoroutineRunner coroutineRunner, IWindowService windowService, IAudioService audioService)
     {
@@ -18,19 +20,32 @@ public class GameLoopState : IParameterizedState<LevelStaticData>//TODO del load
         _coroutineRunner = coroutineRunner;
         _windowService = windowService;
         _audioService = audioService;
+
     }
 
     public void Enter(LevelStaticData levelStaticData)
     {
         //_levelStaticData = levelStaticData;
-        CreateTutorial();
+        //Debug.Log("Game.IsTutorialDone  " + Game.IsTutorialDone);
         _enemySpawner = new EnemySpawner(_gameFactory);
         //_enemySpawnCoroutine = _coroutineRunner.StartCoroutine(SpawnEnemies(Game.GameContext.SpawnEnemyDelay));//TODO check SpawnEnemyDelay
-        _enemySpawnCoroutine = _coroutineRunner.StartCoroutine(SpawnEnemies());//TODO check SpawnEnemyDelay
+        if (Game.IsTutorialDone)
+        {
+            CreateTutorialImage();
+            StartSpawnEnemies();
+        }
+        else
+        {
+            EventManager.OnTutorialEnemyDeath += OnTutorialEnemyDeath;
+            CreateTutorial();
+        }
+
+        
 
         _damageBorder = CreateDamageBorder();
         EventManager.OnDamage += _damageBorder.ShowHide;
         EventManager.OnGameOver += OnGameOver;
+        
         _audioService.PlayLevelMusic();
 
         
@@ -48,6 +63,31 @@ public class GameLoopState : IParameterizedState<LevelStaticData>//TODO del load
         _coroutineRunner.StopCoroutine(_enemySpawnCoroutine);
         EventManager.OnGameOver -= OnGameOver;
         EventManager.OnDamage -= _damageBorder.ShowHide;
+        EventManager.OnTutorialEnemyDeath -= OnTutorialEnemyDeath;
+    }
+
+    private void StartSpawnEnemies()
+    {
+        _enemySpawnCoroutine = _coroutineRunner.StartCoroutine(SpawnEnemies());//TODO check SpawnEnemyDelay
+    }
+
+    private void OnTutorialEnemyDeath()
+    {
+        
+        _tutorialEnemiesCount++;
+
+        if(_maxTutorialEnemiesCount <= _tutorialEnemiesCount)
+        {
+            
+            Game.IsTutorialDone = true;
+            EventManager.OnTutorialEnemyDeath -= OnTutorialEnemyDeath;
+            EventManager.CallOnTutorialDone();
+            StartSpawnEnemies();
+        }
+        else
+        {
+            SpawnTutorialEnemy();
+        }
     }
 
     private DamageBorder CreateDamageBorder()
@@ -60,7 +100,22 @@ public class GameLoopState : IParameterizedState<LevelStaticData>//TODO del load
 
     private void CreateTutorial()
     {
-        _gameFactory.CreateTutorial();
+
+        CreateTutorialImage();
+        SpawnTutorialEnemy();
+    }
+
+    private void CreateTutorialImage()
+    {
+        _gameFactory.CreateTutorialImage();
+    }
+
+    private void SpawnTutorialEnemy()
+    {
+        Enemy enemy = _enemySpawner.SpawnTutorialEnemy(Game.GameContext.CurrentStage);
+        enemy.IsTutorialEnemy = true;
+        enemy.gameObject.SetActive(true);
+        Game.GameContext.AddActiveEnemy(enemy);
     }
 
     //private  IEnumerator SpawnEnemies(float spawnDelay)

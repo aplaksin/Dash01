@@ -20,6 +20,7 @@ public class PlayerMove : MonoBehaviour
     private GameContext _gameContext;//TODO почистить лишнее
     private Vector2 _currentMoveDirection = Vector2.zero;
 
+    private bool _isGridExpanded = false;
     private float currentMoveDuration = 0.0f;
 
     public void Init(Dictionary<Vector2, Vector3> cellPositionByCoords, Dictionary<Vector2, GameObject> blocksByCoords, Vector2 currentPlayerCoords, IInputService inputService, IGameFactory gameFactory, GameContext gameContext)
@@ -34,6 +35,8 @@ public class PlayerMove : MonoBehaviour
 
         //TODO перенести в отдельный скрипт + хп и тд + мб статик дату для всех настроек дать
         ApplyRandomSkin();
+
+        EventManager.OnGridExpanded += OnGridExpanded;
     }
 
     private void Update()
@@ -78,12 +81,18 @@ public class PlayerMove : MonoBehaviour
     private void OnDisable()
     {
         _inputService.UnsubscribeOnMoveEvent(Move);
+        EventManager.OnGridExpanded -= OnGridExpanded;
+    }
+
+    private void OnGridExpanded()
+    {
+        _isGridExpanded = true;
     }
 
     private void Move(Vector2 direction)
     {
 
-        if (direction != Vector2.zero)
+        if (direction != Vector2.zero && _isGridExpanded)
         {
             CalcMovePlayerPosition(direction);
         }

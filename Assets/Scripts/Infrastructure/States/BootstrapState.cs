@@ -62,9 +62,18 @@ public class BootstrapState : IState
 
     private IInputService Inputservice()
     {
-        if (Application.isEditor || SystemInfo.deviceType == DeviceType.Desktop)
+/*        if (Application.isEditor || SystemInfo.deviceType == DeviceType.Desktop)
             return new KeyboardInputService();
         else
+            return new SwipeInputService();*/
+
+        if(Application.isMobilePlatform)
+        {
             return new SwipeInputService();
+        }
+        else
+        {
+            return new KeyboardInputService();
+        }
     }
 }

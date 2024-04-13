@@ -11,6 +11,10 @@ public class GridGeneratorStandart : IGridGenerator
     private Vector3 _scaleVector;
     private Vector2 _padding;
 
+    private List<GameObject> _cellList = new List<GameObject>();
+    private Vector2 _startExpandPosition = Vector2.zero;
+
+
     public GridGeneratorStandart(IAssetProvider assetProvider, int gridHeight, int gridWidht, Vector2 padding, Vector3 scaleVector)
     {
         _assetProvider = assetProvider;
@@ -56,6 +60,7 @@ public class GridGeneratorStandart : IGridGenerator
                 cell.name = $"{cell.name}-{j}-{i}";
                 cell.transform.localScale = new Vector3(cell.transform.localScale.x * _scaleVector.x, cell.transform.localScale.y * _scaleVector.y, cell.transform.localScale.z * _scaleVector.z);
                 //cell.transform.localScale = _scaleVector;
+                
                 cell.transform.position = new Vector3(
                     positionByScalePointerHorizontal + _scaleVector.x / 2 ,
                     positionByScalePointerVertical + _scaleVector.y / 2,
@@ -69,12 +74,41 @@ public class GridGeneratorStandart : IGridGenerator
                 }
 
                 cell.transform.SetParent(grid.transform);
+                _cellList.Add(cell);
 
                 positionByScalePointerHorizontal += _scaleVector.x + cellSpace;
             }
 
             positionByScalePointerVertical += _scaleVector.y + cellSpace;
         }
+
+        Vector3 start;
         
+        cellPositionByCoords.TryGetValue(new Vector2((int)_gridWidth/2, 0), out start);
+        
+        _startExpandPosition = start;
+
+        ExpandGrid();
+    }
+
+    private void ExpandGrid()
+    {
+        List<CellExpandAnimator> cellExpandAnimators = new List<CellExpandAnimator>(_cellList.Count);
+
+        for (int i = 0; i < _cellList.Count; i++)
+        {
+            GameObject cell = _cellList[i];
+            CellExpandAnimator cellExpandAnimator = cell.GetComponent<CellExpandAnimator>();
+            cellExpandAnimator.TargetPosition = cell.transform.position;
+            cellExpandAnimator.ExpandSpeed = 5f;
+            cell.transform.position = _startExpandPosition;
+
+            cellExpandAnimators.Add(cellExpandAnimator);
+        }
+
+        for (int i = 0; i < cellExpandAnimators.Count; i++)
+        {
+            cellExpandAnimators[i].StartExpand();
+        }
     }
 }

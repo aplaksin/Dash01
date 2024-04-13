@@ -4,5 +4,6 @@
     Tank,
     ZigZag,
     SpeedBufferHorizontal,
+    Tutorial,
 
 }

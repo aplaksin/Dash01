@@ -14,7 +14,7 @@ public class EnemyMoveDown : IEnemyAction
 
     public void Act(float deltaTime)
     {
-        var step = _enemy.MoveSpeed * Time.deltaTime;
+        var step = _moveSpeed * Time.deltaTime;
         _transform.position = Vector3.MoveTowards(_transform.position, _transform.position + Vector3.down, step);
     }
 }
