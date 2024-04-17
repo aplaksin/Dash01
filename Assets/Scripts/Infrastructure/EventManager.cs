@@ -4,6 +4,7 @@ using UnityEngine;
 public static class EventManager
 {
     public static event Action OnGridExpanded;
+    public static event Action OnShowFullScreenAD;
     public static event Action <int>OnEnemyDeath;
     public static event Action OnTutorialEnemyDeath;
     public static event Action OnTutorialDone;
@@ -11,13 +12,19 @@ public static class EventManager
     public static event Action <int>OnHpChanged;
     public static event Action<int> OnDamage;
     public static event Action OnGameOver;
-    public static event Action OnLevelLoaded;
+    public static event Action OnGameLevelLoaded;
     public static event Action<GameStageStaticData> OnChangeGameStage;
 
     public static void CallOnChangeGameStage(GameStageStaticData stage)
     {
         OnChangeGameStage?.Invoke(stage);
     }
+
+    public static void CallOnShowFullScreenAD()
+    {
+        OnShowFullScreenAD?.Invoke();
+    }
+
     public static void CallOnGridExpanded()
     {
         OnGridExpanded?.Invoke();
@@ -57,8 +64,10 @@ public static class EventManager
         OnGameOver?.Invoke();
     }
 
-    public static void CallOnLevelLoaded()
+    public static void CallOnGameLevelLoaded()
     {
-        OnLevelLoaded?.Invoke();
+        OnGameLevelLoaded?.Invoke();
     }
+
+
 }

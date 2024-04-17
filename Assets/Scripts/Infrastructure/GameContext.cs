@@ -5,6 +5,8 @@ public class GameContext
     public bool IsPlayerAuthorised = false;
     public bool IsTutorialDone = false;
     public int PlayerBestScore = 0;
+    public float Test = 1f;
+    public bool IsBestScoreChanged = false;
     public int Score { get { return _score; } }
     public float SpawnEnemyDelay { get { return _spawnEnemyDelay; } }
     public GameStageStaticData CurrentStage { get { return _currentStage; } }
@@ -37,11 +39,10 @@ public class GameContext
         SetActiveStage(stage);
         _spawnEnemyDelay = stage.SpawnDelay;
         _audioService = audioService;
-        SubscribeOnEvents();
+        SubscribeOnEvents();//TODO перенести ниже
         _assetProvider = assetProvider;
         _canPlayerSwitchMoveDirection = levelStaticData.CanPlayerSwitchMoveDirection;
         _scoreUIMiltiplier = levelStaticData.ScoreMultiplier;
-
     }
 
     public void AddEnemyBuff(List<IEnemyBuff> buffList)
@@ -144,6 +145,11 @@ public class GameContext
     {
         _score += score;
 
+/*        if(PlayerBestScore == 0 || _score > PlayerBestScore)
+        {
+            PlayerBestScore = _score;
+        }*/
+
         /*        GameStageStaticData stage;
                 //TODO score range, not constant score
                  _gameStageByScore.TryGetValue(_score, out stage);
@@ -230,6 +236,13 @@ public class GameContext
         {
             
             Clear();
+
+            if(Game.GameContext.PlayerBestScore == 0 || Game.GameContext.PlayerBestScore < Game.GameContext.Score)
+            {
+                Game.GameContext.PlayerBestScore = Game.GameContext.Score;
+                Game.GameContext.IsBestScoreChanged = true;
+            }
+
             EventManager.CallOnGameOver();
             _audioService.PlayGameOverMusic();
         }

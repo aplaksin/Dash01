@@ -59,7 +59,8 @@ public class LoadLevelState : IParameterizedState<string>
         CreatePlayer(scaleVector, cellpositionsByCoords, Game.GameContext);
         
         CreateHud();
-
+        EventManager.CallOnGameLevelLoaded();
+        //EventManager.CallOnLevelLoaded();
         //Debug.Log("void OnLoaded()");
         _gameStateMachine.Enter<GameLoopState, LevelStaticData>(_levelStaticData);
     }

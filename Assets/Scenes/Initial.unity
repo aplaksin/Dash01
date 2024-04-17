@@ -508,6 +508,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8682448654678049234, guid: 8604303ff88b7c846a4d8276d3b49764, type: 3}
+      propertyPath: _sfxSource
+      value: 
+      objectReference: {fileID: 8143606927211668924}
+    - target: {fileID: 8682448654678049234, guid: 8604303ff88b7c846a4d8276d3b49764, type: 3}
+      propertyPath: _musicSource
+      value: 
+      objectReference: {fileID: 8143606927211668925}
     - target: {fileID: 8722742988643689062, guid: 8604303ff88b7c846a4d8276d3b49764, type: 3}
       propertyPath: m_Name
       value: GameBootstrapper

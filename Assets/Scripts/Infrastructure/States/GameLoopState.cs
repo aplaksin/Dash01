@@ -25,6 +25,7 @@ public class GameLoopState : IParameterizedState<LevelStaticData>//TODO del load
 
     public void Enter(LevelStaticData levelStaticData)
     {
+        
         //_levelStaticData = levelStaticData;
         //Debug.Log("Game.IsTutorialDone  " + Game.IsTutorialDone);
         _enemySpawner = new EnemySpawner(_gameFactory);

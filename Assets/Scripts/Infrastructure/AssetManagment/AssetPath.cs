@@ -14,7 +14,6 @@ public static class AssetPath
     public const string GridPath = "Grid/Grid";
     public const string MainMenuMusicPath = "Audio/Music/MainMenuMusic";
     public const string GameOverMusicPath = "Audio/Music/GameOverMusic";
-    //public const string PlayerDamageSFXPath = "Audio/SFX/PlayerDamage";
     public const string PlayerDamageSFXPath = "Audio/SFX/damage";
 
     private static Dictionary<EnemyType, string> _enemyPathByType = new Dictionary<EnemyType, string>() {

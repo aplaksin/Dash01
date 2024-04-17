@@ -3,45 +3,43 @@ mergeInto(LibraryManager.library, {
 		console.log("1111");
 	},
 	IsPlayerAuthorisedExternal: function (){
-		var isAuth = player.getMode() === "lite" ? 0 : 1;
-		console.log('isAuth ' + isAuth);
+		var isAuth = player.getMode() === "lite" ? '0' : '1';
+		//console.log('isAuth ' + isAuth);
 		MyGameInstance.SendMessage("Yandex", "SetIsPlayerAuthorised", isAuth);
 	},
 	
 	GetPlayerBestScoreExternal: function (){
-		ysdk.getLeaderboards()
-		  .then(lb => lb.getLeaderboardPlayerEntry('score'))
-		  .then(res => {
-			  MyGameInstance.SendMessage("Yandex", "GetPlayerBestScore", res.score);
-			  console.log('res.score ' + res.score);
-			  })
+		//console.log('GetPlayerBestScoreExternal');
+		lb.getLeaderboardPlayerEntry('bestscore')
+		  .then(res => MyGameInstance.SendMessage("Yandex", "GetPlayerBestScore", res.score + ''))
 		  .catch(err => {
-			if (err.code === 'LEADERBOARD_PLAYER_NOT_PRESENT') {
-			  console.log('no score');
-			}
+			console.error('CRASH GetPlayerBestScore: ', err.message);
 		  });
+
 		
 	},
+	
+	
 	SetPlayerBestScoreExternal: function (score){
+
 		ysdk.getLeaderboards()
-		  .then(lb => {
-			// Без extraData
-			console.log(score);
-			lb.setLeaderboardScore('score', score);
-			
-		  });
-	},	
+		.then(lb => {
+    // Без extraData
+			lb.setLeaderboardScore('bestscore', score);
+		});
+
+	},
 	
 	ShowAdFullScreenExternal: function(){
 		ysdk.adv.showFullscreenAdv({
-    callbacks: {
-        onClose: function(wasShown) {
-          MyGameInstance.SendMessage("Yandex", "AdFullScreenClosed");
-        },
-        onError: function(error) {
-          MyGameInstance.SendMessage("Yandex", "AdFullScreenClosed");
-        }
-    }
-})
+		callbacks: {
+			onClose: function(wasShown) {
+			  MyGameInstance.SendMessage("Yandex", "AdFullScreenClosed");
+			},
+		   onError: function(error) {
+			  MyGameInstance.SendMessage("Yandex", "AdFullScreenClosed");
+			}
+		}
+	})
 	},
 });
